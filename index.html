@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipped Sweetss NYC - Handcrafted Dipped Treats</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Fredoka One (for headings), Inter (for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS for Dipped Sweetss NYC -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8F0; /* Creamy white */
+            color: #333333; /* Dark grey */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Fredoka One', cursive;
+        }
+        .container-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .header-bg {
+            background-color: #F8E6DD; /* Light peach */
+            border-bottom-left-radius: 4rem;
+            border-bottom-right-radius: 4rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        .logo-text {
+            font-size: 3rem;
+            color: #6F4E37; /* Chocolate Brown */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            color: #6F4E37; /* Chocolate Brown */
+            font-weight: 600;
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #F8A4B8; /* Soft Pink */
+            transform: translateY(-2px);
+        }
+        .hero-title {
+            font-size: 5rem;
+            color: #6F4E37; /* Chocolate Brown */
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+        }
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: #8A6F5C; /* Lighter chocolate */
+        }
+        .cta-button {
+            background-color: #F8A4B8; /* Soft Pink */
+            color: white;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .cta-button:hover {
+            background-color: #E28FA0; /* Darker Pink */
+            transform: translateY(-3px) scale(1.02);
+        }
+        .section-heading {
+            color: #6F4E37; /* Chocolate Brown */
+            font-size: 3.5rem; /* Adjusted for consistency */
+        }
+        .sweet-card {
+            background-color: #FFFFFF;
+            border-radius: 2rem;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .sweet-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.15);
+        }
+        .sweet-image {
+            border-radius: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .sweet-title {
+            color: #6F4E37; /* Chocolate Brown */
+        }
+        .sweet-price {
+            color: #E0B400; /* Golden Yellow */
+        }
+        .order-button {
+            background-color: #E0B400; /* Golden Yellow */
+            color: #6F4E37; /* Chocolate Brown */
+            font-weight: 700;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .order-button:hover {
+            background-color: #FFD700; /* Brighter Golden Yellow */
+            transform: translateY(-2px);
+        }
+        .footer-bg {
+            background-color: #6F4E37; /* Chocolate Brown */
+            border-top-left-radius: 4rem;
+            border-top-right-radius: 4rem;
+            box-shadow: 0 -10px 30px -10px rgba(0,0,0,0.15);
+        }
+        .footer-link {
+            color: #FFF8F0; /* Creamy white */
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-link:hover {
+            color: #F8A4B8; /* Soft Pink */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+            .section-heading {
+                font-size: 3rem; /* Adjusted for smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2.5rem;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero-section {
+                padding: 4rem 1rem;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+            .sweet-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            .section-heading {
+                font-size: 2.5rem;
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            .footer-logo {
+                text-align: center;
+            }
+            .footer-links-group {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 2rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-tagline {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            .sweet-card {
+                padding: 1.5rem;
+                border-radius: 1.5rem;
+            }
+            .sweet-image {
+                border-radius: 1rem;
+            }
+            .sweet-title {
+                font-size: 1.3rem;
+            }
+            .sweet-price {
+                font-size: 1.1rem;
+            }
+            .order-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .newsletter-input, .newsletter-button {
+                width: 100%;
+            }
+            .footer-bg {
+                border-top-left-radius: 2rem;
+                border-top-right-radius: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-bg py-6">
+        <div class="container-main flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <a href="#home" class="logo-text text-center block">Dipped Sweetss NYC</a>
+            </div>
+            <nav class="navbar-nav flex flex-wrap justify-center gap-6">
+                <a href="#home" class="nav-link text-lg">Home</a>
+                <a href="#menu" class="nav-link text-lg">Menu</a>
+                <a href="#about" class="nav-link text-lg">About Us</a>
+                <a href="#contact" class="nav-link text-lg">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section text-center py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-b-[4rem]">
+            <div class="container-main">
+                <h1 class="hero-title text-6xl font-extrabold mb-6 animate-fade-in-up">
+                    Indulge in Pure Bliss.
+                </h1>
+                <p class="hero-tagline text-xl mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
+                    Handcrafted dipped treats, made with love and the finest ingredients, delivered right to your door in NYC.
+                </p>
+                <a href="#menu" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl animate-fade-in-up delay-400">
+                    Explore Our Delicious Menu <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="py-20">
+            <div class="container-main">
+                <h2 class="section-heading text-5xl text-center mb-16">Our Irresistible Dipped Delights</h2>
+                <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Sweet Card 1: Dipped Strawberries -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/F8A4B8/6F4E37?text=Dipped+Strawberries" alt="Dipped Strawberries" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Chocolate Dipped Strawberries</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">$35.00/dozen</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                    </div>
+
+                    <!-- Sweet Card 2: Dipped Pretzels -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/E0B400/6F4E37?text=Dipped+Pretzels" alt="Dipped Pretzels" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Gourmet Dipped Pretzels</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Crunchy pretzel rods coated in chocolate and topped with sprinkles, nuts, or drizzle.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">$25.00/dozen</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                    </div>
+
+                    <!-- Sweet Card 3: Dipped Oreos -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/F8E6DD/6F4E37?text=Dipped+Oreos" alt="Dipped Oreos" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Decadent Dipped Oreos</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Classic Oreo cookies transformed with a thick layer of rich chocolate and custom designs.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">$30.00/dozen</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                    </div>
+
+                    <!-- Sweet Card 4: Dipped Cake Pops -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/B2D8D8/6F4E37?text=Dipped+CakePops" alt="Dipped Cake Pops" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Artisan Dipped Cake Pops</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Moist cake on a stick, hand-dipped and decorated to perfection for any occasion.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">$40.00/dozen</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                    </div>
+
+                    <!-- Sweet Card 5: Dipped Marshmallows -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/A0D9B0/6F4E37?text=Dipped+Marshmallows" alt="Dipped Marshmallows" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Cloud-like Dipped Marshmallows</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Soft, fluffy marshmallows generously coated in your favorite chocolate and toppings.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">$28.00/dozen</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                    </div>
+
+                    <!-- Sweet Card 6: Custom Treats -->
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/300x200/B2A0D9/6F4E37?text=Custom+Treats" alt="Custom Dipped Treats" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">Custom Dipped Creations</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            Dream it, we dip it! Contact us for bespoke orders for events and special occasions.
+                        </p>
+                        <span class="sweet-price text-2xl font-extrabold mb-4">Price on Request</span>
+                        <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Inquire Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem]">
+            <div class="container-main text-center">
+                <h2 class="section-heading text-5xl mb-10">Our Story: A Passion for Sweetness</h2>
+                <div class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-700 space-y-6">
+                    <p>
+                        At **Dipped Sweetss NYC**, we believe in the power of a perfect bite. Born out of a deep love for delicious treats and a passion for craftsmanship, our journey began in a small kitchen, experimenting with the finest chocolates and freshest ingredients to create something truly special.
+                    </p>
+                    <p>
+                        Every strawberry, pretzel, and cookie is hand-dipped with meticulous care, ensuring not just a beautiful appearance but an unforgettable taste. We pride ourselves on using premium, ethically sourced chocolate and supporting local suppliers whenever possible.
+                    </p>
+                    <p>
+                        Our mission is to bring joy and a touch of luxury to your everyday moments and special celebrations across New York City. From elegant party favors to a simple indulgence after a long day, Dipped Sweetss NYC is here to sweeten your life.
+                    </p>
+                    <p>
+                        Thank you for letting us be a part of your sweet journey!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container-main text-center">
+                <h2 class="section-heading text-5xl mb-10">Get in Touch with Sweetness!</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
+                    Have a question, a custom order request, or just want to share your favorite dipped treat? We'd love to hear from you!
+                </p>
+                <div class="contact-info flex flex-wrap justify-center gap-10 text-xl font-medium text-gray-800">
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-[#F8A4B8] text-2xl"></i>
+                        <a href="mailto:hello@dippedsweetssnyc.com" class="hover:text-[#E28FA0] transition-colors duration-300">hello@dippedsweetssnyc.com</a>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-phone-alt text-[#F8A4B8] text-2xl"></i>
+                        <a href="tel:+1-212-555-DIPS" class="hover:text-[#E28FA0] transition-colors duration-300">+1 (212) 555-DIPS</a>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-map-marker-alt text-[#F8A4B8] text-2xl"></i>
+                        Serving all NYC boroughs! (Online & Delivery Only)
+                    </p>
+                </div>
+
+                <form class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                    <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Send Us a Message</h3>
+                    <div>
+                        <input type="text" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                    </div>
+                    <div>
+                        <textarea placeholder="Your Message" rows="6" class="w-full p-4 border border-gray-300 rounded-xl resize-y focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button w-full px-6 py-3 rounded-full text-xl shadow-md">
+                        Send Sweet Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-bg py-12 text-white text-center rounded-t-[4rem]">
+        <div class="container-main grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            <div class="footer-logo">
+                <h3 class="logo-text text-4xl font-extrabold text-[#FFF8F0] mb-4">Dipped Sweetss NYC</h3>
+                <p class="text-sm text-gray-200">&copy; 2025 Dipped Sweetss NYC. All rights reserved.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Quick Links</h4>
+                <ul class="space-y-2 text-lg">
+                    <li><a href="#home" class="footer-link">Home</a></li>
+                    <li><a href="#menu" class="footer-link">Menu</a></li>
+                    <li><a href="#about" class="footer-link">About Us</a></li>
+                    <li><a href="#contact" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Follow Us!</h4>
+                <div class="flex justify-center md:justify-start gap-6 text-3xl">
+                    <a href="#" aria-label="Instagram" class="footer-link hover:text-[#E0B400]"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook" class="footer-link hover:text-[#E0B400]"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="TikTok" class="footer-link hover:text-[#E0B400]"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all anchor tags whose href attribute starts with '#'
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                // Add a click event listener to each selected anchor
+                anchor.addEventListener('click', function (e) {
+                    // Prevent the default jump-to-anchor behavior
+                    e.preventDefault();
+
+                    // Get the target element using the href attribute
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    // If the target element exists, scroll to it smoothly
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth' // Enable smooth scrolling animation
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
