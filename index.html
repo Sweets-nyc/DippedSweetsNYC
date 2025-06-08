@@ -32,7 +32,8 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
         }
         .logo-text {
-            font-size: 3rem;
+            /* Adjusted font size to make space for navigation */
+            font-size: 2.25rem; /* Equivalent to Tailwind's text-4xl */
             color: #6F4E37; /* Chocolate Brown */
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
@@ -267,60 +268,75 @@
     <header class="header-bg py-6">
         <div class="container-main flex flex-col md:flex-row justify-between items-center">
             <div class="mb-4 md:mb-0">
-                <a href="#home" class="logo-text text-center block">Dipped Sweetss NYC</a>
+                <a href="#home" class="logo-text text-center block" onclick="showSection('home-menu-combined'); return false;">Dipped Sweetss NYC</a>
             </div>
-            <nav class="navbar-nav flex flex-wrap justify-center gap-6">
-                <a href="#home" class="nav-link text-lg">Home</a>
-                <a href="#menu" class="nav-link text-lg" onclick="populateSweetMenu('MainMenuDefault');">Menu</a>
+            <nav class="navbar-nav flex flex-wrap justify-center gap-4">
+                <a href="#home" class="nav-link text-lg" onclick="showSection('home-menu-combined'); return false;">Home</a>
+                <a href="#menu" class="nav-link text-lg" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault'); return false;">Menu</a>
                 <!-- Categories Dropdown -->
                 <div class="nav-link text-lg group">
-                    <a href="#" class="inline-flex items-center">
+                    <a href="#menu" class="inline-flex items-center" onclick="showSection('menu-only-section'); return false;">
                         Categories <i class="fas fa-chevron-down ml-2 text-base"></i>
                     </a>
                     <div class="dropdown-menu">
-                        <a href="#menu" class="dropdown-item" data-category="MainMenuDefault">All Other Treats</a>
-                        <a href="#menu" class="dropdown-item" data-category="Dipped Strawberries">Dipped Strawberries</a>
-                        <a href="#menu" class="dropdown-item" data-category="Dipped Pretzels">Dipped Pretzels</a>
-                        <a href="#menu" class="dropdown-item" data-category="Cake Sicles & Pops">Cake Sicles & Pops</a>
-                        <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes">Rice Crispy & Dipped Cupcakes</a>
-                        <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups">Individual Sample Cups</a>
-                        <!-- Removed "Dipped Churro Bites" as a separate category entry -->
+                        <a href="#menu" class="dropdown-item" data-category="MainMenuDefault" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault'); return false;">All Other Treats</a>
+                        <a href="#menu" class="dropdown-item" data-category="Dipped Strawberries" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Strawberries'); return false;">Dipped Strawberries</a>
+                        <a href="#menu" class="dropdown-item" data-category="Dipped Pretzels" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Pretzels'); return false;">Dipped Pretzels</a>
+                        <a href="#menu" class="dropdown-item" data-category="Cake Sicles & Pops" onclick="showSection('menu-only-section'); populateSweetMenu('Cake Sicles & Pops'); return false;">Cake Sicles & Pops</a>
+                        <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes" onclick="showSection('menu-only-section'); populateSweetMenu('Rice Crispy & Dipped Cupcakes'); return false;">Rice Crispy & Dipped Cupcakes</a>
+                        <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups" onclick="showSection('menu-only-section'); populateSweetMenu('Individual Sample Cups'); return false;">Individual Sample Cups</a>
                     </div>
                 </div>
-                <a href="#about" class="nav-link text-lg">About Us</a>
-                <a href="#contact" class="nav-link text-lg">Contact</a>
+                <a href="#create-order" class="nav-link text-lg" onclick="showSection('create-order-section'); return false;">Create Your Order</a>
+                <a href="#about" class="nav-link text-lg" onclick="showSection('about-section'); return false;">About Us</a>
+                <a href="#contact" class="nav-link text-lg" onclick="showSection('contact-section'); return false;">Contact</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero-section text-center py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-b-[4rem]">
-            <div class="container-main">
-                <h1 class="hero-title text-6xl font-extrabold mb-6 animate-fade-in-up">
-                    Indulge in Pure Bliss.
-                </h1>
-                <p class="hero-tagline text-xl mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
-                    Handcrafted dipped treats, made with love and the finest ingredients, delivered right to your door in NYC.
-                </p>
-                <a href="#menu" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl animate-fade-in-up delay-400">
-                    Explore Our Delicious Menu <i class="fas fa-arrow-right ml-3"></i>
-                </a>
+        <!-- Combined Home and Menu Section (visible by default) -->
+        <section id="home-menu-combined" class="py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-b-[4rem]">
+            <!-- Hero Section content -->
+            <div id="home-content" class="hero-section text-center pb-20">
+                <div class="container-main">
+                    <h1 class="hero-title text-6xl font-extrabold mb-6 animate-fade-in-up">
+                        Indulge in Pure Bliss.
+                    </h1>
+                    <p class="hero-tagline text-xl mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
+                        Handcrafted dipped treats, made with love and the finest ingredients, delivered right to your door in NYC.
+                    </p>
+                    <!-- This button now scrolls to the menu, which is already visible below -->
+                    <a href="#menu-only-section" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl animate-fade-in-up delay-400" onclick="smoothScrollTo('menu-only-section'); return false;">
+                        Explore Our Delicious Menu <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Menu Section content - now part of the default view -->
+            <div id="menu-content" class="py-20">
+                <div class="container-main">
+                    <h2 class="section-heading text-5xl text-center mb-16">Our Irresistible Dipped Delights</h2>
+                    <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="sweet-menu-grid">
+                        <!-- Sweet cards will be inserted here by JavaScript -->
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Menu Section - Dynamically populated by JavaScript -->
-        <section id="menu" class="py-20">
+        <!-- Menu-Only Section (for when 'Menu' navigation is clicked) -->
+        <section id="menu-only-section" class="py-20" style="display:none;">
             <div class="container-main">
                 <h2 class="section-heading text-5xl text-center mb-16">Our Irresistible Dipped Delights</h2>
-                <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="sweet-menu-grid">
+                <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="sweet-menu-grid-alt">
                     <!-- Sweet cards will be inserted here by JavaScript -->
                 </div>
             </div>
         </section>
 
+
         <!-- About Us Section -->
-        <section id="about" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem]">
+        <section id="about-section" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem]" style="display:none;">
             <div class="container-main text-center">
                 <h2 class="section-heading text-5xl mb-10">Our Story: A Passion for Sweetness</h2>
                 <div class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-700 space-y-6">
@@ -341,7 +357,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20">
+        <section id="contact-section" class="py-20" style="display:none;">
             <div class="container-main text-center">
                 <h2 class="section-heading text-5xl mb-10">Get in Touch with Sweetness!</h2>
                 <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
@@ -378,7 +394,6 @@
                     </p>
                 </div>
 
-
                 <form class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
                     <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Send Us a Message</h3>
                     <div>
@@ -396,6 +411,60 @@
                 </form>
             </div>
         </section>
+
+        <!-- Create Your Order Section -->
+        <section id="create-order-section" class="py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC]" style="display:none;">
+            <div class="container-main text-center">
+                <h2 class="section-heading text-5xl mb-10">Craft Your Perfect Order!</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
+                    Looking for something unique or planning a special event? Tell us what you envision, and we'll make it a reality.
+                </p>
+
+                <form id="customOrderForm" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                    <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Tell Us About Your Custom Order</h3>
+
+                    <!-- Order Details -->
+                    <div>
+                        <label for="orderDetails" class="block text-left text-lg font-medium text-gray-700 mb-2">What treats are you dreaming of?</label>
+                        <textarea id="orderDetails" name="orderDetails" rows="8" placeholder="e.g., 3 dozen chocolate dipped strawberries with gold flakes, 2 dozen custom themed cake pops for a birthday party..." class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]"></textarea>
+                    </div>
+
+                    <!-- Order Type -->
+                    <div class="text-left">
+                        <label class="block text-lg font-medium text-gray-700 mb-3">Is this for a simple order or a larger event?</label>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="orderTypeSimple" name="orderType" value="simple" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" checked>
+                                <label for="orderTypeSimple" class="ml-2 text-lg text-gray-700">Simple / Individual Order</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="orderTypeParty" name="orderType" value="party" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
+                                <label for="orderTypeParty" class="ml-2 text-lg text-gray-700">Party / Event Order</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div>
+                        <label for="orderName" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Name</label>
+                        <input type="text" id="orderName" name="orderName" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                    </div>
+                    <div>
+                        <label for="orderEmail" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Email</label>
+                        <input type="email" id="orderEmail" name="orderEmail" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                    </div>
+                    <div>
+                        <label for="orderPhone" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Phone (Optional)</label>
+                        <input type="tel" id="orderPhone" name="orderPhone" placeholder="Your Phone Number" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                    </div>
+
+                    <button type="submit" class="cta-button w-full px-6 py-3 rounded-full text-xl shadow-md">
+                        Submit Custom Order Request <i class="fas fa-cookie-bite ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer-bg py-12 text-white text-center rounded-t-[4rem]">
@@ -407,10 +476,11 @@
             <div class="footer-links-group">
                 <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Quick Links</h4>
                 <ul class="space-y-2 text-lg">
-                    <li><a href="#home" class="footer-link">Home</a></li>
-                    <li><a href="#menu" class="footer-link">Menu</a></li>
-                    <li><a href="#about" class="footer-link">About Us</a></li>
-                    <li><a href="#contact" class="footer-link">Contact</a></li>
+                    <li><a href="#home" class="footer-link" onclick="showSection('home-menu-combined'); return false;">Home</a></li>
+                    <li><a href="#menu" class="footer-link" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault'); return false;">Menu</a></li>
+                    <li><a href="#about" class="footer-link" onclick="showSection('about-section'); return false;">About Us</a></li>
+                    <li><a href="#contact" class="footer-link" onclick="showSection('contact-section'); return false;">Contact</a></li>
+                    <li><a href="#create-order" class="footer-link" onclick="showSection('create-order-section'); return false;">Create Your Order</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">
@@ -424,251 +494,308 @@
         </div>
     </footer>
 
-    <!-- JavaScript for dynamic menu and smooth scrolling -->
+    <!-- JavaScript for dynamic menu, section display, and form handling -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Data for your menu items (variables for each sweet)
-            const sweetsData = [
-                {
-                    img: "db0735d2-681f-466d-a5d5-a7fceae3664c.jpeg",
-                    title: "Classic Dipped Strawberries",
-                    description: "Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.",
-                    price: "$35.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: true // This will now appear on the main menu
-                },
-                {
-                    img: "2b0fd04a-dfe1-42b1-b087-2e3c51fe7a3b.jpeg",
-                    title: "White Chocolate Drizzle Strawberries",
-                    description: "Fresh strawberries dipped in milk chocolate, elegantly drizzled with white chocolate.",
-                    price: "$38.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: false // These will NOT appear on the main menu
-                },
-                {
-                    img: "927b7bcd-ac6a-4c5b-b5b6-df40e195cf4e.jpeg",
-                    title: "Oreo Crunch Strawberries",
-                    description: "Strawberries dipped in white chocolate and coated with crushed Oreo cookies.",
-                    price: "$40.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "5bc5629f-61c9-422b-8882-d1e3b3390d3e.jpeg",
-                    title: "Confetti Dream Strawberries",
-                    description: "Milk chocolate-dipped strawberries adorned with festive, colorful sprinkles.",
-                    price: "$37.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "94e8e622-c0fe-4af3-824e-73cf376cd3d1.jpeg",
-                    title: "Nutty Caramel Strawberries",
-                    description: "Decadent strawberries dipped in caramel, then coated in nuts and chocolate.",
-                    price: "$42.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "dbf44f3d-48a2-4000-ae4d-c5276a6b0df5.jpeg",
-                    title: "Luxury Gold Dust Strawberries",
-                    description: "Exquisite strawberries dipped in dark chocolate and dusted with edible gold.",
-                    price: "$50.00/dozen",
-                    category: "Dipped Strawberries",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
-                    title: "Chocolate Dipped Pretzels",
-                    description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
-                    price: "$20.00/dozen",
-                    category: "Dipped Pretzels",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "45819452-78ee-497a-96f1-3f913ffa95ff.jpeg",
-                    title: "Gourmet Pretzel Rods",
-                    description: "Long pretzel rods elegantly dipped and decorated with various toppings.",
-                    price: "$28.00/dozen",
-                    category: "Dipped Pretzels",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "7f770087-fe60-44a9-baa8-23ee81db1d07.jpeg",
-                    title: "Custom Cake Sicles",
-                    description: "Cake on a stick, shaped like popsicles, covered in chocolate and artistic designs.",
-                    price: "$45.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
-                    title: "Classic Cake Pops",
-                    description: "Moist cake bites on a stick, hand-dipped in chocolate and decorated with sprinkles.",
-                    price: "$40.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "c7c5357a-99b0-439a-8213-04c22bc5b94e.jpeg", // Placeholder for new item
-                    title: "Velvet Swirl Cake Pops",
-                    description: "Decadent red velvet cake pops with elegant white chocolate swirls.",
-                    price: "$42.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg", // Placeholder for new item
-                    title: "Brownie Batter Cake Pops",
-                    description: "Rich brownie-flavored cake pops dipped in dark chocolate and topped with mini chocolate chips.",
-                    price: "$40.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "94801b50-345d-4d51-afc8-73c332b3a0d6.jpeg", // Placeholder for new item
-                    title: "Simple Chocolate Covered Oreos",
-                    description: "Classic Oreos dipped in smooth chocolate, available in various colors and simple drizzles.",
-                    price: "$55.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "793e79b7-20a1-46cf-afa0-5f55534205ee.jpeg", // Placeholder for new item
-                    title: "Cookie Dough Cake Pops",
-                    description: "Sweet cookie dough cake pops dipped in milk chocolate, a delightful treat.",
-                    price: "$45.00/dozen",
-                    category: "Cake Sicles & Pops",
-                    displayOnMainMenu: false
-                },
-                {
-                    img: "14c8746e-cac5-4380-b743-1e3b4d8326ec.jpeg",
-                    title: "Dipped Rice Crispy Treats",
-                    description: "Chewy rice crispy treats generously coated in rich chocolate and fun toppings.",
-                    price: "$30.00/dozen",
-                    category: "Rice Crispy & Dipped Cupcakes",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "a67682b1-e2ad-4e9b-8dce-a834af8df359.jpeg",
-                    title: "Mini Dipped Cupcakes",
-                    description: "Delightful mini cupcakes, frosted and then partially dipped in chocolate.",
-                    price: "$38.00/dozen",
-                    category: "Rice Crispy & Dipped Cupcakes",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "02bb3cbc-bd8d-4bc1-a7e4-2a41f5821dec.jpeg",
-                    title: "Tres Leches Cups (Sample)",
-                    description: "Small, moist sponge cakes soaked in three kinds of milk, a creamy delight.",
-                    price: "$8.00/each",
-                    category: "Individual Sample Cups",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "f2cc655a-26b1-4bb9-a9f2-4bc20d4f775d.jpeg",
-                    title: "Individual Flan Desserts (Sample)",
-                    description: "Rich, creamy caramel custard baked to perfection, a classic Latin dessert.",
-                    price: "$7.00/each",
-                    category: "Individual Sample Cups",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "d20a85a9-9ee2-493b-ab0d-b430f2c2116d.jpeg",
-                    title: "Silky Chocolate Mousse Cups (Sample)",
-                    description: "Light and airy chocolate mousse, a perfect individual portion of indulgence.",
-                    price: "$9.00/each",
-                    category: "Individual Sample Cups",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "b5b46884-95db-49c8-82e8-6ea5bdf01f69.jpeg",
-                    title: "Creme Brulee Cups (Sample)",
-                    description: "Creamy custard with a crisp caramelized sugar topping, served in individual cups.",
-                    price: "$10.00/each",
-                    category: "Individual Sample Cups",
-                    displayOnMainMenu: true
-                },
-                {
-                    img: "823f3f9d-c336-4992-b8f1-64ae3e2761e1.jpeg",
-                    title: "Dipped Churro Bites (Sample)",
-                    description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
-                    price: "$5.00/each",
-                    category: "Individual Sample Cups",
-                    displayOnMainMenu: true
-                }
-            ];
+        // Data for your menu items
+        const sweetsData = [
+            {
+                img: "db0735d2-681f-466d-a5d5-a7fceae3664c.jpeg",
+                title: "Classic Dipped Strawberries",
+                description: "Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.",
+                price: "$35.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: true
+            },
+            {
+                img: "2b0fd04a-dfe1-42b1-b087-2e3c51fe7a3b.jpeg",
+                title: "White Chocolate Drizzle Strawberries",
+                description: "Fresh strawberries dipped in milk chocolate, elegantly drizzled with white chocolate.",
+                price: "$38.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: false
+            },
+            {
+                img: "927b7bcd-ac6a-4c5b-b5b6-df40e195cf4e.jpeg",
+                title: "Oreo Crunch Strawberries",
+                description: "Strawberries dipped in white chocolate and coated with crushed Oreo cookies.",
+                price: "$40.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: false
+            },
+            {
+                img: "5bc5629f-61c9-422b-8882-d1e3b3390d3e.jpeg",
+                title: "Confetti Dream Strawberries",
+                description: "Milk chocolate-dipped strawberries adorned with festive, colorful sprinkles.",
+                price: "$37.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: false
+            },
+            {
+                img: "94e8e622-c0fe-4af3-824e-73cf376cd3d1.jpeg",
+                title: "Nutty Caramel Strawberries",
+                description: "Decadent strawberries dipped in caramel, then coated in nuts and chocolate.",
+                price: "$42.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: false
+            },
+            {
+                img: "dbf44f3d-48a2-4000-ae4d-c5276a6b0df5.jpeg",
+                title: "Luxury Gold Dust Strawberries",
+                description: "Exquisite strawberries dipped in dark chocolate and dusted with edible gold.",
+                price: "$50.00/dozen",
+                category: "Dipped Strawberries",
+                displayOnMainMenu: false
+            },
+            {
+                img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
+                title: "Chocolate Dipped Pretzels",
+                description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
+                price: "$20.00/dozen",
+                category: "Dipped Pretzels",
+                displayOnMainMenu: true
+            },
+            {
+                img: "45819452-78ee-497a-96f1-3f913ffa95ff.jpeg",
+                title: "Gourmet Pretzel Rods",
+                description: "Long pretzel rods elegantly dipped and decorated with various toppings.",
+                price: "$28.00/dozen",
+                category: "Dipped Pretzels",
+                displayOnMainMenu: true
+            },
+            {
+                img: "7f770087-fe60-44a9-baa8-23ee81db1d07.jpeg",
+                title: "Custom Cake Sicles",
+                description: "Cake on a stick, shaped like popsicles, covered in chocolate and artistic designs.",
+                price: "$45.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: true
+            },
+            {
+                img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
+                title: "Classic Cake Pops",
+                description: "Moist cake bites on a stick, hand-dipped in chocolate and decorated with sprinkles.",
+                price: "$40.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: true
+            },
+            {
+                img: "c7c5357a-99b0-439a-8213-04c22bc5b94e.jpeg", // Placeholder for new item
+                title: "Velvet Swirl Cake Pops",
+                description: "Decadent red velvet cake pops with elegant white chocolate swirls.",
+                price: "$42.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: false
+            },
+            {
+                img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg", // Placeholder for new item
+                title: "Brownie Batter Cake Pops",
+                description: "Rich brownie-flavored cake pops dipped in dark chocolate and topped with mini chocolate chips.",
+                price: "$40.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: false
+            },
+            {
+                img: "94801b50-345d-4d51-afc8-73c332b3a0d6.jpeg", // Placeholder for new item
+                title: "Simple Chocolate Covered Oreos",
+                description: "Classic Oreos dipped in smooth chocolate, available in various colors and simple drizzles.",
+                price: "$55.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: false
+            },
+            {
+                img: "793e79b7-20a1-46cf-afa0-5f55534205ee.jpeg", // Placeholder for new item
+                title: "Cookie Dough Cake Pops",
+                description: "Sweet cookie dough cake pops dipped in milk chocolate, a delightful treat.",
+                price: "$45.00/dozen",
+                category: "Cake Sicles & Pops",
+                displayOnMainMenu: false
+            },
+            {
+                img: "14c8746e-cac5-4380-b743-1e3b4d8326ec.jpeg",
+                title: "Dipped Rice Crispy Treats",
+                description: "Chewy rice crispy treats generously coated in rich chocolate and fun toppings.",
+                price: "$30.00/dozen",
+                category: "Rice Crispy & Dipped Cupcakes",
+                displayOnMainMenu: true
+            },
+            {
+                img: "a67682b1-e2ad-4e9b-8dce-a834af8df359.jpeg",
+                title: "Mini Dipped Cupcakes",
+                description: "Delightful mini cupcakes, frosted and then partially dipped in chocolate.",
+                price: "$38.00/dozen",
+                category: "Rice Crispy & Dipped Cupcakes",
+                displayOnMainMenu: true
+            },
+            {
+                img: "02bb3cbc-bd8d-4bc1-a7e4-2a41f5821dec.jpeg",
+                title: "Tres Leches Cups (Sample)",
+                description: "Small, moist sponge cakes soaked in three kinds of milk, a creamy delight.",
+                price: "$8.00/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true
+            },
+            {
+                img: "f2cc655a-26b1-4bb9-a9f2-4bc20d4f775d.jpeg",
+                title: "Individual Flan Desserts (Sample)",
+                description: "Rich, creamy caramel custard baked to perfection, a classic Latin dessert.",
+                price: "$7.00/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true
+            },
+            {
+                img: "d20a85a9-9ee2-493b-ab0d-b430f2c2116d.jpeg",
+                title: "Silky Chocolate Mousse Cups (Sample)",
+                description: "Light and airy chocolate mousse, a perfect individual portion of indulgence.",
+                price: "$9.00/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true
+            },
+            {
+                img: "b5b46884-95db-49c8-82e8-6ea5bdf01f69.jpeg",
+                title: "Creme Brulee Cups (Sample)",
+                description: "Creamy custard with a crisp caramelized sugar topping, served in individual cups.",
+                price: "$10.00/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true
+            },
+            {
+                img: "823f3f9d-c336-4992-b8f1-64ae3e2761e1.jpeg",
+                title: "Dipped Churro Bites (Sample)",
+                description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
+                price: "$5.00/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true
+            }
+        ];
 
-            // Function to dynamically populate the sweet menu grid based on filterType
-            function populateSweetMenu(filterType = 'MainMenuDefault') {
-                const sweetMenuGrid = document.getElementById('sweet-menu-grid');
-                if (sweetMenuGrid) {
-                    let htmlContent = '';
-                    let filteredSweets = [];
+        // Function to control which sections are visible
+        function showSection(sectionId) {
+            const allSections = document.querySelectorAll('main > section'); // Target top-level sections
+            allSections.forEach(section => {
+                section.style.display = 'none'; // Hide all sections
+            });
 
-                    if (filterType === 'MainMenuDefault') {
-                        // For the main menu, show only items marked for main menu display
-                        filteredSweets = sweetsData.filter(sweet => sweet.displayOnMainMenu === true);
-                    } else {
-                        // For specific category selections, show all items of that category
-                        filteredSweets = sweetsData.filter(sweet => sweet.category === filterType);
-                    }
-
-                    // If no sweets found for a category, display a message
-                    if (filteredSweets.length === 0) {
-                        htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No sweets found in the selected category yet. Check back soon!</p>`;
-                    } else {
-                        filteredSweets.forEach(sweet => {
-                            htmlContent += `
-                                <div class="sweet-card p-6 flex flex-col items-center text-center">
-                                    <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
-                                    <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
-                                    <p class="text-gray-600 text-lg mb-4 flex-grow">
-                                        ${sweet.description}
-                                    </p>
-                                    <span class="sweet-price text-2xl font-extrabold mb-4">${sweet.price}</span>
-                                    <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
-                                </div>
-                            `;
-                        });
-                    }
-                    sweetMenuGrid.innerHTML = htmlContent;
+            if (sectionId === 'home-menu-combined') {
+                // When "Home" is clicked, show the combined home/menu section
+                document.getElementById('home-menu-combined').style.display = 'block';
+                // Ensure the main menu grid is populated when home is shown
+                populateSweetMenu('MainMenuDefault', 'sweet-menu-grid');
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top for home
+            } else if (sectionId === 'menu-only-section') {
+                // When "Menu" is clicked, show only the dedicated menu section
+                document.getElementById('menu-only-section').style.display = 'block';
+                // Populate the alternative menu grid for the menu-only view
+                populateSweetMenu('MainMenuDefault', 'sweet-menu-grid-alt');
+                const menuSection = document.getElementById('menu-only-section');
+                if (menuSection) {
+                    window.scrollTo({ top: menuSection.offsetTop - document.querySelector('header').offsetHeight, behavior: 'smooth' });
                 }
             }
+            else {
+                // For other sections (About, Contact, Create Order), show only that specific section
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.style.display = 'block';
+                    window.scrollTo({ top: activeSection.offsetTop - document.querySelector('header').offsetHeight, behavior: 'smooth' });
+                }
+            }
+        }
 
-            // Call the function to populate the menu with the MainMenuDefault view on initial load
-            populateSweetMenu('MainMenuDefault');
+        // Function to dynamically populate the sweet menu grid based on filterType and targetGridId
+        function populateSweetMenu(filterType = 'MainMenuDefault', targetGridId = 'sweet-menu-grid') {
+            const sweetMenuGrid = document.getElementById(targetGridId);
+            if (sweetMenuGrid) {
+                let htmlContent = '';
+                let filteredSweets = [];
 
-            // Smooth scrolling for anchor links within the page.
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+                if (filterType === 'MainMenuDefault') {
+                    // For the main menu, show only items marked for main menu display
+                    // This logic is used for both 'home-menu-combined' and 'menu-only-section' default views
+                    filteredSweets = sweetsData.filter(sweet => sweet.displayOnMainMenu === true);
+                } else {
+                    // For specific category selections, show all items of that category
+                    filteredSweets = sweetsData.filter(sweet => sweet.category === filterType);
+                }
 
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+                // If no sweets found for a category, display a message
+                if (filteredSweets.length === 0) {
+                    htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No sweets found in the selected category yet. Check back soon!</p>`;
+                } else {
+                    filteredSweets.forEach(sweet => {
+                        htmlContent += `
+                            <div class="sweet-card p-6 flex flex-col items-center text-center">
+                                <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
+                                <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
+                                <p class="text-gray-600 text-lg mb-4 flex-grow">
+                                    ${sweet.description}
+                                </p>
+                                <span class="sweet-price text-2xl font-extrabold mb-4">${sweet.price}</span>
+                                <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                            </div>
+                        `;
+                    });
+                }
+                sweetMenuGrid.innerHTML = htmlContent;
+            }
+        }
 
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
+        // Function for smooth scrolling without changing section visibility
+        function smoothScrollTo(targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - document.querySelector('header').offsetHeight,
+                    behavior: 'smooth'
                 });
-            });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initially show the combined home and menu section
+            showSection('home-menu-combined');
+            populateSweetMenu('MainMenuDefault', 'sweet-menu-grid'); // Populate the default menu grid
 
             // Event listeners for dropdown category selection
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault(); // Prevent default link behavior
                     const category = this.dataset.category; // Get the category from data-category attribute
-                    populateSweetMenu(category); // Filter sweets by the selected category
-
-                    // Optional: Smooth scroll to the menu section after filtering
-                    const menuSection = document.getElementById('menu');
-                    if (menuSection) {
-                        menuSection.scrollIntoView({ behavior: 'smooth' });
-                    }
+                    showSection('menu-only-section'); // Ensure the menu-only section is shown
+                    populateSweetMenu(category, 'sweet-menu-grid-alt'); // Filter sweets by the selected category for the menu-only grid
                 });
             });
+
+            // Handle submission of the custom order form
+            const customOrderForm = document.getElementById('customOrderForm');
+            if (customOrderForm) {
+                customOrderForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    const orderDetails = document.getElementById('orderDetails').value;
+                    const orderType = document.querySelector('input[name="orderType"]:checked').value;
+                    const orderName = document.getElementById('orderName').value;
+                    const orderEmail = document.getElementById('orderEmail').value;
+                    const orderPhone = document.getElementById('orderPhone').value;
+
+                    // Basic validation
+                    if (!orderDetails || !orderName || !orderEmail) {
+                        console.error("Validation Error: Please fill in all required fields (Order Details, Your Name, and Your Email).");
+                        return;
+                    }
+
+                    // For demonstration, log the form data
+                    console.log("Custom Order Request Submitted:");
+                    console.log("Order Details:", orderDetails);
+                    console.log("Order Type:", orderType);
+                    console.log("Name:", orderName);
+                    console.log("Email:", orderEmail);
+                    console.log("Phone:", orderPhone || "N/A");
+
+                    // For this example, we'll just log and reset the form.
+                    console.log("Form submission simulated successfully. (In a live app, this data would be sent to a backend.)");
+                    customOrderForm.reset();
+                });
+            }
         });
     </script>
 </body>
