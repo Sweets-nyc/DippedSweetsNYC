@@ -284,7 +284,7 @@
                         <a href="#menu" class="dropdown-item" data-category="Cake Sicles & Pops">Cake Sicles & Pops</a>
                         <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes">Rice Crispy & Dipped Cupcakes</a>
                         <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups">Individual Sample Cups</a>
-                        <a href="#menu" class="dropdown-item" data-category="Dipped Churro Bites">Dipped Churro Bites</a>
+                        <!-- Removed "Dipped Churro Bites" as a separate category entry -->
                     </div>
                 </div>
                 <a href="#about" class="nav-link text-lg">About Us</a>
@@ -510,6 +510,46 @@
                     displayOnMainMenu: true
                 },
                 {
+                    img: "https://placehold.co/300x200/F0E6D8/6F4E37?text=Velvet+Swirl", // Placeholder for new item
+                    title: "Velvet Swirl Cake Pops",
+                    description: "Decadent red velvet cake pops with elegant white chocolate swirls.",
+                    price: "$42.00/dozen",
+                    category: "Cake Sicles & Pops",
+                    displayOnMainMenu: false
+                },
+                {
+                    img: "https://placehold.co/300x200/F0E6D8/6F4E37?text=Lemon+Zest", // Placeholder for new item
+                    title: "Lemon Zest Cake Sicles",
+                    description: "Light and tangy lemon cake sicles, coated in white chocolate with a citrusy glaze.",
+                    price: "$48.00/dozen",
+                    category: "Cake Sicles & Pops",
+                    displayOnMainMenu: false
+                },
+                {
+                    img: "https://placehold.co/300x200/F0E6D8/6F4E37?text=Brownie+Batter", // Placeholder for new item
+                    title: "Brownie Batter Cake Pops",
+                    description: "Rich brownie-flavored cake pops dipped in dark chocolate and topped with mini chocolate chips.",
+                    price: "$40.00/dozen",
+                    category: "Cake Sicles & Pops",
+                    displayOnMainMenu: false
+                },
+                {
+                    img: "https://placehold.co/300x200/F0E6D8/6F4E37?text=Unicorn+Sparkle", // Placeholder for new item
+                    title: "Unicorn Sparkle Cake Sicles",
+                    description: "Magical vanilla cake sicles with vibrant colors, edible glitter, and rainbow sprinkles.",
+                    price: "$55.00/dozen",
+                    category: "Cake Sicles & Pops",
+                    displayOnMainMenu: false
+                },
+                {
+                    img: "https://placehold.co/300x200/F0E6D8/6F4E37?text=Cookie+Dough", // Placeholder for new item
+                    title: "Cookie Dough Cake Pops",
+                    description: "Sweet cookie dough cake pops dipped in milk chocolate, a delightful treat.",
+                    price: "$45.00/dozen",
+                    category: "Cake Sicles & Pops",
+                    displayOnMainMenu: false
+                },
+                {
                     img: "14c8746e-cac5-4380-b743-1e3b4d8326ec.jpeg",
                     title: "Dipped Rice Crispy Treats",
                     description: "Chewy rice crispy treats generously coated in rich chocolate and fun toppings.",
@@ -562,8 +602,8 @@
                     title: "Dipped Churro Bites (Sample)",
                     description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
                     price: "$5.00/each",
-                    category: "Dipped Churro Bites", // Still its own category
-                    displayOnMainMenu: true // Now appears on main menu and its own category page
+                    category: "Individual Sample Cups", // Category changed to Individual Sample Cups
+                    displayOnMainMenu: true // Now appears on main menu and Individual Sample Cups page
                 }
             ];
 
@@ -576,7 +616,6 @@
 
                     if (filterType === 'MainMenuDefault') {
                         // For the main menu, show only items marked for main menu display
-                        // This includes the Classic Dipped Strawberries, but excludes the other detailed ones
                         filteredSweets = sweetsData.filter(sweet => sweet.displayOnMainMenu === true);
                     } else {
                         // For specific category selections, show all items of that category
