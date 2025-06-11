@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Viewport meta tag updated: initial-scale set to 0.65 to make the page appear more zoomed out by default.
+         shrink-to-fit=no is added for better compatibility on some mobile browsers (e.g., older iOS Safari). -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.65, shrink-to-fit=no">
     <title>Dipped Sweetss NYC - Handcrafted Dipped Treats</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,12 +18,14 @@
             font-family: 'Inter', sans-serif;
             background-color: #FFF8F0; /* Creamy white */
             color: #333333; /* Dark grey */
+            overflow-x: hidden; /* Prevent horizontal scrolling if content tries to exceed viewport globally, handled locally where needed */
+            font-size: 1rem; /* Base font size for desktop (1rem = 16px by default) */
         }
         h1, h2, h3, h4 {
             font-family: 'Fredoka One', cursive;
         }
         .container-main {
-            max-width: 1200px;
+            max-width: 1200px; /* Limits content width on large screens */
             margin: 0 auto;
             padding: 0 1.5rem;
         }
@@ -32,8 +36,7 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
         }
         .logo-text {
-            /* Adjusted font size to make space for navigation */
-            font-size: 2.25rem; /* Equivalent to Tailwind's text-4xl */
+            font-size: 2.25rem; /* Equivalent to Tailwind's text-4xl on desktop */
             color: #6F4E37; /* Chocolate Brown */
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
@@ -42,6 +45,8 @@
             font-weight: 600;
             transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
             position: relative; /* Needed for dropdown positioning */
+            padding: 0.5rem 1rem; /* Default padding for nav links on desktop */
+            font-size: 1.125rem; /* Tailwind's text-lg equivalent on desktop */
         }
         .nav-link:hover {
             color: #F8A4B8; /* Soft Pink */
@@ -50,7 +55,7 @@
         .hero-title {
             font-size: 5rem;
             color: #6F4E37; /* Chocolate Brown */
-            text-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.15); /* Corrected shadow property */
         }
         .hero-tagline {
             font-size: 1.5rem;
@@ -74,6 +79,11 @@
             border-radius: 2rem;
             box-shadow: 0 15px 30px -10px rgba(0,0,0,0.08);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            /* Added for consistent mobile sizing within grid */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box; /* Ensure padding/border are included in width calculation */
         }
         .sweet-card:hover {
             transform: translateY(-10px) rotate(-1deg);
@@ -82,6 +92,9 @@
         .sweet-image {
             border-radius: 1.5rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 100%; /* Ensure image takes full width of its container */
+            aspect-ratio: 4/3; /* Maintain a 4:3 aspect ratio */
+            object-fit: cover; /* Crop to fit, preventing distortion */
         }
         .sweet-title {
             color: #6F4E37; /* Chocolate Brown */
@@ -113,7 +126,7 @@
             color: #F8A4B8; /* Soft Pink */
         }
 
-        /* Dropdown specific styles - MODIFIED FOR SMOOTHER HOVER */
+        /* Dropdown specific styles */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -125,7 +138,6 @@
             z-index: 100; /* Ensure it's above other content */
             border-radius: 0.75rem; /* rounded-xl */
             padding: 0.5rem 0;
-            /* Removed margin-top to eliminate the gap */
         }
 
         /* The nav-link parent div now controls dropdown visibility */
@@ -147,119 +159,240 @@
             color: #E28FA0; /* Darker Pink */
         }
 
-        /* Responsive Adjustments */
+        /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
+
+        /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
         @media (max-width: 1024px) {
             .hero-title {
-                font-size: 4rem;
+                font-size: 3.5rem; /* Slightly smaller hero title */
             }
             .hero-tagline {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             .section-heading {
-                font-size: 3rem; /* Adjusted for smaller screens */
+                font-size: 2.8rem;
             }
         }
 
+        /* Specific mobile styling - now truly responsive to device width. */
         @media (max-width: 768px) {
+            body {
+                font-size: 0.9rem; /* Base font size for mobile */
+            }
+            .header-bg {
+                border-bottom-left-radius: 2rem;
+                border-bottom-right-radius: 2rem;
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
             .logo-text {
-                font-size: 2.5rem;
+                font-size: 2rem !important; /* Smaller logo for mobile */
+                margin-bottom: 1rem !important;
             }
             .navbar-nav {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%; /* Full width on small screens */
+                /* Changed to grid for 2 columns */
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 2 columns, equal width */
+                gap: 0.5rem; /* Reduced gap for a tighter layout */
+                width: 100%; /* Ensure the grid takes full width */
+                /* Removed align-items: center; as grid handles alignment differently */
             }
             .nav-link {
-                width: 100%; /* Full width for nav links */
-                text-align: center; /* Center align nav links */
+                /* Removed width: 90%; so it can auto-fit grid column */
+                font-size: 0.95rem !important; /* Slightly smaller nav link font */
+                padding: 0.6rem 0.8rem !important;
+                border-radius: 0.5rem; /* Slightly smaller rounded corners */
+                background-color: rgba(255, 255, 255, 0.5);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                display: flex; /* Use flex to center content within each nav-link */
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                height: 100%; /* Ensure consistent height for all nav links in the grid */
             }
             .dropdown-menu {
-                position: static; /* Stack dropdown items normally for mobile */
-                width: 100%;
+                position: static; /* Remains static to flow within the nav-link */
+                width: 100%; /* Take full width of its parent nav-link's grid cell */
+                max-width: 90%; /* Prevent it from stretching too wide in larger grid cells */
+                margin-left: auto; /* Center it */
+                margin-right: auto; /* Center it */
                 box-shadow: none;
-                margin-top: 0;
-                border-radius: 0;
-                padding: 0;
-                border-top: 1px solid #F8E6DD;
+                margin-top: 0.3rem;
+                border-radius: 0.5rem; /* Smaller radius for dropdown */
+                border-top: none;
+                background-color: rgba(255, 255, 255, 0.9); /* Slightly less transparent */
+                padding: 0.3rem 0;
             }
             .dropdown-item {
-                padding-left: 2rem; /* Indent dropdown items */
-                text-align: center; /* Center align dropdown items on mobile */
+                font-size: 0.9rem !important; /* Smaller dropdown item font */
+                padding: 0.6rem 0.8rem !important;
+                text-align: center; /* Center text within dropdown items */
             }
-            .hero-section {
-                padding: 4rem 1rem;
+            /* Adjust sweet-grid to be responsive and fit better */
+            .sweet-grid {
+                display: grid !important; /* Force grid layout */
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
+                gap: 0.6rem; /* Reduced gap for more compactness */
+                width: 100%;
+                margin: 0;
             }
+            .sweet-card {
+                padding: 0.25rem; /* Reduced padding for compactness */
+                /* Ensure it takes full width of its grid cell */
+                width: 100%;
+            }
+            .sweet-image {
+                width: 100%;
+                /* Using aspect-ratio for better image scaling without fixed height */
+                aspect-ratio: 4/3; /* Adjust as needed, e.g., 1/1 for square, 3/2 for wider */
+                object-fit: cover;
+                margin-bottom: 0.4rem; /* Reduced margin */
+                height: auto; /* Let height adjust based on aspect-ratio */
+            }
+            .sweet-title {
+                font-size: 1.05rem; /* Slightly smaller for compactness */
+                margin-bottom: 0.15rem; /* Reduced margin */
+            }
+            .sweet-description {
+                font-size: 0.7rem; /* Slightly smaller for compactness */
+                line-height: 1.25;
+                margin-bottom: 0.4rem; /* Reduced margin */
+            }
+            .sweet-price {
+                font-size: 0.95rem; /* Slightly smaller for compactness */
+                margin-bottom: 0.4rem; /* Reduced margin */
+            }
+            .order-button {
+                font-size: 0.8rem; /* Slightly smaller for compactness */
+                padding: 0.4rem 0.7rem;
+            }
+            /* Adjust other content for responsiveness */
             .hero-title {
-                font-size: 3rem;
+                font-size: 2.8rem; /* Smaller hero title */
             }
             .hero-tagline {
-                font-size: 1.1rem;
+                font-size: 1.1rem; /* Smaller tagline */
             }
-            .sweet-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            .cta-button {
+                font-size: 1.1rem; /* Smaller CTA button */
+                padding: 0.8rem 1.8rem;
             }
             .section-heading {
-                font-size: 2.5rem;
+                font-size: 2.2rem; /* Smaller section heading */
+                margin-bottom: 1.5rem; /* Reduced margin */
             }
-            .contact-info {
-                flex-direction: column; /* Keep column for small screens */
-                align-items: center; /* Center items in column */
-                gap: 1.5rem;
+            .contact-info p, .contact-details-group span, form label {
+                font-size: 1rem; /* Smaller contact text */
             }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
+            .contact-info i {
+                font-size: 1.6rem; /* Smaller icon size */
             }
-            .footer-logo {
-                text-align: center;
+            form input, form textarea, form button {
+                font-size: 0.9rem; /* Smaller form elements */
+                padding: 0.8rem;
             }
-            .footer-links-group {
-                text-align: center;
+            .footer-logo .logo-text {
+                font-size: 2rem; /* Smaller footer logo */
+            }
+            .footer-link {
+                font-size: 1rem; /* Smaller footer links */
+            }
+            .footer-links-group h4 {
+                font-size: 1.6rem; /* Smaller footer heading */
+            }
+            .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
+                font-size: 1.5rem;
             }
         }
 
+        /* Even smaller mobile screens (e.g., very narrow phone viewports) */
         @media (max-width: 480px) {
+            body {
+                font-size: 0.8rem; /* Further reduced base font size */
+            }
+            .container-main { /* Reduced padding for very small screens */
+                padding: 0 0.8rem;
+            }
             .logo-text {
-                font-size: 2rem;
+                font-size: 1.7rem !important;
+                margin-bottom: 0.7rem !important;
+            }
+            .nav-link {
+                font-size: 0.8rem !important; /* Even smaller nav link font */
+                padding: 0.4rem 0.5rem !important;
+            }
+            .dropdown-menu {
+                font-size: 0.75rem !important;
+                padding: 0.1rem 0;
+            }
+            .dropdown-item {
+                font-size: 0.75rem !important;
+                padding: 0.4rem 0.5rem !important;
             }
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 0.7rem;
             }
             .hero-tagline {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
             }
             .cta-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 1.1rem;
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+            .section-heading {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+            /* Adjust sweet-grid for very small screens */
+            .sweet-grid {
+                grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
+                gap: 0.4rem; /* Further reduced gap */
             }
             .sweet-card {
-                padding: 1.5rem;
-                border-radius: 1.5rem;
+                padding: 0.25rem; /* Further reduced padding */
+                box-sizing: border-box; /* Reinforce */
             }
             .sweet-image {
-                border-radius: 1rem;
+                /* Using aspect-ratio for very small screens too */
+                aspect-ratio: 4/3;
+                height: auto; /* Let height adjust based on aspect-ratio */
             }
             .sweet-title {
-                font-size: 1.3rem;
+                font-size: 0.9rem; /* Even smaller title */
+            }
+            .sweet-description {
+                font-size: 0.65rem; /* Even smaller description */
+                line-height: 1.2;
             }
             .sweet-price {
-                font-size: 1.1rem;
+                font-size: 0.8rem; /* Even smaller price */
             }
             .order-button {
-                padding: 0.7rem 1.2rem;
-                font-size: 0.9rem;
+                font-size: 0.65rem; /* Even smaller button */
+                padding: 0.2rem 0.5rem;
             }
-            .newsletter-form {
-                flex-direction: column;
-                gap: 1rem;
+            .contact-info p, .contact-details-group span {
+                font-size: 0.85rem;
             }
-            .newsletter-input, .newsletter-button {
-                width: 100%;
+            .contact-info i {
+                font-size: 1.3rem;
             }
-            .footer-bg {
-                border-top-left-radius: 2rem;
-                border-top-right-radius: 2rem;
+            form input, form textarea, form button {
+                font-size: 0.75rem;
+                padding: 0.6rem;
+            }
+            .footer-logo .logo-text {
+                font-size: 1.7rem;
+            }
+            .footer-link {
+                font-size: 0.85rem;
+            }
+            .footer-links-group h4 {
+                font-size: 1.3rem;
+            }
+            .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -452,7 +585,8 @@
                     <!-- New: Select from Our Menu -->
                     <div>
                         <label class="block text-left text-lg font-medium text-gray-700 mb-4">Or, Select from Our Existing Menu:</label>
-                        <div id="menuSelectionContainer" class="flex flex-nowrap overflow-x-auto gap-4 p-4 rounded-xl border border-gray-200 bg-gray-50 snap-x snap-mandatory pb-6">
+                        <!-- Changed to grid and adjusted gap and padding for better mobile display -->
+                        <div id="menuSelectionContainer" class="grid grid-cols-2 gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
                             <!-- Menu items will be dynamically loaded here by JavaScript -->
                         </div>
                         <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
@@ -555,7 +689,7 @@
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "2b0fd04a-dfe1-42b1-b087-2e3c51fe7a3b.jpeg",
@@ -564,7 +698,7 @@
                 simplePrice: "$3.33/each", // Adjusted from $40.00/dozen
                 partyPrice: "$3.00/each", // Adjusted from $36.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "927b7bcd-ac6a-4c5b-b5b6-df40e195cf4e.jpeg",
@@ -573,7 +707,7 @@
                 simplePrice: "$3.50/each", // Adjusted from $42.00/dozen
                 partyPrice: "$3.17/each", // Adjusted from $38.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "5bc5629f-61c9-422b-8882-d1e3b3390d3e.jpeg",
@@ -582,7 +716,7 @@
                 simplePrice: "$3.25/each", // Adjusted from $39.00/dozen
                 partyPrice: "$2.92/each", // Adjusted from $35.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "94e8e622-c0fe-4af3-824e-73cf376cd3d1.jpeg",
@@ -591,7 +725,7 @@
                 simplePrice: "$3.67/each", // Adjusted from $44.00/dozen
                 partyPrice: "$3.33/each", // Adjusted from $40.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "dbf44f3d-48a2-4000-ae4d-c5276a6b0df5.jpeg",
@@ -600,7 +734,7 @@
                 simplePrice: "$4.00/each", // Adjusted from $48.00/dozen
                 partyPrice: "$3.67/each", // Adjusted from $44.00/dozen
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
@@ -609,7 +743,7 @@
                 simplePrice: "$2.00/each", // Adjusted from $24.00/dozen
                 partyPrice: "$1.67/each", // Adjusted from $20.00/dozen
                 category: "Dipped Pretzels",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "45819452-78ee-497a-96f1-3f913ffa95ff.jpeg",
@@ -618,7 +752,7 @@
                 simplePrice: "$2.33/each", // Adjusted from $28.00/dozen
                 partyPrice: "$2.08/each", // Adjusted from $25.00/dozen
                 category: "Dipped Pretzels",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "7f770087-fe60-44a9-baa8-23ee81db1d07.jpeg",
@@ -627,7 +761,7 @@
                 simplePrice: "$4.00/each", // Adjusted from $48.00/dozen
                 partyPrice: "$3.58/each", // Adjusted from $43.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
@@ -636,7 +770,7 @@
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "c7c5357a-99b0-439a-8213-04c22bc5b94e.jpeg",
@@ -645,7 +779,7 @@
                 simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg",
@@ -654,7 +788,7 @@
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "94801b50-345d-4d51-afc8-73c332b3a0d6.jpeg",
@@ -663,7 +797,7 @@
                 simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "793e79b7-20a1-46cf-afa0-5f55534205ee.jpeg",
@@ -672,7 +806,7 @@
                 simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
                 category: "Cake Sicles & Pops",
-                displayOnMainMenu: false
+                displayOnMainMenu: false // Remove from home screen
             },
             {
                 img: "14c8746e-cac5-4380-b743-1e3b4d8326ec.jpeg",
@@ -681,7 +815,7 @@
                 simplePrice: "$2.67/each", // Adjusted from $32.00/dozen
                 partyPrice: "$2.33/each", // Adjusted from $28.00/dozen
                 category: "Rice Crispy & Dipped Cupcakes",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Put back on home screen
             },
             {
                 img: "a67682b1-e2ad-4e9b-8dce-a834af8df359.jpeg",
@@ -690,7 +824,7 @@
                 simplePrice: "$3.00/each", // Adjusted from $36.00/dozen
                 partyPrice: "$2.67/each", // Adjusted from $32.00/dozen
                 category: "Rice Crispy & Dipped Cupcakes",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "02bb3cbc-bd8d-4bc1-a7e4-2a41f5821dec.jpeg",
@@ -699,7 +833,7 @@
                 simplePrice: "$8.00/each",
                 partyPrice: "$7.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "f2cc655a-26b1-4bb9-a9f2-4bc20d4f775d.jpeg",
@@ -708,7 +842,7 @@
                 simplePrice: "$7.00/each",
                 partyPrice: "$6.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "d20a85a9-9ee2-493b-ab0d-b430f2c2116d.jpeg",
@@ -717,7 +851,7 @@
                 simplePrice: "$6.00/each",
                 partyPrice: "$4.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "b5b46884-95db-49c8-82e8-6ea5bdf01f69.jpeg",
@@ -726,7 +860,7 @@
                 simplePrice: "$6.00/each",
                 partyPrice: "$4.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "823f3f9d-c336-4992-b8f1-64ae3e2761e1.jpeg",
@@ -735,7 +869,7 @@
                 simplePrice: "$3.00/each",
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                displayOnMainMenu: true // Keep on home screen
             }
         ];
 
@@ -758,8 +892,8 @@
             } else if (sectionId === 'menu-only-section') {
                 // When "Menu" is clicked, show only the dedicated menu section
                 document.getElementById('menu-only-section').style.display = 'block';
-                // Populate the alternative menu grid for the menu-only view
-                populateSweetMenu('MainMenuDefault', 'sweet-menu-grid-alt');
+                // Populate the alternative menu grid for the menu-only view, showing all items
+                populateSweetMenu('AllCategories', 'sweet-menu-grid-alt'); // Changed 'MainMenuDefault' to 'AllCategories' for this initial view
                 const menuSection = document.getElementById('menu-only-section');
                 if (menuSection) {
                     window.scrollTo({ top: menuSection.offsetTop - document.querySelector('header').offsetHeight, behavior: 'smooth' });
@@ -776,18 +910,17 @@
         }
 
         // Function to dynamically populate the sweet menu grid based on filterType and targetGridId
-        // This is used for the main menu and category menus (not the order form selection)
         function populateSweetMenu(filterType = 'MainMenuDefault', targetGridId = 'sweet-menu-grid') {
             const sweetMenuGrid = document.getElementById(targetGridId);
             if (sweetMenuGrid) {
                 let htmlContent = '';
                 let filteredSweets = [];
 
-                if (filterType === 'MainMenuDefault') {
-                    // For the main menu, show only items marked for main menu display
+                if (targetGridId === 'sweet-menu-grid') { // This is the home screen grid
                     filteredSweets = sweetsData.filter(sweet => sweet.displayOnMainMenu === true);
-                } else {
-                    // For specific category selections, show all items of that category
+                } else if (filterType === 'AllCategories') { // This is for 'All Other Treats' category on the menu page
+                    filteredSweets = sweetsData; // Show all items for the 'All Other Treats' category
+                } else { // This is for specific categories on the menu-only section
                     filteredSweets = sweetsData.filter(sweet => sweet.category === filterType);
                 }
 
@@ -826,13 +959,13 @@
                 const priceToDisplay = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
 
                 htmlContent += `
-                    <div class="flex-none w-64 sweet-card p-4 text-center snap-center">
-                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/200x150/F8E6DD/6F4E37?text=Image';" class="sweet-image w-full h-32 object-cover mb-3 rounded-lg">
-                        <h4 class="font-bold text-lg text-[#6F4E37] mb-1">${sweet.title}</h4>
-                        <p class="text-sm text-gray-600 mb-2">Price: <span class="font-semibold text-[#E0B400]">${priceToDisplay}</span></p>
-                        <div class="flex items-center justify-center gap-2 mt-2">
-                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-16 p-2 border border-gray-300 rounded-md text-center focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
-                            <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}')" class="bg-[#E0B400] text-white px-3 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
+                    <div class="sweet-card p-1 text-center"> <!-- Removed flex-none w-64, reduced padding -->
+                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/100x80/F8E6DD/6F4E37?text=Image';" class="sweet-image w-full object-cover mb-1 rounded-lg"> <!-- Removed h-20, relying on aspect-ratio -->
+                        <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4> <!-- Reduced font size -->
+                        <p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${priceToDisplay}</span></p> <!-- Reduced font size -->
+                        <div class="flex items-center justify-center gap-1 mt-1"> <!-- Reduced gap, margin -->
+                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-xs focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]"> <!-- Reduced width, padding, font size -->
+                            <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button> <!-- Reduced padding, font size -->
                         </div>
                     </div>
                 `;
