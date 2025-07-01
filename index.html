@@ -421,7 +421,7 @@
                         <a href="#menu" class="dropdown-item" data-category="MainMenuDefault" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault', 'sweet-menu-grid-alt'); return false;">All Other Treats</a>
                         <a href="#menu" class="dropdown-item" data-category="Dipped Strawberries" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Strawberries', 'sweet-menu-grid-alt'); return false;">Dipped Strawberries</a>
                         <a href="#menu" class="dropdown-item" data-category="Dipped Pretzels" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Pretzels', 'sweet-menu-grid-alt'); return false;">Dipped Pretzels</a>
-                        <a href="#menu" class="dropdown-item" data-category="Cake Sicles & Pops" onclick="showSection('menu-only-section'); populateSweetMenu('Cake Sicles & Pops', 'sweet-menu-grid-alt'); return false;">Cake Sicles & Pops</a>
+                        <a href="#menu" class="dropdown-item" data-category="Cake Sicles & Pops" onclick="showSection('menu-only-section'); populateSweetMenu('Cake Sicles & Pops', 'sweet-menu-grid-alt'); return false;">Cake Pops & Covered Treats</a>
                         <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes" onclick="showSection('menu-only-section'); populateSweetMenu('Rice Crispy & Dipped Cupcakes', 'sweet-menu-grid-alt'); return false;">Rice Crispy & Dipped Cupcakes</a>
                         <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups" onclick="showSection('menu-only-section'); populateSweetMenu('Individual Sample Cups', 'sweet-menu-grid-alt'); return false;">Individual Sample Cups</a>
                     </div>
@@ -502,15 +502,19 @@
                 <div class="contact-info flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-10 text-xl font-medium text-gray-800">
                     <p class="flex items-center gap-3">
                         <i class="fas fa-envelope text-[#F8A4B8] text-2xl"></i>
-                        <a href="mailto:hello@dippedsweetssnyc.com" class="hover:text-[#E28FA0] transition-colors duration-300">hello@dippedsweetssnyc.com</a>
+                        <a href="mailto:DippedSweets.nyc@gmail.com" class="hover:text-[#E28FA0] transition-colors duration-300">DippedSweets.nyc@gmail.com</a>
                     </p>
                     <p class="flex items-center gap-3">
                         <i class="fas fa-phone-alt text-[#F8A4B8] text-2xl"></i>
-                        <a href="tel:+1-212-555-DIPS" class="hover:text-[#E28FA0] transition-colors duration-300">+1 (212) 555-DIPS</a>
+                        <a href="tel:+1-929-323-9892" class="hover:text-[#E28FA0] transition-colors duration-300">+1 (929) 323-9892</a>
                     </p>
                     <p class="flex items-center gap-3">
                         <i class="fab fa-instagram text-[#F8A4B8] text-2xl"></i>
                         <a href="https://www.instagram.com/dippedsweets_nyc/" target="_blank" rel="noopener noreferrer" class="hover:text-[#E28FA0] transition-colors duration-300">@dippedsweetss_nyc</a>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fab fa-facebook text-[#F8A4B8] text-2xl"></i>
+                        <a href="https://www.facebook.com/profile.php?id=61578114530851" target="_blank" rel="noopener noreferrer" class="hover:text-[#E28FA0] transition-colors duration-300">Dipped Sweetss NYC on Facebook</a>
                     </p>
                 </div>
 
@@ -530,7 +534,9 @@
                     </p>
                 </div>
 
-                <form id="contactForm" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                <form id="contactForm" name="contact" method="POST" data-netlify="true" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                    <!-- Hidden field to identify the form for Netlify -->
+                    <input type="hidden" name="form-name" value="contact">
                     <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Send Us a Message</h3>
                     <div>
                         <input type="text" id="contactName" name="name" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
@@ -556,7 +562,12 @@
                     Looking for something unique or planning a special event? Tell us what you envision, and we'll make it a reality.
                 </p>
 
-                <form id="customOrderForm" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                <form id="customOrderForm" name="custom_order" method="POST" enctype="multipart/form-data" data-netlify="true" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                    <!-- Hidden field to identify the form for Netlify -->
+                    <input type="hidden" name="form-name" value="custom_order">
+                    <!-- Hidden field to store selected menu items as JSON -->
+                    <input type="hidden" name="selected_menu_items" id="selectedItemsHiddenInput">
+
                     <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Tell Us About Your Custom Order</h3>
 
                     <!-- IMPORTANT CLARIFICATION -->
@@ -673,8 +684,8 @@
             <div class="footer-links-group">
                 <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Follow Us!</h4>
                 <div class="flex justify-center md:justify-start gap-6 text-3xl">
-                    <a href="#" aria-label="Instagram" class="footer-link hover:text-[#E0B400]"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook" class="footer-link hover:text-[#E0B400]"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/dippedsweets_nyc/" aria-label="Instagram" class="footer-link hover:text-[#E0B400]" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61578114530851" aria-label="Facebook" class="footer-link hover:text-[#E0B400]" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" aria-label="TikTok" class="footer-link hover:text-[#E0B400]"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
@@ -722,22 +733,22 @@
                 displayOnMainMenu: false // Remove from home screen
             },
             {
-                img: "94e8e622-c0fe-4af3-824e-73cf376cd3d1.jpeg",
-                title: "Nutty Caramel Strawberries",
-                description: "Decadent strawberries dipped in caramel, then coated in nuts and chocolate.",
-                simplePrice: "$3.67/each", // Adjusted from $44.00/dozen
-                partyPrice: "$3.33/each", // Adjusted from $40.00/dozen
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Custom+Strawberry",
+                title: "Custom Dipped Strawberries",
+                description: "Design your own! Choose your chocolate, toppings, and drizzles for a truly unique treat.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false // Remove from home screen
+                displayOnMainMenu: false
             },
             {
-                img: "dbf44f3d-48a2-4000-ae4d-c5276a6b0df5.jpeg",
-                title: "Luxury Gold Dust Strawberries",
-                description: "Exquisite strawberries dipped in dark chocolate and dusted with edible gold.",
-                simplePrice: "$4.00/each", // Adjusted from $48.00/dozen
-                partyPrice: "$3.67/each", // Adjusted from $44.00/dozen
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Dark+Raspberry",
+                title: "Nuty Strawberries",
+                description: "Fresh strawberries dipped in rich milk chocolate, adorned with dried cut nuts of your choice.",
+                simplePrice: "$3.42/each",
+                partyPrice: "$3.08/each",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false // Remove from home screen
+                displayOnMainMenu: false
             },
             {
                 img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
@@ -757,22 +768,14 @@
                 category: "Dipped Pretzels",
                 displayOnMainMenu: true // Keep on home screen
             },
-            {
-                img: "7f770087-fe60-44a9-baa8-23ee81db1d07.jpeg",
-                title: "Custom Cake Sicles",
-                description: "Cake on a stick, shaped like popsicles, covered in chocolate and artistic designs.",
-                simplePrice: "$4.00/each", // Adjusted from $48.00/dozen
-                partyPrice: "$3.58/each", // Adjusted from $43.00/dozen
-                category: "Cake Sicles & Pops",
-                displayOnMainMenu: true // Keep on home screen
-            },
+            // Removed "Custom Cake Sicles"
             {
                 img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
                 title: "Classic Cake Pops",
                 description: "Moist cake bites on a stick, hand-dipped in chocolate and decorated with sprinkles.",
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
-                category: "Cake Sicles & Pops",
+                category: "Cake Sicles & Pops", // Category remains for other pops/oreos
                 displayOnMainMenu: true // Keep on home screen
             },
             {
@@ -810,6 +813,15 @@
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
                 category: "Cake Sicles & Pops",
                 displayOnMainMenu: false // Remove from home screen
+            },
+            {
+                img: "823f3f9d-c336-4992-b8f1-64ae3e2761e1.jpeg",
+                title: "Dipped Churro Bites (Sample)",
+                description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
+                simplePrice: "$3.00/each",
+                partyPrice: "$2.00/each",
+                category: "Cake Sicles & Pops", // Moved to this category
+                displayOnMainMenu: true // Keep on home screen
             },
             {
                 img: "14c8746e-cac5-4380-b743-1e3b4d8326ec.jpeg",
@@ -862,15 +874,6 @@
                 description: "Creamy custard with a crisp caramelized sugar topping, served in individual cups.",
                 simplePrice: "$6.00/each",
                 partyPrice: "$4.00/each",
-                category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
-            },
-            {
-                img: "823f3f9d-c336-4992-b8f1-64ae3e2761e1.jpeg",
-                title: "Dipped Churro Bites (Sample)",
-                description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
-                simplePrice: "$3.00/each",
-                partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
                 displayOnMainMenu: true // Keep on home screen
             }
@@ -1086,23 +1089,16 @@
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); // Prevent default form submission
                     const name = document.getElementById('contactName').value;
                     const email = document.getElementById('contactEmail').value;
                     const message = document.getElementById('contactMessage').value;
 
                     if (!name || !email || !message) {
                         showMessage("Please fill in all required fields for the contact form.", true);
+                        e.preventDefault(); // Prevent submission if validation fails
                         return;
                     }
-
-                    console.log("Contact Form Submitted:");
-                    console.log("Name:", name);
-                    console.log("Email:", email);
-                    console.log("Message:", message);
-
-                    showMessage("Your message has been sent!", false);
-                    contactForm.reset();
+                    // The form will now submit to Netlify.
                 });
             }
 
@@ -1110,63 +1106,41 @@
             const customOrderForm = document.getElementById('customOrderForm');
             if (customOrderForm) {
                 customOrderForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); // Prevent default form submission
-
                     const orderDetails = document.getElementById('orderDetails').value;
-                    const orderType = document.querySelector('input[name="orderType"]:checked').value;
                     const orderName = document.getElementById('orderName').value;
                     const orderEmail = document.getElementById('orderEmail').value;
-                    const orderPhone = document.getElementById('orderPhone').value;
-                    const contactMethod = document.querySelector('input[name="contactMethod"]:checked').value; // Get preferred contact method
 
-                    const inspirationPhotosInput = document.getElementById('inspirationPhotos');
-                    const inspirationPhotoNames = [];
-                    if (inspirationPhotosInput.files.length > 0) {
-                        for (let i = 0; i < inspirationPhotosInput.files.length; i++) {
-                            inspirationPhotoNames.push(inspirationPhotosInput.files[i].name);
-                        }
-                    }
-
-                    // Prepare selected menu items for submission
                     const selectedMenuOrder = Object.values(selectedOrderItems).map(item => ({
                         title: item.title,
                         quantity: item.quantity,
-                        price: item.priceUsed // Use the price that was active when added
+                        price: item.priceUsed
                     }));
 
+                    // Add selected menu items as a hidden field to the form
+                    let hiddenInput = document.getElementById('selectedItemsHiddenInput');
+                    if (!hiddenInput) {
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.id = 'selectedItemsHiddenInput';
+                        hiddenInput.name = 'selected_menu_items'; // Name for Netlify to capture
+                        customOrderForm.appendChild(hiddenInput);
+                    }
+                    hiddenInput.value = JSON.stringify(selectedMenuOrder);
 
                     // Basic validation
                     if (!orderDetails && selectedMenuOrder.length === 0) {
                         showMessage("Please provide order details or select items from the menu.", true);
+                        e.preventDefault(); // Prevent submission if validation fails
                         return;
                     }
                     if (!orderName || !orderEmail) {
                         showMessage("Please fill in Your Name and Your Email.", true);
+                        e.preventDefault(); // Prevent submission if validation fails
                         return;
                     }
 
-
-                    // For demonstration, log the form data
-                    console.log("Custom Order Request Submitted:");
-                    console.log("Order Details:", orderDetails);
-                    console.log("Order Type:", orderType);
-                    console.log("Name:", orderName);
-                    console.log("Email:", orderEmail);
-                    console.log("Phone:", orderPhone || "N/A");
-                    console.log("Preferred Contact Method:", contactMethod); // Log the new field
-                    console.log("Inspiration Photos:", inspirationPhotoNames.length > 0 ? inspirationPhotoNames.join(', ') : "No photos uploaded");
-                    console.log("Selected Menu Items:", selectedMenuOrder);
-
-
-                    // For this example, we'll just log and reset the form.
-                    showMessage("Your custom order request has been sent! We'll contact you soon.", false);
-                    customOrderForm.reset();
-                    // Clear selected items after submission
-                    for (const key in selectedOrderItems) {
-                        delete selectedOrderItems[key];
-                    }
-                    updateOrderSummary(); // Clear the displayed summary
-                    // Optionally, you could show a success message on the page here
+                    // The form will now submit to Netlify.
+                    // Netlify will handle the success message by default.
                 });
             }
         });
