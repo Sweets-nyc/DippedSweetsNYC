@@ -166,8 +166,8 @@
             overflow: hidden;
             border-radius: 1.5rem; /* Matches sweet-image border-radius */
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Matches sweet-image shadow */
-            aspect-ratio: 4/3; /* Maintain aspect ratio */
-            min-height: 200px; /* Ensure a minimum height on smaller screens */
+            aspect-ratio: 4/3; /* Maintain a 4:3 aspect ratio */
+            min-height: 200px; /* Default min-height, adjusted in media queries */
         }
         .slider-image {
             width: 100%;
@@ -246,7 +246,7 @@
                 font-size: 2.8rem;
             }
             .slider-container {
-                min-height: 250px; /* Ensure a minimum height on smaller screens */
+                min-height: 350px; /* Increased min-height for larger images on medium screens */
             }
         }
 
@@ -380,6 +380,9 @@
             }
             .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
                 font-size: 1.5rem;
+            }
+            .slider-container {
+                min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
             }
         }
 
@@ -1236,11 +1239,50 @@
             // Add event listeners for the About Us slider container for pause/resume on hover
             const aboutUsSlider = document.getElementById('about-us-slider');
             if (aboutUsSlider) {
+                // Mouse events for desktop hover
                 aboutUsSlider.addEventListener('mouseover', stopAutoSlide);
                 aboutUsSlider.addEventListener('mouseout', startAutoSlide);
-                // For touch devices, a tap might be considered a 'hover' depending on browser.
-                // For a more robust solution, you might consider touch events for pause/play.
-                // For now, auto-slide will continue on touch devices unless dots are interacted with.
+
+                // Touch events for swipe functionality on mobile
+                let startX = 0;
+                let isSwiping = false;
+                const swipeThreshold = 50; // Minimum pixels to count as a swipe
+
+                aboutUsSlider.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isSwiping = false;
+                    stopAutoSlide(); // Pause auto-slide when touch starts
+                });
+
+                aboutUsSlider.addEventListener('touchmove', (e) => {
+                    // Only prevent default if we're clearly swiping horizontally
+                    const currentX = e.touches[0].clientX;
+                    const diffX = currentX - startX;
+                    // Check for significant horizontal movement to distinguish from vertical scroll
+                    if (Math.abs(diffX) > 10 && Math.abs(e.touches[0].clientY - e.changedTouches[0].clientY) < 20) {
+                        isSwiping = true;
+                        e.preventDefault(); // Prevent vertical scrolling if horizontal swipe is detected
+                    }
+                }, { passive: false }); // Use { passive: false } to allow preventDefault
+
+                aboutUsSlider.addEventListener('touchend', (e) => {
+                    if (isSwiping) {
+                        const endX = e.changedTouches[0].clientX;
+                        const diffX = endX - startX;
+
+                        if (Math.abs(diffX) > swipeThreshold) {
+                            if (diffX > 0) {
+                                // Swiped right
+                                plusSlides(-1);
+                            } else {
+                                // Swiped left
+                                plusSlides(1);
+                            }
+                        }
+                    }
+                    // Resume auto-slide after touch ends, regardless of whether a swipe occurred
+                    startAutoSlide();
+                });
             }
 
             // Event listeners for dropdown category selection
