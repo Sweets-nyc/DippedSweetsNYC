@@ -398,6 +398,51 @@
                 font-size: 1.5rem;
             }
         }
+        /* Slider specific styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 1.5rem; /* Matches sweet-image border-radius */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Matches sweet-image shadow */
+            aspect-ratio: 4/3; /* Maintain aspect ratio */
+        }
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slider-image.active {
+            display: block;
+            opacity: 1;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .dot {
+            height: 12px;
+            width: 12px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+        .dot.active {
+            background-color: #F8A4B8; /* Soft Pink */
+            border: 1px solid #E28FA0; /* Darker Pink */
+        }
     </style>
 </head>
 <body>
@@ -477,23 +522,45 @@
         </section>
 
 
-        <!-- About Us Section -->
-        <section id="about-section" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem]" style="display:none;">
-            <div class="container-main text-center">
-                <h2 class="section-heading text-5xl mb-10">Our Story: A Passion for Sweetness</h2>
-                <div class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-700 space-y-6">
-                    <p>
-                        At **Dipped Sweets NYC**, we believe in the power of a perfect bite. Born out of a deep love for delicious treats and a passion for craftsmanship, our journey began in a small kitchen, experimenting with the finest chocolates and freshest ingredients to create something truly special.
-                    </p>
-                    <p>
-                        Every strawberry, pretzel, and cookie is hand-dipped with meticulous care, ensuring not just a beautiful appearance but an unforgettable taste. We pride ourselves on using premium, ethically sourced chocolate and supporting local suppliers whenever possible.
-                    </p>
-                    <p>
-                        Our mission is to bring joy and a touch of luxury to your everyday moments and special celebrations across New York City. From elegant party favors to a simple indulgence after a long day, Dipped Sweets NYC is here to sweeten your life.
-                    </p>
-                    <p>
-                        Thank you for letting us be a part of your sweet journey!
-                    </p>
+        <!-- About Us Section - UPDATED -->
+        <section id="about-section" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem] rounded-b-[4rem] shadow-lg" style="display:none;">
+            <div class="container-main">
+                <h2 class="section-heading text-5xl text-center mb-12">Our Story: A Passion for Sweetness</h2>
+                <div class="flex flex-col md:flex-row items-center md:gap-12 lg:gap-16">
+                    <!-- Image Slider Column -->
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <div class="slider-container">
+                            <img src="https://placehold.co/600x400/F8A4B8/FFFFFF?text=Sweet+Story+1" alt="Dipped Sweets NYC Kitchen 1" class="slider-image active">
+                            <img src="https://placehold.co/600x400/E28FA0/FFFFFF?text=Sweet+Story+2" alt="Dipped Sweets NYC Kitchen 2" class="slider-image">
+                            <img src="https://placehold.co/600x400/F8E6DD/6F4E37?text=Sweet+Story+3" alt="Dipped Sweets NYC Kitchen 3" class="slider-image">
+
+                            <div class="slider-dots">
+                                <span class="dot active" onclick="currentSlide(1)"></span>
+                                <span class="dot" onclick="currentSlide(2)"></span>
+                                <span class="dot" onclick="currentSlide(3)"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text Column -->
+                    <div class="md:w-1/2 text-lg leading-relaxed text-gray-700 space-y-6 text-center md:text-left">
+                        <p>
+                            At **Dipped Sweets NYC**, our story is deeply rooted in the heart of this city. Born in **Manhattan** and raised in the **Bronx**, I know these streets by heart and carry a profound love for both Upper Manhattan and the Bronx – they are truly my place. With just **$10 in hand**, a dream, and unwavering determination, I embarked on this journey to create something special.
+                        </p>
+                        <p>
+                            We're still growing, but our passion goes into every single treat. Each strawberry, pretzel, and cookie is hand-dipped with meticulous care, crafted using **premium, ethically sourced chocolate** and the freshest ingredients. Our goal is to stand out and bring a genuine moment of sweetness and a special touch to everyone we serve.
+                        </p>
+                        <p>
+                            Whether you're a large corporation looking for unique gifts, a local supplier we partner with, or an individual simply craving a delicious indulgence, we're here to make your day a little sweeter. Our mission is to spread joy across New York City, one delicious bite at a time.
+                        </p>
+                        <p class="font-semibold text-[#6F4E37] italic">
+                            Thank you for letting us be a part of your sweet journey!
+                        </p>
+                        <div class="mt-8 text-center md:text-left">
+                            <a href="#create-order" class="cta-button inline-flex items-center px-6 py-3 rounded-full font-bold text-lg shadow-md hover:shadow-lg" onclick="showSection('create-order-section'); return false;">
+                                Create Your Custom Order <i class="fas fa-cookie-bite ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -929,9 +996,20 @@
                 if (menuSection) {
                     window.scrollTo({ top: menuSection.offsetTop - document.querySelector('header').offsetHeight, behavior: 'smooth' });
                 }
+            } else if (sectionId === 'about-section') {
+                // For the About section, show it and initialize the slider
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.style.display = 'block';
+                    window.scrollTo({ top: activeSection.offsetTop - document.querySelector('header').offsetHeight, behavior: 'smooth' });
+                    // Initialize slider when About Us section is displayed
+                    if (typeof showSlides === 'function') { // Check if slider function exists
+                        showSlides(slideIndex);
+                    }
+                }
             }
             else {
-                // For other sections (About, Contact, Create Order), show only that specific section
+                // For other sections (Contact, Create Order), show only that specific section
                 const activeSection = document.getElementById(sectionId);
                 if (activeSection) {
                     activeSection.style.display = 'block';
@@ -1073,6 +1151,48 @@
                 });
             }
         }
+
+        // Image Slider Logic
+        let slideIndex = 1; // Start with the first slide
+
+        function showSlides(n) {
+            let i;
+            const slides = document.getElementsByClassName("slider-image");
+            const dots = document.getElementsByClassName("dot");
+
+            // Handle wrap-around for slides
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+
+            // Hide all slides and deactivate all dots
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove("active");
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            // Display the current slide and activate the corresponding dot
+            if (slides[slideIndex - 1]) { // Check if element exists before accessing
+                slides[slideIndex - 1].style.display = "block";
+                slides[slideIndex - 1].classList.add("active");
+            }
+            if (dots[slideIndex - 1]) { // Check if element exists before accessing
+                dots[slideIndex - 1].classList.add("active");
+            }
+        }
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // Initially show the combined home and menu section
