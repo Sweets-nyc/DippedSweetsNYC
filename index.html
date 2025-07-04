@@ -58,7 +58,7 @@
             border-bottom-right-radius: 4rem;
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
             position: relative; /* Added to create a stacking context */
-            z-index: 20; /* Added to ensure header is above main content */
+            z-index: 999; /* Increased to ensure header is above main content */
         }
         .logo-text {
             font-size: 2.25rem; /* Equivalent to Tailwind's text-4xl on desktop */
@@ -998,13 +998,13 @@
                 displayOnMainMenu: true // Keep on home screen
             },
             {
-                img: "b5b46884-95db-49c8-82e8-6ea5bdf01f69.jpeg",
-                title: "Creme Brulee Cups (Sample)",
-                description: "Creamy custard with a crisp caramelized sugar topping, served in individual cups.",
-                simplePrice: "$6.00/each",
-                partyPrice: "$4.00/each",
-                category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
+                img: "cheescake.jpg", // Placeholder for Cheesecakes
+                title: "Cheesecakes",
+                description: "Creamy cheesecakes available in Oreo, Graham Cracker, and Normal Strawberry flavors.",
+                simplePrice: "$6.00/slice", // Adjusted to reflect "slice"
+                partyPrice: "$4.00/slice", // Adjusted to reflect "slice"
+                category: "Individual Sample Cups", // Keeping under this category for now
+                displayOnMainMenu: true
             },
             {
                 img: "churrrr.jpg",
