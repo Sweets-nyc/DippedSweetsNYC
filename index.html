@@ -107,6 +107,7 @@
             display: flex;
             flex-direction: column;
             box-sizing: border-box; /* Ensure padding/border are included in width calculation */
+            position: relative; /* For the "Now Serving" ribbon */
         }
         .sweet-card:hover {
             transform: translateY(-10px) rotate(-1deg);
@@ -256,6 +257,22 @@
             background-color: #f44336; /* Red for error */
         }
 
+        /* Now Serving Ribbon styles - Made more prominent */
+        .ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #E28FA0; /* Darker Pink for more contrast */
+            color: white;
+            padding: 0.75rem 2rem; /* Increased padding */
+            border-bottom-left-radius: 1.5rem; /* Larger radius */
+            font-weight: bold;
+            font-size: 1.1rem; /* Increased font size */
+            transform: translateY(-0.8rem) translateX(0.8rem) rotate(8deg); /* More pronounced rotation and translation */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Stronger shadow */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Added text shadow */
+            z-index: 10;
+        }
         /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
 
         /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
@@ -306,7 +323,7 @@
                 padding: 0.6rem 0.8rem !important;
                 border-radius: 0.5rem; /* Slightly smaller rounded corners */
                 background-color: rgba(255, 255, 255, 0.5);
-                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                box-shadow: 0 2px 5px (0,0,0,0.05);
                 display: flex; /* Use flex to center content within each nav-link */
                 justify-content: center; /* Center horizontally */
                 align-items: center; /* Center vertically */
@@ -906,7 +923,6 @@
                 category: "Dipped Pretzels",
                 displayOnMainMenu: true // Keep on home screen
             },
-            // Removed "Custom Cake Sicles" entirely
             {
                 img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
                 title: "Classic Cake Pops",
@@ -916,18 +932,6 @@
                 category: "Cake Pops", // Changed category back to "Cake Pops"
                 displayOnMainMenu: true // Keep on home screen
             },
-            /*
-            // Removed "Velvet Swirl Cake Pops" as requested
-            {
-                img: "c7c5357a-99b0-439a-8213-04c22bc5b94e.jpeg",
-                title: "Velvet Swirl Cake Pops",
-                description: "Decadent red velvet cake pops with elegant white chocolate swirls.",
-                simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
-                partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
-                category: "Cake Pops", // Changed category back to "Cake Pops"
-                displayOnMainMenu: false // Remove from home screen
-            },
-            */
             {
                 img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg",
                 title: "Brownie Batter Cake Pops",
@@ -991,18 +995,6 @@
                 category: "Individual Sample Cups",
                 displayOnMainMenu: true // Keep on home screen
             },
-            /*
-            // Removed "Silky Chocolate Mousse Cups (Sample)" as requested
-            {
-                img: "66a024fc-b8a5-400f-afdf-47d5e30a07ac.jpeg",
-                title: "Silky Chocolate Mousse Cups (Sample)",
-                description: "Light and airy chocolate mousse, a perfect individual portion of indulgence.",
-                simplePrice: "$6.00/each",
-                partyPrice: "$4.00/each",
-                category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
-            },
-            */
             {
                 img: "b5b46884-95db-49c8-82e8-6ea5bdf01f69.jpeg",
                 title: "Creme Brulee Cups (Sample)",
@@ -1020,6 +1012,16 @@
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
                 displayOnMainMenu: true // Keep on home screen
+            },
+            {
+                img: "fruit.avif", // Changed image to fruit.avif
+                title: "Fresh Fruit Salad Platter",
+                description: "A refreshing mix of seasonal fresh fruits, perfect for a light and healthy treat.",
+                simplePrice: "$5.00/each",
+                partyPrice: "$4.50/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true,
+                isNew: true
             }
         ];
 
@@ -1095,6 +1097,7 @@
                     filteredSweets.forEach(sweet => {
                         htmlContent += `
                             <div class="sweet-card p-6 flex flex-col items-center text-center">
+                                ${sweet.isNew ? '<div class="ribbon">Now Serving!!</div>' : ''} <!-- Ribbon added here with "!!" -->
                                 <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
                                 <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
                                 <p class="text-gray-600 text-lg mb-4 flex-grow">
