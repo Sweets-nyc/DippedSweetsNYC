@@ -338,11 +338,6 @@
             margin-top: 0.75rem; /* Reduced margin for the quantity/calculate row */
             gap: 0.5rem; /* Reduced gap for compactness */
         }
-        section#prices-section .w-20.p-1.border { /* Quantity input */
-            width: 4.5rem; /* Smaller width */
-            padding: 0.25rem; /* Smaller padding */
-            font-size: 0.85rem; /* Smaller font */
-        }
         section#prices-section .bg-\[\#F8A4B8\].px-3.py-1 { /* Calculate button */
             padding: 0.3rem 0.75rem; /* Smaller padding */
             font-size: 0.85rem; /* Smaller font */
@@ -483,7 +478,7 @@
                 font-size: 1.6rem; /* Smaller icon size */
             }
             form input, form textarea, form button {
-                font-size: 0.9rem; /* Smaller form elements */
+                font-size: 1rem; /* Adjusted to 1rem (16px) to prevent zoom */
                 padding: 0.8rem;
             }
             .footer-logo .logo-text {
@@ -598,7 +593,7 @@
                 font-size: 1.3rem;
             }
             form input, form textarea, form button {
-                font-size: 0.75rem;
+                font-size: 1rem; /* Adjusted to 1rem (16px) to prevent zoom */
                 padding: 0.6rem;
             }
             .footer-logo .logo-text {
@@ -1455,7 +1450,7 @@
                         <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4>
                         ${priceOptionsHtml}
                         <div class="flex items-center justify-center gap-1 mt-1">
-                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-xs focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
                             <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}', '${unitSelectId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
                         </div>
                     </div>
