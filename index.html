@@ -275,6 +275,20 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Added text shadow */
             z-index: 10;
         }
+
+        /* Menu Selection Container for Order Form - Default (Mobile) */
+        #menuSelectionContainer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns by default for mobile */
+            gap: 0.75rem; /* Tailwind's gap-3 */
+            padding: 0.75rem; /* Tailwind's p-3 */
+            border-radius: 0.75rem; /* Tailwind's rounded-xl */
+            border: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
+            background-color: #f9fafb; /* Tailwind's bg-gray-50 */
+            padding-bottom: 1rem; /* Added extra padding for scrollbar */
+            overflow-x: hidden; /* Hide horizontal overflow by default on mobile */
+        }
+
         /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
 
         /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
@@ -325,7 +339,7 @@
                 padding: 0.6rem 0.8rem !important;
                 border-radius: 0.5rem; /* Slightly smaller rounded corners */
                 background-color: rgba(255, 255, 255, 0.5);
-                box-shadow: 0 2px 5px (0,0,0,0.05);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Corrected rgba syntax */
                 display: flex; /* Use flex to center content within each nav-link */
                 justify-content: center; /* Center horizontally */
                 align-items: center; /* Center vertically */
@@ -518,6 +532,42 @@
             }
             .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
                 font-size: 1.5rem;
+            }
+        }
+
+        /* Styles for desktop and larger screens (md breakpoint and up) */
+        @media (min-width: 768px) { /* Tailwind's md breakpoint */
+            #menuSelectionContainer {
+                grid-auto-flow: column; /* Items flow into columns first */
+                grid-template-rows: repeat(4, minmax(0, 1fr)); /* 4 rows */
+                overflow-x: auto; /* Enable horizontal scrolling */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                scroll-snap-type: x mandatory; /* Snap to items horizontally */
+            }
+            #menuSelectionContainer .sweet-card {
+                width: 12rem; /* Fixed width for each card on desktop */
+                flex-shrink: 0; /* Prevent items from shrinking */
+                scroll-snap-align: start; /* Snap to the start of each card */
+            }
+            /* Hide scrollbar for aesthetic purposes, but keep functionality */
+            #menuSelectionContainer::-webkit-scrollbar {
+                height: 8px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+            /* For Firefox */
+            #menuSelectionContainer {
+                scrollbar-width: thin;
+                scrollbar-color: #888 #f1f1f1;
             }
         }
     </style>
@@ -757,7 +807,7 @@
                     <div>
                         <label class="block text-left text-lg font-medium text-gray-700 mb-4">Or, Select from Our Existing Menu:</label>
                         <!-- Changed to grid and adjusted gap and padding for better mobile display -->
-                        <div id="menuSelectionContainer" class="grid grid-cols-2 gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
+                        <div id="menuSelectionContainer" class="gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
                             <!-- Menu items will be dynamically loaded here by JavaScript -->
                         </div>
                         <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
@@ -998,12 +1048,12 @@
                 displayOnMainMenu: true // Keep on home screen
             },
             {
-                img: "cheescake.jpg", // Placeholder for Cheesecakes
-                title: "Cheesecakes (Sample)",
+                img: "cheescake.jpg", // Image for Cheesecakes
+                title: "Cheesecakes (Oreo, Graham, Strawberry)",
                 description: "Creamy cheesecakes available in Oreo, Graham Cracker, and Normal Strawberry flavors.",
-                simplePrice: "$6.00/slice", // Adjusted to reflect "slice"
-                partyPrice: "$4.00/slice", // Adjusted to reflect "slice"
-                category: "Individual Sample Cups", // Keeping under this category for now
+                simplePrice: "$6.00/slice",
+                partyPrice: "$4.00/slice",
+                category: "Individual Sample Cups",
                 displayOnMainMenu: true
             },
             {
