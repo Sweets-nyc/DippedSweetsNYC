@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -289,6 +288,67 @@
             overflow-x: hidden; /* Hide horizontal overflow by default on mobile */
         }
 
+        /* Styles specific to the Prices section - UPDATED to match sweet-card style */
+        section#prices-section .price-card {
+            background-color: #FFFFFF;
+            border-radius: 1.5rem; /* Slightly smaller radius for more compactness */
+            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.08); /* Slightly smaller shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+            padding: 1rem; /* Reduced padding */
+        }
+        section#prices-section .price-card:hover {
+            transform: translateY(-5px) rotate(-0.5deg); /* Reduced hover effect */
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.12); /* Reduced hover shadow */
+        }
+        section#prices-section .sweet-image {
+            border-radius: 1rem; /* Reduced radius to match card */
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04); /* Reduced shadow */
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            margin-bottom: 0.75rem; /* Reduced margin */
+        }
+        section#prices-section .sweet-title {
+            color: #6F4E37;
+            font-size: 1.75rem; /* Reduced title size */
+            font-weight: 700;
+            margin-bottom: 0.4rem; /* Reduced margin */
+        }
+        section#prices-section .price-detail {
+            font-size: 0.9rem; /* Slightly adjusted for better readability within new card size */
+            font-weight: 600;
+            color: #8A6F5C;
+            margin-bottom: 0.1rem; /* Reduced margin */
+        }
+        section#prices-section .price-value {
+            color: #E0B400;
+            font-weight: 800;
+            font-size: 1.25rem; /* Reduced for compactness */
+        }
+        section#prices-section .inquire-price {
+            color: #F8A4B8;
+            font-weight: 800;
+            font-size: 1.25rem; /* Reduced for compactness */
+        }
+        section#prices-section .flex.items-center.justify-center.mt-4.gap-2 {
+            margin-top: 0.75rem; /* Reduced margin for the quantity/calculate row */
+            gap: 0.5rem; /* Reduced gap for compactness */
+        }
+        section#prices-section .w-20.p-1.border { /* Quantity input */
+            width: 4.5rem; /* Smaller width */
+            padding: 0.25rem; /* Smaller padding */
+            font-size: 0.85rem; /* Smaller font */
+        }
+        section#prices-section .bg-\[\#F8A4B8\].px-3.py-1 { /* Calculate button */
+            padding: 0.3rem 0.75rem; /* Smaller padding */
+            font-size: 0.85rem; /* Smaller font */
+        }
+
+
         /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
 
         /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
@@ -441,6 +501,20 @@
             .slider-container {
                 min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
             }
+
+            /* Responsive adjustments for prices section */
+            section#prices-section .price-card {
+                padding: 0.75rem; /* Adjusted for mobile view */
+            }
+            section#prices-section .sweet-title {
+                font-size: 1.25rem; /* Adjusted for mobile view */
+            }
+            section#prices-section .price-detail {
+                font-size: 0.85rem; /* Adjusted for mobile view */
+            }
+            section#prices-section .price-value, section#prices-section .inquire-price {
+                font-size: 1rem; /* Adjusted for mobile view */
+            }
         }
 
         /* Even smaller mobile screens (e.g., very narrow phone viewports) */
@@ -586,11 +660,11 @@
             </div>
             <nav class="navbar-nav flex flex-wrap justify-center gap-4">
                 <a href="#home" class="nav-link text-lg" onclick="showSection('home-menu-combined'); return false;">Home</a>
-                <a href="#menu" class="nav-link text-lg" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault', 'sweet-menu-grid-alt'); return false;">Menu</a>
+                <a href="#prices" class="nav-link text-lg" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">Prices</a>
                 <a href="#create-order" class="nav-link text-lg" onclick="showSection('create-order-section'); return false;">Create Your Order</a>
                 <a href="#contact" class="nav-link text-lg" onclick="showSection('contact-section'); return false;">Contact</a>
                 <a href="#about" class="nav-link text-lg" onclick="showSection('about-section'); return false;">About Us</a>
-                <!-- Categories Dropdown -->
+                <!-- Categories Dropdown - remains as requested -->
                 <div class="nav-link text-lg group">
                     <a href="#menu" class="inline-flex items-center" onclick="showSection('menu-only-section'); return false;">
                         Categories <i class="fas fa-chevron-down ml-2 text-base"></i>
@@ -638,7 +712,7 @@
             </div>
         </section>
 
-        <!-- Menu-Only Section (for when 'Menu' navigation is clicked) -->
+        <!-- Menu-Only Section (for when 'Categories' navigation is clicked) -->
         <section id="menu-only-section" class="py-20" style="display:none;">
             <div class="container-main">
                 <h2 class="section-heading text-5xl text-center mb-16">Our Irresistible Dipped Delights</h2>
@@ -648,6 +722,32 @@
             </div>
         </section>
 
+        <!-- Prices Section (New) -->
+        <section id="prices-section" class="py-20" style="display:none;">
+            <div class="container-main">
+                <h2 class="section-heading text-5xl text-center mb-10">Detailed Pricing for Our Treats</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12 text-center">
+                    Here's a comprehensive breakdown of our pricing for individual and party orders.
+                    For custom orders, please reach out directly!
+                </p>
+
+                <!-- Pricing Mode Selector -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12 p-4 bg-white rounded-xl shadow-md">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="priceMode" value="simple" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" checked onchange="populatePricesPage(this.value)">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Simple Order</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="priceMode" value="party" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" onchange="populatePricesPage(this.value)">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Party Order</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="prices-grid">
+                    <!-- Price cards will be dynamically inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
 
         <!-- About Us Section - UPDATED -->
         <section id="about-section" class="py-20 bg-gradient-to-tl from-[#F8E6DD] to-[#FFF8F0] rounded-t-[4rem] rounded-b-[4rem] shadow-lg" style="display:none;">
@@ -882,10 +982,10 @@
                 <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Quick Links</h4>
                 <ul class="space-y-2 text-lg">
                     <li><a href="#home" class="footer-link" onclick="showSection('home-menu-combined'); return false;">Home</a></li>
-                    <li><a href="#menu" class="footer-link" onclick="showSection('menu-only-section'); populateSweetMenu('MainMenuDefault', 'sweet-menu-grid-alt'); return false;">Menu</a></li>
-                    <li><a href="#about" class="footer-link" onclick="showSection('about-section'); return false;">About Us</a></li>
-                    <li><a href="#contact" class="footer-link" onclick="showSection('contact-section'); return false;">Contact</a></li>
+                    <li><a href="#prices" class="footer-link" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">Prices</a></li>
                     <li><a href="#create-order" class="footer-link" onclick="showSection('create-order-section'); return false;">Create Your Order</a></li>
+                    <li><a href="#contact" class="footer-link" onclick="showSection('contact-section'); return false;">Contact</a></li>
+                    <li><a href="#about" class="footer-link" onclick="showSection('about-section'); return false;">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">
@@ -909,6 +1009,7 @@
                 description: "Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.",
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
+                dozenPrice: "$30.56/dozen", // 2.83 * 12 * 0.90
                 category: "Dipped Strawberries",
                 displayOnMainMenu: true // Keep on home screen
             },
@@ -918,6 +1019,7 @@
                 description: "Fresh strawberries dipped in milk chocolate, elegantly drizzled with white chocolate.",
                 simplePrice: "$3.33/each", // Adjusted from $40.00/dozen
                 partyPrice: "$3.00/each", // Adjusted from $36.00/dozen
+                dozenPrice: "$32.40/dozen", // 3.00 * 12 * 0.90
                 category: "Dipped Strawberries",
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -927,6 +1029,7 @@
                 description: "Strawberries dipped in white chocolate and coated with crushed Oreo cookies.",
                 simplePrice: "$3.50/each", // Adjusted from $42.00/dozen
                 partyPrice: "$3.17/each", // Adjusted from $38.00/dozen
+                dozenPrice: "$34.24/dozen", // 3.17 * 12 * 0.90
                 category: "Dipped Strawberries",
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -936,6 +1039,7 @@
                 description: "Milk chocolate-dipped strawberries adorned with festive, colorful sprinkles.",
                 simplePrice: "$3.25/each", // Adjusted from $39.00/dozen
                 partyPrice: "$2.92/each", // Adjusted from $35.00/dozen
+                dozenPrice: "$31.54/dozen", // 2.92 * 12 * 0.90
                 category: "Dipped Strawberries",
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -945,6 +1049,7 @@
                 description: "Design your own! Choose your chocolate, toppings, and drizzles for a truly unique treat.",
                 simplePrice: "Inquire for Price",
                 partyPrice: "Inquire for Price",
+                dozenPrice: "Inquire for Price", // Custom items will also have inquire for dozen
                 category: "Dipped Strawberries",
                 displayOnMainMenu: false
             },
@@ -954,6 +1059,7 @@
                 description: "Fresh strawberries dipped in rich milk chocolate, adorned with dried cut nuts of your choice.",
                 simplePrice: "$3.42/each",
                 partyPrice: "$3.08/each",
+                dozenPrice: "$33.26/dozen", // 3.08 * 12 * 0.90
                 category: "Dipped Strawberries",
                 displayOnMainMenu: false
             },
@@ -963,6 +1069,7 @@
                 description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
                 simplePrice: "$2.00/each", // Adjusted from $24.00/dozen
                 partyPrice: "$1.67/each", // Adjusted from $20.00/dozen
+                dozenPrice: "$18.04/dozen", // 1.67 * 12 * 0.90
                 category: "Dipped Pretzels",
                 displayOnMainMenu: true // Keep on home screen
             },
@@ -972,6 +1079,7 @@
                 description: "Long pretzel rods elegantly dipped and decorated with various toppings.",
                 simplePrice: "$2.33/each", // Adjusted from $28.00/dozen
                 partyPrice: "$2.08/each", // Adjusted from $25.00/dozen
+                dozenPrice: "$22.46/dozen", // 2.08 * 12 * 0.90
                 category: "Dipped Pretzels",
                 displayOnMainMenu: true // Keep on home screen
             },
@@ -981,6 +1089,7 @@
                 description: "Moist cake bites on a stick, hand-dipped in chocolate and decorated with sprinkles.",
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
+                dozenPrice: "$30.56/dozen", // 2.83 * 12 * 0.90
                 category: "Cake Pops", // Changed category back to "Cake Pops"
                 displayOnMainMenu: true // Keep on home screen
             },
@@ -990,6 +1099,7 @@
                 description: "Rich brownie-flavored cake pops dipped in dark chocolate and topped with mini chocolate chips.",
                 simplePrice: "$3.17/each", // Adjusted from $38.00/dozen
                 partyPrice: "$2.83/each", // Adjusted from $34.00/dozen
+                dozenPrice: "$30.56/dozen", // 2.83 * 12 * 0.90
                 category: "Cake Pops", // Changed category back to "Cake Pops"
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -999,6 +1109,7 @@
                 description: "Classic Oreos dipped in smooth chocolate, available in various colors and simple drizzles.",
                 simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
+                dozenPrice: "$33.26/dozen", // 3.08 * 12 * 0.90
                 category: "Cake Pops", // Changed category back to "Cake Pops"
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -1008,6 +1119,7 @@
                 description: "Sweet cookie dough cake pops dipped in milk chocolate, a delightful treat.",
                 simplePrice: "$3.42/each", // Adjusted from $41.00/dozen
                 partyPrice: "$3.08/each", // Adjusted from $37.00/dozen
+                dozenPrice: "$33.26/dozen", // 3.08 * 12 * 0.90
                 category: "Cake Pops", // Changed category back to "Cake Pops"
                 displayOnMainMenu: false // Remove from home screen
             },
@@ -1017,6 +1129,7 @@
                 description: "Chewy rice crispy treats generously coated in rich chocolate and fun toppings.",
                 simplePrice: "$2.67/each", // Adjusted from $32.00/dozen
                 partyPrice: "$2.33/each", // Adjusted from $28.00/dozen
+                dozenPrice: "$25.16/dozen", // 2.33 * 12 * 0.90
                 category: "Rice Crispy & Dipped Cupcakes",
                 displayOnMainMenu: true // Put back on home screen
             },
@@ -1026,6 +1139,7 @@
                 description: "Delightful mini cupcakes, frosted and then partially dipped in chocolate.",
                 simplePrice: "$3.00/each", // Adjusted from $36.00/dozen
                 partyPrice: "$2.67/each", // Adjusted from $32.00/dozen
+                dozenPrice: "$28.84/dozen", // 2.67 * 12 * 0.90
                 category: "Rice Crispy & Dipped Cupcakes",
                 displayOnMainMenu: true // Keep on home screen
             },
@@ -1165,7 +1279,104 @@
             }
         }
 
-        // Function to populate the menu selection in the order form with dynamic pricing
+        // Function to parse price string to number
+        const parsePrice = (priceStr) => parseFloat(priceStr.replace(/[$,/each/dozen/slice]/g, ''));
+
+        function calculateCost(itemTitle) {
+            const sweet = sweetsData.find(s => s.title === itemTitle);
+            if (!sweet) return;
+
+            const quantityInput = document.getElementById(`qty-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
+            const resultDisplay = document.getElementById(`result-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
+            let quantity = parseInt(quantityInput.value, 10);
+
+            if (isNaN(quantity) || quantity < 1) {
+                resultDisplay.textContent = "Please enter a valid quantity.";
+                resultDisplay.classList.add('text-red-500');
+                return;
+            }
+            resultDisplay.classList.remove('text-red-500'); // Remove error styling if quantity is valid
+
+            let totalCost = 0;
+            let message = '';
+
+            if (sweet.simplePrice === "Inquire for Price") {
+                resultDisplay.textContent = "Cost: Inquire for Price";
+                return;
+            }
+
+            // Get selected pricing mode
+            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+
+            const simplePriceNum = parsePrice(sweet.simplePrice);
+            const partyPriceNum = parsePrice(sweet.partyPrice);
+            // Removed dozenPriceNum as it's no longer displayed on the prices page for party mode
+
+            if (selectedMode === 'simple') {
+                totalCost = quantity * simplePriceNum;
+                message = ' (Simple pricing applied)';
+            } else if (selectedMode === 'party') {
+                totalCost = quantity * partyPriceNum; // Always use party price per each for party mode
+                message = ' (Party pricing applied)';
+            }
+
+            resultDisplay.textContent = `Cost: $${totalCost.toFixed(2)}${message}`;
+        }
+
+        function populatePricesPage(selectedMode = 'simple') { // Default to 'simple'
+            const pricesGrid = document.getElementById('prices-grid');
+            if (!pricesGrid) return;
+
+            let htmlContent = '';
+            sweetsData.forEach(sweet => {
+                let priceDisplayHtml = '';
+                let minQuantity = 1; // Default min quantity for simple mode
+                let defaultQuantity = 1; // Default quantity for simple mode
+
+                if (selectedMode === 'party') {
+                    minQuantity = 1; // Minimum quantity is 1 for party mode, as dozen price is removed
+                    defaultQuantity = 1;
+                }
+
+                if (sweet.simplePrice === "Inquire for Price") {
+                    priceDisplayHtml = `
+                        <p class="price-detail">Price: <span class="inquire-price">${sweet.simplePrice}</span></p>
+                    `;
+                } else {
+                    if (selectedMode === 'simple') {
+                        priceDisplayHtml = `
+                            <p class="price-detail">Simple Order: <span class="price-value">${sweet.simplePrice}</span></p>
+                        `;
+                    } else if (selectedMode === 'party') {
+                        // Only show party price, no dozen price for party mode
+                        priceDisplayHtml = `
+                            <p class="price-detail">Party Order: <span class="price-value">${sweet.partyPrice}</span></p>
+                        `;
+                    }
+                }
+
+                htmlContent += `
+                    <div class="price-card text-center">
+                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image">
+                        <h3 class="sweet-title">${sweet.title}</h3>
+                        <div class="mt-auto pt-2">
+                            ${priceDisplayHtml}
+                            <div class="flex items-center justify-center mt-4 gap-2">
+                                <label for="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-sm text-gray-700">Qty:</label>
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${defaultQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                                <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">Calculate</button>
+                            </div>
+                            <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
+                            <p class="text-xs text-gray-500 mt-1">Price automatically adjusts for dozens.</p>
+                        </div>
+                    </div>
+                `;
+            });
+            pricesGrid.innerHTML = htmlContent;
+        }
+
+
+        // Function to populate the menu selection in the order form with dynamic pricing and unit options
         function populateOrderMenuSelection() {
             const menuSelectionContainer = document.getElementById('menuSelectionContainer');
             if (!menuSelectionContainer) return;
@@ -1175,16 +1386,57 @@
 
             sweetsData.forEach(sweet => {
                 const quantityInputId = `qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}`;
-                const priceToDisplay = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
+                const unitSelectId = `unit-${sweet.title.replace(/\s+/g, '-').toLowerCase()}`;
+
+                let priceOptionsHtml = '';
+                let defaultPrice = '';
+                let defaultUnit = '';
+
+                if (sweet.simplePrice === "Inquire for Price") {
+                    priceOptionsHtml = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">Inquire for Price</span></p>`;
+                    defaultPrice = "Inquire for Price";
+                    defaultUnit = "each"; // Default unit for inquiry items
+                } else {
+                    if (selectedOrderType === 'simple') {
+                        defaultPrice = sweet.simplePrice;
+                        defaultUnit = sweet.simplePrice.includes('/slice') ? 'slice' : 'each'; // Determine unit from price string
+                        priceOptionsHtml = `
+                            <p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]" id="price-${sweet.title.replace(/\s+/g, '-').toLowerCase()}">${defaultPrice}</span></p>
+                        `;
+                    } else { // Party / Event Order
+                        // In the order form, we still offer 'each' or 'dozen' for party orders if dozenPrice is available
+                        if (sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price") {
+                            defaultPrice = sweet.partyPrice; // Default to 'each' for party orders
+                            defaultUnit = sweet.partyPrice.includes('/slice') ? 'slice' : 'each';
+                            priceOptionsHtml = `
+                                <div class="flex items-center justify-center gap-2 mb-1">
+                                    <label class="text-xs text-gray-600">Unit:</label>
+                                    <select id="${unitSelectId}" onchange="updateItemPriceDisplay('${sweet.title.replace(/'/g, "\\'")}', '${unitSelectId}', '${quantityInputId}')"
+                                            class="text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] py-0.5 px-1">
+                                        <option value="each" data-price="${sweet.partyPrice}" ${defaultUnit === 'each' ? 'selected' : ''}>Each</option>
+                                        <option value="dozen" data-price="${sweet.dozenPrice}" ${defaultUnit === 'dozen' ? 'selected' : ''}>Dozen</option>
+                                    </select>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]" id="price-${sweet.title.replace(/\s+/g, '-').toLowerCase()}">${defaultPrice}</span></p>
+                            `;
+                        } else {
+                            defaultPrice = sweet.partyPrice;
+                            defaultUnit = sweet.partyPrice.includes('/slice') ? 'slice' : 'each';
+                            priceOptionsHtml = `
+                                <p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]" id="price-${sweet.title.replace(/\s+/g, '-').toLowerCase()}">${defaultPrice}</span></p>
+                            `;
+                        }
+                    }
+                }
 
                 htmlContent += `
-                    <div class="sweet-card p-1 text-center"> <!-- Removed flex-none w-64, reduced padding -->
-                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/100x80/F8E6DD/6F4E37?text=Image';" class="sweet-image w-full object-cover mb-1 rounded-lg"> <!-- Removed h-20, relying on aspect-ratio -->
-                        <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4> <!-- Reduced font size -->
-                        <p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${priceToDisplay}</span></p> <!-- Reduced font size -->
-                        <div class="flex items-center justify-center gap-1 mt-1"> <!-- Reduced gap, margin -->
-                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-xs focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]"> <!-- Reduced width, padding, font size -->
-                            <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button> <!-- Reduced padding, font size -->
+                    <div class="sweet-card p-1 text-center">
+                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/100x80/F8E6DD/6F4E37?text=Image';" class="sweet-image w-full object-cover mb-1 rounded-lg">
+                        <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4>
+                        ${priceOptionsHtml}
+                        <div class="flex items-center justify-center gap-1 mt-1">
+                            <input type="number" id="${quantityInputId}" value="1" min="1" class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-xs focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                            <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}', '${unitSelectId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
                         </div>
                     </div>
                 `;
@@ -1192,7 +1444,35 @@
             menuSelectionContainer.innerHTML = htmlContent;
         }
 
-        function addToOrder(itemTitle, quantityInputId) {
+        // Function to update the displayed price when unit (each/dozen) is changed
+        function updateItemPriceDisplay(itemTitle, unitSelectId, quantityInputId) {
+            const unitSelect = document.getElementById(unitSelectId);
+            const priceSpan = document.getElementById(`price-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
+            if (unitSelect && priceSpan) {
+                const selectedOption = unitSelect.options[unitSelect.selectedIndex];
+                const newPrice = selectedOption.dataset.price;
+                priceSpan.textContent = newPrice;
+
+                // Adjust min quantity if switching to dozen
+                const quantityInput = document.getElementById(quantityInputId);
+                if (quantityInput) {
+                    if (selectedOption.value === 'dozen') {
+                        quantityInput.min = "1"; // Minimum 1 dozen
+                        if (parseInt(quantityInput.value, 10) < 1) {
+                            quantityInput.value = "1";
+                        }
+                    } else { // 'each'
+                        quantityInput.min = "1"; // Minimum 1 each
+                        if (parseInt(quantityInput.value, 10) < 1) {
+                            quantityInput.value = "1";
+                        }
+                    }
+                }
+            }
+        }
+
+
+        function addToOrder(itemTitle, quantityInputId, unitSelectId) {
             const quantityInput = document.getElementById(quantityInputId);
             let quantity = parseInt(quantityInput.value, 10);
             if (isNaN(quantity) || quantity < 1) {
@@ -1203,19 +1483,42 @@
             if (!sweet) return;
 
             const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
-            const priceUsed = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
 
-            if (selectedOrderItems[itemTitle]) {
-                selectedOrderItems[itemTitle].quantity += quantity;
-            } else {
-                selectedOrderItems[itemTitle] = { ...sweet, quantity: quantity, priceUsed: priceUsed };
+            let priceUsed = '';
+            let unit = '';
+
+            if (sweet.simplePrice === "Inquire for Price") {
+                priceUsed = "Inquire for Price";
+                unit = "custom"; // For items that are "Inquire for Price"
+            } else if (selectedOrderType === 'simple') {
+                priceUsed = sweet.simplePrice;
+                unit = sweet.simplePrice.includes('/slice') ? 'slice' : 'each';
+            } else { // Party / Event Order
+                const unitSelect = document.getElementById(unitSelectId);
+                // For the order form, if a dozen option exists, respect the user's choice
+                if (unitSelect && sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price") {
+                    unit = unitSelect.value; // 'each' or 'dozen'
+                    priceUsed = unit === 'each' ? sweet.partyPrice : sweet.dozenPrice;
+                } else {
+                    priceUsed = sweet.partyPrice;
+                    unit = sweet.partyPrice.includes('/slice') ? 'slice' : 'each';
+                }
             }
+
+            // If the item is already in the cart with the same unit, update quantity
+            const existingItemKey = `${itemTitle}-${unit}`;
+            if (selectedOrderItems[existingItemKey]) {
+                selectedOrderItems[existingItemKey].quantity += quantity;
+            } else {
+                selectedOrderItems[existingItemKey] = { ...sweet, quantity: quantity, unit: unit, priceUsed: priceUsed };
+            }
+
             updateOrderSummary();
             quantityInput.value = 1; // Reset quantity input
         }
 
-        function removeFromOrder(itemTitle) {
-            delete selectedOrderItems[itemTitle];
+        function removeFromOrder(itemKey) {
+            delete selectedOrderItems[itemKey];
             updateOrderSummary();
         }
 
@@ -1230,15 +1533,24 @@
                 summaryHtml = '<li id="no-items-message">No items selected yet.</li>';
             } else {
                 items.forEach(item => {
+                    const displayUnit = item.unit === 'custom' ? '' : item.unit; // Don't display "custom" unit
+                    const itemKey = `${item.title}-${item.unit}`; // Reconstruct key for removal
                     summaryHtml += `
                         <li class="flex justify-between items-center py-1 bg-white p-2 rounded-lg shadow-sm mb-1">
-                            <span>${item.title} (x${item.quantity}) - ${item.priceUsed}</span>
-                            <button type="button" onclick="removeFromOrder('${item.title.replace(/'/g, "\\'")}')" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
+                            <span>${item.title} (x${item.quantity} ${displayUnit}) - ${item.priceUsed}</span>
+                            <button type="button" onclick="removeFromOrder('${itemKey.replace(/'/g, "\\'")}')" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
                         </li>
                     `;
                 });
             }
             selectedItemsList.innerHTML = summaryHtml;
+            // Update the hidden input for Netlify form submission
+            document.getElementById('selectedItemsHiddenInput').value = JSON.stringify(items.map(item => ({
+                title: item.title,
+                quantity: item.quantity,
+                unit: item.unit,
+                price: item.priceUsed
+            })));
         }
 
         // Function to handle changes in order type radio buttons
@@ -1413,6 +1725,7 @@
                     const selectedMenuOrder = Object.values(selectedOrderItems).map(item => ({
                         title: item.title,
                         quantity: item.quantity,
+                        unit: item.unit, // Include the unit in the submitted data
                         price: item.priceUsed
                     }));
 
