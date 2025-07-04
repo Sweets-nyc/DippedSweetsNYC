@@ -515,6 +515,12 @@
             section#prices-section .price-value, section#prices-section .inquire-price {
                 font-size: 1rem; /* Adjusted for mobile view */
             }
+
+            /* New: Ensure prices-grid is 2 columns on small screens */
+            #prices-grid {
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
+                gap: 0.6rem; /* Match sweet-grid gap */
+            }
         }
 
         /* Even smaller mobile screens (e.g., very narrow phone viewports) */
@@ -606,6 +612,12 @@
             }
             .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
                 font-size: 1.5rem;
+            }
+
+            /* New: Ensure prices-grid is 2 columns on very small screens */
+            #prices-grid {
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
+                gap: 0.4rem; /* Match sweet-grid gap */
             }
         }
 
@@ -1291,6 +1303,16 @@
             const resultDisplay = document.getElementById(`result-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
             let quantity = parseInt(quantityInput.value, 10);
 
+            // Get selected pricing mode
+            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+
+            // Enforce minimum quantity for party mode
+            if (selectedMode === 'party' && quantity < 12) {
+                resultDisplay.textContent = "Party orders require a minimum of 12 items.";
+                resultDisplay.classList.add('text-red-500');
+                return;
+            }
+
             if (isNaN(quantity) || quantity < 1) {
                 resultDisplay.textContent = "Please enter a valid quantity.";
                 resultDisplay.classList.add('text-red-500');
@@ -1305,9 +1327,6 @@
                 resultDisplay.textContent = "Cost: Inquire for Price";
                 return;
             }
-
-            // Get selected pricing mode
-            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
 
             const simplePriceNum = parsePrice(sweet.simplePrice);
             const partyPriceNum = parsePrice(sweet.partyPrice);
