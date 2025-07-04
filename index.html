@@ -1269,8 +1269,9 @@
                                 <p class="text-gray-600 text-lg mb-4 flex-grow">
                                     ${sweet.description}
                                 </p>
-                                <span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePrice}</span> <!-- Always show simplePrice on main menu -->
-                                <button class="order-button px-6 py-3 rounded-full text-lg shadow-md">Order Now</button>
+                                <!-- Re-added "View Prices" button and removed direct price display -->
+                                <button class="cta-button px-6 py-3 rounded-full text-lg shadow-md mb-3" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">View Prices</button>
+                                <button class="order-button px-6 py-3 rounded-full text-lg shadow-md" onclick="showSection('create-order-section'); return false;">Order Now</button>
                             </div>
                         `;
                     });
