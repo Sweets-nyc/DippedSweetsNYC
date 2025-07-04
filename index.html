@@ -942,7 +942,6 @@
                         <input type="text" id="orderName" name="orderName" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
                     </div>
                     <div>
-                        <label for="orderEmail" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Email</label>
                         <input type="email" id="orderEmail" name="orderEmail" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
                     </div>
                     <div>
@@ -1338,6 +1337,29 @@
             resultDisplay.textContent = `Cost: $${totalCost.toFixed(2)}${message}`;
         }
 
+        // Function to increment/decrement quantity on the prices page
+        function adjustPriceQuantity(itemTitle, delta) {
+            const quantityInput = document.getElementById(`qty-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
+            if (quantityInput) {
+                let currentVal = parseInt(quantityInput.value, 10);
+                if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
+
+                let newVal = currentVal + delta;
+                const minVal = parseInt(quantityInput.min, 10);
+
+                if (newVal < minVal) {
+                    newVal = minVal; // Don't go below minimum
+                }
+                if (newVal < 1) { // Ensure it doesn't go below 1 for general cases
+                    newVal = 1;
+                }
+
+                quantityInput.value = newVal;
+                calculateCost(itemTitle); // Recalculate cost after adjustment
+            }
+        }
+
+
         function populatePricesPage(selectedMode = 'simple') { // Default to 'simple'
             const pricesGrid = document.getElementById('prices-grid');
             if (!pricesGrid) return;
@@ -1377,8 +1399,9 @@
                         <div class="mt-auto pt-2">
                             ${priceDisplayHtml}
                             <div class="flex items-center justify-center mt-4 gap-2">
-                                <label for="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-sm text-gray-700">Qty:</label>
+                                <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                                 <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${defaultQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                                <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                                 <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">Calculate</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
