@@ -446,6 +446,10 @@
             .slider-container {
                 min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
             }
+            /* Specific rule for prices-grid on small screens */
+            #prices-grid {
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on small screens */
+            }
         }
 
         /* Even smaller mobile screens (e.g., very narrow phone viewports) */
