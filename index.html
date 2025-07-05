@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport meta tag: initial-scale set to 0.65 as requested, for a zoomed-out view.
+    <!-- Viewport meta tag: initial-scale set to 1.0 for standard mobile responsiveness.
          shrink-to-fit=no is included for better mobile compatibility. -->
-    <meta name="viewport" content="width=device-width, initial-scale=0.65, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dipped Sweets NYC - Handcrafted Dipped Treats</title>
     <!-- Google Site Verification Tag -->
     <meta name="google-site-verification" content="gqFNam_QA1Zrgb68hx-MxOxsVTJN4NTKrzYs49EBHv8" />
@@ -449,6 +449,25 @@
             /* Specific rule for prices-grid on small screens */
             #prices-grid {
                 grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on small screens */
+            }
+            /* Adjustments for elements within sweet-card on prices page for small screens */
+            #prices-grid .sweet-card .sweet-title {
+                font-size: 1.2rem; /* Smaller title for prices page cards */
+            }
+            #prices-grid .sweet-card .sweet-description {
+                font-size: 0.75rem; /* Smaller description for prices page cards */
+            }
+            #prices-grid .sweet-card .sweet-price {
+                font-size: 1.1rem; /* Smaller price for prices page cards */
+            }
+            #prices-grid .sweet-card input[type="number"] {
+                width: 16 !important; /* Make quantity input narrower */
+                padding: 0.25rem !important; /* Reduce padding for quantity input */
+                font-size: 0.85rem !important; /* Smaller font for quantity input */
+            }
+            #prices-grid .sweet-card button {
+                padding: 0.3rem 0.6rem !important; /* Adjust button padding */
+                font-size: 0.75rem !important; /* Adjust button font size */
             }
         }
 
