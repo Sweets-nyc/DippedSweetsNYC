@@ -123,9 +123,15 @@
         }
         .sweet-title {
             color: #6F4E37; /* Chocolate Brown */
+            font-size: 1.875rem; /* text-3xl */
+        }
+        .sweet-description {
+            font-size: 1.125rem; /* text-lg */
+            line-height: 1.5;
         }
         .sweet-price {
             color: #E0B400; /* Golden Yellow */
+            font-size: 1.5rem; /* text-2xl */
         }
         .order-button {
             background-color: #E0B400; /* Golden Yellow */
@@ -534,75 +540,39 @@
             }
         }
 
-        /* Styles specific to the Prices section - UPDATED to match sweet-card style */
-        section#prices-section .price-card {
-            background-color: #FFFFFF;
-            border-radius: 1.5rem; /* Slightly smaller radius for more compactness */
-            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.08); /* Slightly smaller shadow */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            position: relative;
-            padding: 1rem; /* Reduced padding */
-        }
-        section#prices-section .price-card:hover {
-            transform: translateY(-5px) rotate(-0.5deg); /* Reduced hover effect */
-            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.12); /* Reduced hover shadow */
-        }
-        section#prices-section .sweet-image {
-            border-radius: 1rem; /* Reduced radius to match card */
-            box-shadow: 0 3px 10px rgba(0,0,0,0.04); /* Reduced shadow */
-            width: 100%;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            margin-bottom: 0.75rem; /* Reduced margin */
-        }
-        section#prices-section .sweet-title {
-            color: #6F4E37;
-            font-size: 1.75rem; /* Reduced title size */
-            font-weight: 700;
-            margin-bottom: 0.4rem; /* Reduced margin */
-        }
-        section#prices-section .price-detail {
-            font-size: 0.9rem; /* Slightly adjusted for better readability within new card size */
-            font-weight: 600;
-            color: #8A6F5C;
-            margin-bottom: 0.1rem; /* Reduced margin */
-        }
-        section#prices-section .price-value {
-            color: #E0B400;
-            font-weight: 800;
-            font-size: 1.25rem; /* Reduced for compactness */
-        }
-        section#prices-section .inquire-price {
-            color: #F8A4B8;
-            font-weight: 800;
-            font-size: 1.25rem; /* Reduced for compactness */
-        }
-        section#prices-section .flex.items-center.justify-center.mt-4.gap-2 {
-            margin-top: 0.75rem; /* Reduced margin for the quantity/calculate row */
-            gap: 0.5rem; /* Reduced gap for compactness */
-        }
-        section#prices-section .bg-\[\#F8A4B8\].px-3.py-1 { /* Calculate button */
-            padding: 0.3rem 0.75rem; /* Smaller padding */
-            font-size: 0.85rem; /* Smaller font */
-        }
-        /* New: Ensure prices-grid is 2 columns on small screens */
-        #prices-grid {
-            grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
-            gap: 0.6rem; /* Match sweet-grid gap */
-        }
-
-        /* Hide calculate button on mobile, show on desktop */
-        @media (max-width: 767px) {
-            .hide-on-mobile {
-                display: none;
+        /* Styles for desktop and larger screens (md breakpoint and up) */
+        @media (min-width: 768px) { /* Tailwind's md breakpoint */
+            #menuSelectionContainer {
+                grid-auto-flow: column; /* Items flow into columns first */
+                grid-template-rows: repeat(4, minmax(0, 1fr)); /* 4 rows */
+                overflow-x: auto; /* Enable horizontal scrolling */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                scroll-snap-type: x mandatory; /* Snap to items horizontally */
             }
-        }
-        @media (min-width: 768px) {
-            .hide-on-mobile {
-                display: inline-block; /* Or whatever display type it should have on desktop */
+            #menuSelectionContainer .sweet-card {
+                width: 12rem; /* Fixed width for each card on desktop */
+                flex-shrink: 0; /* Prevent items from shrinking */
+                scroll-snap-align: start; /* Snap to the start of each card */
+            }
+            /* Hide scrollbar for aesthetic purposes, but keep functionality */
+            #menuSelectionContainer::-webkit-scrollbar {
+                height: 8px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+            #menuSelectionContainer::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+            /* For Firefox */
+            #menuSelectionContainer {
+                scrollbar-width: thin;
+                scrollbar-color: #888 #f1f1f1;
             }
         }
     </style>
@@ -1255,15 +1225,15 @@
             // Get selected pricing mode
             const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
 
-            // Enforce minimum quantity for party mode
-            if (selectedMode === 'party' && quantity < 12) {
-                resultDisplay.textContent = "Party orders require a minimum of 12 items.";
+            // Enforce minimum quantity for party mode if applicable
+            if (selectedMode === 'party' && sweet.partyPrice !== "Inquire for Price" && sweet.partyPrice.includes('/each') && quantity < 12) {
+                resultDisplay.textContent = "Party orders for this item require a minimum of 12 items.";
                 resultDisplay.classList.add('text-red-500');
                 return;
             }
 
             if (isNaN(quantity) || quantity < 1) {
-                resultDisplay.textContent = "Please enter a valid quantity.";
+                resultDisplay.textContent = "Please enter a valid quantity (min 1).";
                 resultDisplay.classList.add('text-red-500');
                 return;
             }
@@ -1273,23 +1243,22 @@
             let message = '';
 
             if (sweet.simplePrice === "Inquire for Price") {
-                resultDisplay.textContent = "Cost: Inquire for Price";
+                resultDisplay.textContent = "Calculated Cost: Inquire for Price";
                 return;
             }
 
             const simplePriceNum = parsePrice(sweet.simplePrice);
             const partyPriceNum = parsePrice(sweet.partyPrice);
-            // Removed dozenPriceNum as it's no longer displayed on the prices page for party mode
 
             if (selectedMode === 'simple') {
                 totalCost = quantity * simplePriceNum;
-                message = ' (Simple pricing applied)';
+                message = ' (Simple pricing)';
             } else if (selectedMode === 'party') {
-                totalCost = quantity * partyPriceNum; // Always use party price per each for party mode
-                message = ' (Party pricing applied)';
+                totalCost = quantity * partyPriceNum; // Always use party price per each for party mode calculation
+                message = ' (Party pricing)';
             }
 
-            resultDisplay.textContent = `Cost: $${totalCost.toFixed(2)}${message}`;
+            resultDisplay.textContent = `Calculated Cost: $${totalCost.toFixed(2)}${message}`;
         }
 
         // Function to increment/decrement quantity on the prices page
@@ -1300,13 +1269,16 @@
                 if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
 
                 let newVal = currentVal + delta;
-                const minVal = parseInt(quantityInput.min, 10);
-
-                if (newVal < minVal) {
-                    newVal = minVal; // Don't go below minimum
+                // Ensure quantity doesn't go below 1, or below 12 for party mode if applicable
+                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                const sweet = sweetsData.find(s => s.title === itemTitle);
+                let minAllowed = 1;
+                if (selectedMode === 'party' && sweet.partyPrice !== "Inquire for Price" && sweet.partyPrice.includes('/each')) {
+                    minAllowed = 12; // Minimum 12 for party mode calculation
                 }
-                if (newVal < 1) { // Ensure it doesn't go below 1 for general cases
-                    newVal = 1;
+
+                if (newVal < minAllowed) {
+                    newVal = minAllowed;
                 }
 
                 quantityInput.value = newVal;
@@ -1321,46 +1293,41 @@
 
             let htmlContent = '';
             sweetsData.forEach(sweet => {
-                let priceDisplayHtml = '';
-                let minQuantity = 1; // Default min quantity for simple mode
-                let defaultQuantity = 1; // Default quantity for simple mode
-
-                if (selectedMode === 'party') {
-                    minQuantity = 12; // Minimum quantity is 12 for party mode
-                    defaultQuantity = 12; // Default quantity is 12 for party mode
-                }
+                let displayPriceHtml = '';
+                let minQuantityForInput = 1; // Default min quantity for input field
 
                 if (sweet.simplePrice === "Inquire for Price") {
-                    priceDisplayHtml = `
-                        <p class="price-detail">Price: <span class="inquire-price">${sweet.simplePrice}</span></p>
-                    `;
+                    displayPriceHtml = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePrice}</span>`;
                 } else {
                     if (selectedMode === 'simple') {
-                        priceDisplayHtml = `
-                            <p class="price-detail">Simple Order: <span class="price-value">${sweet.simplePrice}</span></p>
-                        `;
+                        displayPriceHtml = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePrice}</span>`;
                     } else if (selectedMode === 'party') {
-                        // Only show party price, no dozen price for party mode
-                        priceDisplayHtml = `
-                            <p class="price-detail">Party Order: <span class="price-value">${sweet.partyPrice}</span></p>
-                        `;
+                        displayPriceHtml = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.partyPrice}</span>`;
+                        // If party mode, and it's a per-each item, set min quantity for input to 12
+                        if (sweet.partyPrice.includes('/each')) {
+                            minQuantityForInput = 12;
+                        }
                     }
                 }
 
                 htmlContent += `
-                    <div class="price-card text-center">
-                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image">
-                        <h3 class="sweet-title">${sweet.title}</h3>
-                        <div class="mt-auto pt-2">
-                            ${priceDisplayHtml}
+                    <div class="sweet-card p-6 flex flex-col items-center text-center">
+                        ${sweet.isNew ? '<div class="ribbon">Now Serving!!</div>' : ''}
+                        <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
+                        <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
+                        <p class="text-gray-600 text-lg mb-4 flex-grow">
+                            ${sweet.description}
+                        </p>
+                        ${displayPriceHtml}
+                        <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${defaultQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${minQuantityForInput}" min="${minQuantityForInput}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
-                                <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors hide-on-mobile">Calculate</button>
+                                <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">Calculate</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
-                            <p class="text-xs text-gray-500 mt-1">Price automatically adjusts for dozens.</p>
+                            <p class="text-xs text-gray-500 mt-1">Adjust quantity and click 'Calculate'.</p>
                         </div>
                     </div>
                 `;
