@@ -381,6 +381,25 @@
                 /* Ensure it takes full width of its grid cell */
                 width: 100%;
             }
+            /* Specific adjustments for #prices-grid sweet cards on screens <= 768px */
+            #prices-grid .sweet-card {
+                max-width: 160px; /* Make them smaller */
+                margin: 0 auto; /* Center within grid cell */
+            }
+            #prices-grid .sweet-title {
+                font-size: 0.9rem; /* Smaller title for prices page */
+            }
+            #prices-grid .sweet-description {
+                font-size: 0.6rem; /* Smaller description for prices page */
+            }
+            #prices-grid .sweet-price {
+                font-size: 0.8rem; /* Smaller price for prices page */
+            }
+            #prices-grid .order-button {
+                font-size: 0.6rem; /* Smaller button for prices page */
+                padding: 0.3rem 0.6rem;
+            }
+
             .sweet-image {
                 width: 100%;
                 /* Using aspect-ratio for better image scaling without fixed height */
@@ -498,6 +517,25 @@
                 padding: 0.15rem; /* Further reduced padding */
                 box-sizing: border-box; /* Reinforce */
             }
+            /* Specific adjustments for #prices-grid sweet cards on screens <= 480px */
+            #prices-grid .sweet-card {
+                max-width: 140px; /* Make them even smaller */
+                margin: 0 auto; /* Center within grid cell */
+            }
+            #prices-grid .sweet-title {
+                font-size: 0.75rem; /* Even smaller title for prices page */
+            }
+            #prices-grid .sweet-description {
+                font-size: 0.55rem; /* Even smaller description for prices page */
+            }
+            #prices-grid .sweet-price {
+                font-size: 0.7rem; /* Even smaller price for prices page */
+            }
+            #prices-grid .order-button {
+                font-size: 0.55rem; /* Even smaller button for prices page */
+                padding: 0.15rem 0.4rem;
+            }
+
             .sweet-image {
                 /* Using aspect-ratio for very small screens too */
                 aspect-ratio: 4/3;
@@ -1633,14 +1671,12 @@
                         const endX = e.changedTouches[0].clientX;
                         const diffX = endX - startX;
 
-                        if (Math.abs(diffX) > swipeThreshold) {
-                            if (diffX > 0) {
-                                // Swiped right
-                                plusSlides(-1);
-                            } else {
-                                // Swiped left
-                                plusSlides(1);
-                            }
+                        if (diffX > 0) {
+                            // Swiped right
+                            plusSlides(-1);
+                        } else {
+                            // Swiped left
+                            plusSlides(1);
                         }
                     }
                     // Resume auto-slide after touch ends, regardless of whether a swipe occurred
