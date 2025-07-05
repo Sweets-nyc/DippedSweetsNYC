@@ -1363,10 +1363,10 @@
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                                 <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${minQuantityForInput}" min="${minQuantityForInput}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
-                                <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">Calculate</button>
+                                <!-- Removed the Calculate button as it's no longer needed -->
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
-                            <p class="text-xs text-gray-500 mt-1">Adjust quantity and click 'Calculate'.</p>
+                            <p class="text-xs text-gray-500 mt-1">Adjust quantity.</p>
                         </div>
                     </div>
                 `;
