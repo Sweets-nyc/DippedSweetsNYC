@@ -288,66 +288,6 @@
             overflow-x: hidden; /* Hide horizontal overflow by default on mobile */
         }
 
-        /* Styles specific to the Prices section - UPDATED to match sweet-card style */
-        section#prices-section .price-card {
-            background-color: #FFFFFF;
-            border-radius: 1.5rem; /* Slightly smaller radius for more compactness */
-            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.08); /* Slightly smaller shadow */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            position: relative;
-            padding: 1rem; /* Reduced padding */
-        }
-        section#prices-section .price-card:hover {
-            transform: translateY(-5px) rotate(-0.5deg); /* Reduced hover effect */
-            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.12); /* Reduced hover shadow */
-        }
-        section#prices-section .sweet-image {
-            border-radius: 1rem; /* Reduced radius to match card */
-            box-shadow: 0 3px 10px rgba(0,0,0,0.04); /* Reduced shadow */
-            width: 100%;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            margin-bottom: 0.75rem; /* Reduced margin */
-        }
-        section#prices-section .sweet-title {
-            color: #6F4E37;
-            font-size: 1.75rem; /* Reduced title size */
-            font-weight: 700;
-            margin-bottom: 0.4rem; /* Reduced margin */
-        }
-        section#prices-section .price-detail {
-            font-size: 0.9rem; /* Slightly adjusted for better readability within new card size */
-            font-weight: 600;
-            color: #8A6F5C;
-            margin-bottom: 0.1rem; /* Reduced margin */
-        }
-        section#prices-section .price-value {
-            color: #E0B400;
-            font-weight: 800;
-            font-size: 1.25rem; /* Reduced for compactness */
-        }
-        section#prices-section .inquire-price {
-            color: #F8A4B8;
-            font-weight: 800;
-            font-size: 1.25rem; /* Reduced for compactness */
-        }
-        section#prices-section .flex.items-center.justify-center.mt-4.gap-2 {
-            margin-top: 0.75rem; /* Reduced margin for the quantity/calculate row */
-            gap: 0.5rem; /* Reduced gap for compactness */
-        }
-        section#prices-section .bg-\[\#F8A4B8\].px-3.py-1 { /* Calculate button */
-            padding: 0.3rem 0.75rem; /* Smaller padding */
-            font-size: 0.85rem; /* Smaller font */
-        }
-
-        /* New CSS for hiding calculate button on mobile */
-        .hide-on-mobile {
-            display: none; /* Hidden by default on mobile */
-        }
-
         /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
 
         /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
@@ -482,7 +422,7 @@
                 font-size: 1.6rem; /* Smaller icon size */
             }
             form input, form textarea, form button {
-                font-size: 1rem; /* Adjusted to 1rem (16px) to prevent zoom */
+                font-size: 0.9rem; /* Smaller form elements */
                 padding: 0.8rem;
             }
             .footer-logo .logo-text {
@@ -499,26 +439,6 @@
             }
             .slider-container {
                 min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
-            }
-
-            /* Responsive adjustments for prices section */
-            section#prices-section .price-card {
-                padding: 0.75rem; /* Adjusted for mobile view */
-            }
-            section#prices-section .sweet-title {
-                font-size: 1.25rem; /* Adjusted for mobile view */
-            }
-            section#prices-section .price-detail {
-                font-size: 0.85rem; /* Adjusted for mobile view */
-            }
-            section#prices-section .price-value, section#prices-section .inquire-price {
-                font-size: 1rem; /* Adjusted for mobile view */
-            }
-
-            /* New: Ensure prices-grid is 2 columns on small screens */
-            #prices-grid {
-                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
-                gap: 0.6rem; /* Match sweet-grid gap */
             }
         }
 
@@ -597,7 +517,7 @@
                 font-size: 1.3rem;
             }
             form input, form textarea, form button {
-                font-size: 1rem; /* Adjusted to 1rem (16px) to prevent zoom */
+                font-size: 0.75rem;
                 padding: 0.6rem;
             }
             .footer-logo .logo-text {
@@ -612,52 +532,77 @@
             .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
                 font-size: 1.5rem;
             }
-
-            /* New: Ensure prices-grid is 2 columns on very small screens */
-            #prices-grid {
-                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
-                gap: 0.4rem; /* Match sweet-grid gap */
-            }
         }
 
-        /* Styles for desktop and larger screens (md breakpoint and up) */
-        @media (min-width: 768px) { /* Tailwind's md breakpoint */
-            #menuSelectionContainer {
-                grid-auto-flow: column; /* Items flow into columns first */
-                grid-template-rows: repeat(4, minmax(0, 1fr)); /* 4 rows */
-                overflow-x: auto; /* Enable horizontal scrolling */
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-                scroll-snap-type: x mandatory; /* Snap to items horizontally */
-            }
-            #menuSelectionContainer .sweet-card {
-                width: 12rem; /* Fixed width for each card on desktop */
-                flex-shrink: 0; /* Prevent items from shrinking */
-                scroll-snap-align: start; /* Snap to the start of each card */
-            }
-            /* Hide scrollbar for aesthetic purposes, but keep functionality */
-            #menuSelectionContainer::-webkit-scrollbar {
-                height: 8px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 10px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-thumb {
-                background: #888;
-                border-radius: 10px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-            /* For Firefox */
-            #menuSelectionContainer {
-                scrollbar-width: thin;
-                scrollbar-color: #888 #f1f1f1;
-            }
+        /* Styles specific to the Prices section - UPDATED to match sweet-card style */
+        section#prices-section .price-card {
+            background-color: #FFFFFF;
+            border-radius: 1.5rem; /* Slightly smaller radius for more compactness */
+            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.08); /* Slightly smaller shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+            padding: 1rem; /* Reduced padding */
+        }
+        section#prices-section .price-card:hover {
+            transform: translateY(-5px) rotate(-0.5deg); /* Reduced hover effect */
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.12); /* Reduced hover shadow */
+        }
+        section#prices-section .sweet-image {
+            border-radius: 1rem; /* Reduced radius to match card */
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04); /* Reduced shadow */
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            margin-bottom: 0.75rem; /* Reduced margin */
+        }
+        section#prices-section .sweet-title {
+            color: #6F4E37;
+            font-size: 1.75rem; /* Reduced title size */
+            font-weight: 700;
+            margin-bottom: 0.4rem; /* Reduced margin */
+        }
+        section#prices-section .price-detail {
+            font-size: 0.9rem; /* Slightly adjusted for better readability within new card size */
+            font-weight: 600;
+            color: #8A6F5C;
+            margin-bottom: 0.1rem; /* Reduced margin */
+        }
+        section#prices-section .price-value {
+            color: #E0B400;
+            font-weight: 800;
+            font-size: 1.25rem; /* Reduced for compactness */
+        }
+        section#prices-section .inquire-price {
+            color: #F8A4B8;
+            font-weight: 800;
+            font-size: 1.25rem; /* Reduced for compactness */
+        }
+        section#prices-section .flex.items-center.justify-center.mt-4.gap-2 {
+            margin-top: 0.75rem; /* Reduced margin for the quantity/calculate row */
+            gap: 0.5rem; /* Reduced gap for compactness */
+        }
+        section#prices-section .bg-\[\#F8A4B8\].px-3.py-1 { /* Calculate button */
+            padding: 0.3rem 0.75rem; /* Smaller padding */
+            font-size: 0.85rem; /* Smaller font */
+        }
+        /* New: Ensure prices-grid is 2 columns on small screens */
+        #prices-grid {
+            grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
+            gap: 0.6rem; /* Match sweet-grid gap */
+        }
 
-            /* Show calculate button on desktop */
+        /* Hide calculate button on mobile, show on desktop */
+        @media (max-width: 767px) {
             .hide-on-mobile {
-                display: inline-block;
+                display: none;
+            }
+        }
+        @media (min-width: 768px) {
+            .hide-on-mobile {
+                display: inline-block; /* Or whatever display type it should have on desktop */
             }
         }
     </style>
@@ -1080,6 +1025,16 @@
                 displayOnMainMenu: false
             },
             {
+                img: "fruit.avif", // Changed image to fruit.avif
+                title: "Fresh Fruit Salad Platter",
+                description: "A refreshing mix of seasonal fresh fruits, perfect for a light and healthy treat.",
+                simplePrice: "$5.00/each",
+                partyPrice: "$4.50/each",
+                category: "Individual Sample Cups",
+                displayOnMainMenu: true,
+                isNew: true
+            },
+            {
                 img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
                 title: "Chocolate Dipped Pretzels",
                 description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
@@ -1194,16 +1149,6 @@
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
                 displayOnMainMenu: true // Keep on home screen
-            },
-            {
-                img: "fruit.avif", // Changed image to fruit.avif
-                title: "Fresh Fruit Salad Platter",
-                description: "A refreshing mix of seasonal fresh fruits, perfect for a light and healthy treat.",
-                simplePrice: "$5.00/each",
-                partyPrice: "$4.50/each",
-                category: "Individual Sample Cups",
-                displayOnMainMenu: true,
-                isNew: true
             }
         ];
 
