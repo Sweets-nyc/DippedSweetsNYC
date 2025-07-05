@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport meta tag: initial-scale set to 0.65 as requested, for a zoomed-out view.
+    <!-- Viewport meta tag: initial-scale set to 1.0 for standard mobile responsiveness.
          shrink-to-fit=no is included for better mobile compatibility. -->
-    <meta name="viewport" content="width=device-width, initial-scale=0.65, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dipped Sweets NYC - Handcrafted Dipped Treats</title>
     <!-- Google Site Verification Tag -->
     <meta name="google-site-verification" content="gqFNam_QA1Zrgb68hx-MxOxsVTJN4NTKrzYs49EBHv8" />
@@ -449,100 +449,23 @@
             /* Specific rule for prices-grid on small screens */
             #prices-grid {
                 grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on small screens */
+                gap: 0.5rem; /* Slightly reduced gap for compactness */
+            }
+            /* The following rules are removed to allow inheritance from .sweet-card */
+            /* #prices-grid .sweet-card { padding: 0.5rem; } */
+            /* #prices-grid .sweet-card .sweet-title { font-size: 1rem; } */
+            /* #prices-grid .sweet-card .sweet-description { font-size: 0.65rem; line-height: 1.2; } */
+            /* #prices-grid .sweet-card .sweet-price { font-size: 0.9rem; } */
+            #prices-grid .sweet-card .mt-auto {
+                margin-top: 0.5rem !important; /* Adjust margin for spacing */
+            }
+            #prices-grid .sweet-card .flex.items-center.justify-center.mt-4.gap-2 {
+                margin-top: 0.5rem !important; /* Adjust margin for spacing */
+                gap: 0.25rem !important; /* Reduce gap between controls */
             }
         }
 
-        /* Even smaller mobile screens (e.g., very narrow phone viewports) */
-        @media (max-width: 480px) {
-            body {
-                font-size: 0.8rem; /* Further reduced base font size */
-            }
-            .container-main { /* Reduced padding for very small screens */
-                padding: 0 0.8rem;
-            }
-            .logo-text {
-                font-size: 1.7rem !important;
-                margin-bottom: 0.7rem !important;
-            }
-            .nav-link {
-                font-size: 0.8rem !important; /* Even smaller nav link font */
-                padding: 0.4rem 0.5rem !important;
-            }
-            .dropdown-menu {
-                font-size: 0.75rem !important;
-                padding: 0.1rem 0;
-            }
-            .dropdown-item {
-                font-size: 0.75rem !important;
-                padding: 0.4rem 0.5rem !important;
-            }
-            .hero-title {
-                font-size: 2rem;
-                margin-bottom: 0.7rem;
-            }
-            .hero-tagline {
-                font-size: 0.9rem;
-                margin-bottom: 0.8rem;
-            }
-            .cta-button {
-                font-size: 0.9rem;
-                padding: 0.6rem 1rem;
-            }
-            .section-heading {
-                font-size: 1.8rem;
-                margin-bottom: 0.8rem;
-            }
-            /* Adjust sweet-grid for very small screens */
-            .sweet-grid {
-                grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
-                gap: 0.4rem; /* Further reduced gap */
-            }
-            .sweet-card {
-                padding: 0.25rem; /* Further reduced padding */
-                box-sizing: border-box; /* Reinforce */
-            }
-            .sweet-image {
-                /* Using aspect-ratio for very small screens too */
-                aspect-ratio: 4/3;
-                height: auto; /* Let height adjust based on aspect-ratio */
-            }
-            .sweet-title {
-                font-size: 0.9rem; /* Even smaller title */
-            }
-            .sweet-description {
-                font-size: 0.65rem; /* Even smaller description */
-                line-height: 1.2;
-            }
-            .sweet-price {
-                font-size: 0.8rem; /* Even smaller price */
-            }
-            .order-button {
-                font-size: 0.65rem; /* Even smaller button */
-                padding: 0.2rem 0.5rem;
-            }
-            .contact-info p, .contact-details-group span {
-                font-size: 0.85rem;
-            }
-            .contact-info i {
-                font-size: 1.3rem;
-            }
-            form input, form textarea, form button {
-                font-size: 0.75rem;
-                padding: 0.6rem;
-            }
-            .footer-logo .logo-text {
-                font-size: 1.7rem;
-            }
-            .footer-link {
-                font-size: 0.85rem;
-            }
-            .footer-links-group h4 {
-                font-size: 1.3rem;
-            }
-            .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
-                font-size: 1.5rem;
-            }
-        }
+        /* Removed @media (max-width: 480px) block for better consistency and less aggressive scaling */
 
         /* Styles for desktop and larger screens (md breakpoint and up) */
         @media (min-width: 768px) { /* Tailwind's md breakpoint */
@@ -1326,7 +1249,7 @@
                         <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${minQuantityForInput}" min="${minQuantityForInput}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${minQuantityForInput}" min="${minQuantityForInput}" class="w-16 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                                 <button type="button" onclick="calculateCost('${sweet.title.replace(/'/g, "\\'")}')" class="bg-[#F8A4B8] text-white px-3 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">Calculate</button>
                             </div>
