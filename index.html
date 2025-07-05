@@ -1265,8 +1265,11 @@
             // Get selected pricing mode
             const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
 
-            if (isNaN(quantity) || quantity < 1) {
-                resultDisplay.textContent = "Please enter a valid quantity (min 1).";
+            // Determine minimum quantity based on mode
+            const minQuantity = selectedMode === 'simple' ? 4 : 12;
+
+            if (isNaN(quantity) || quantity < minQuantity) {
+                resultDisplay.textContent = `Please enter a valid quantity (min ${minQuantity}).`;
                 resultDisplay.classList.add('text-red-500');
                 return;
             }
@@ -1318,10 +1321,13 @@
                 let currentVal = parseInt(quantityInput.value, 10);
                 if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
 
+                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                const minQuantity = selectedMode === 'simple' ? 4 : 12; // Get current mode's minimum
+
                 let newVal = currentVal + delta;
-                // Ensure quantity doesn't go below 1
-                if (newVal < 1) {
-                    newVal = 1;
+                // Ensure quantity doesn't go below the mode-specific minimum
+                if (newVal < minQuantity) {
+                    newVal = minQuantity;
                 }
 
                 quantityInput.value = newVal;
@@ -1335,6 +1341,9 @@
             if (!pricesGrid) return;
 
             let htmlContent = '';
+            const initialQuantity = selectedMode === 'simple' ? 4 : 12;
+            const minQuantity = selectedMode === 'simple' ? 4 : 12;
+
             sweetsData.forEach(sweet => {
                 let currentPriceDisplay = ''; // This will show the price based on selectedMode
                 // Removed otherPricesHtml as per user request
@@ -1365,7 +1374,7 @@
                         <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="1" min="1" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput="calculateCost('${sweet.title.replace(/'/g, "\\'")}')">
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput="calculateCost('${sweet.title.replace(/'/g, "\\'")}')">
                                 <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
