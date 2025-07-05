@@ -368,13 +368,13 @@
                 padding: 0.6rem 0.8rem !important;
                 text-align: center; /* Center text within dropdown items */
             }
-            /* Adjust sweet-grid to be responsive and fit better */
-            .sweet-grid {
+            /* Adjust sweet-grid and prices-grid to be responsive and fit better */
+            .sweet-grid, #prices-grid { /* Combined selector for consistent behavior */
                 display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
                 gap: 0.6rem; /* Reduced gap for more compactness */
-                width: 100%;
-                margin: 0;
+                width: 100%; /* Ensure full width */
+                margin: 0 auto !important; /* Center the grid horizontally */
             }
             .sweet-card {
                 padding: 0.25rem; /* Reduced padding for compactness */
@@ -446,10 +446,6 @@
             .slider-container {
                 min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
             }
-            /* Specific rule for prices-grid on small screens */
-            #prices-grid {
-                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on small screens */
-            }
         }
 
         /* Even smaller mobile screens (e.g., very narrow phone viewports) */
@@ -492,10 +488,11 @@
                 font-size: 1.8rem;
                 margin-bottom: 0.8rem;
             }
-            /* Adjust sweet-grid for very small screens */
-            .sweet-grid {
+            /* Adjust sweet-grid and prices-grid for very small screens */
+            .sweet-grid, #prices-grid { /* Combined selector for consistent behavior */
                 grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
                 gap: 0.4rem; /* Further reduced gap */
+                margin: 0 auto !important; /* Center the grid horizontally */
             }
             .sweet-card {
                 padding: 0.25rem; /* Further reduced padding */
