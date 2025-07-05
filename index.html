@@ -451,7 +451,7 @@
                 padding: 0.8rem;
             }
             .footer-logo .logo-text {
-                font-size: 2rem; /* Smaller footer logo */
+                font-size: 2rem;
             }
             .footer-link {
                 font-size: 1rem;
@@ -1252,7 +1252,7 @@
         }
 
         // Function to parse price string to number
-        const parsePrice = (priceStr) => parseFloat(priceStr.replace(/[$,/each/dozen/slice/6]/g, ''));
+        const parsePrice = (priceStr) => parseFloat(priceStr.replace(/[$,/each/dozen/slice/platter]/g, ''));
 
         function calculateCost(itemTitle) {
             const sweet = sweetsData.find(s => s.title === itemTitle);
@@ -1262,52 +1262,52 @@
             const resultDisplay = document.getElementById(`result-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
             let quantity = parseInt(quantityInput.value, 10);
 
-            // Get selected pricing mode
-            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
-
-            // Determine minimum quantity based on mode
-            const minQuantity = selectedMode === 'simple' ? 4 : 12;
-
-            if (isNaN(quantity) || quantity < minQuantity) {
-                resultDisplay.textContent = `Please enter a valid quantity (min ${minQuantity}).`;
-                resultDisplay.classList.add('text-red-500');
-                return;
+            // Determine minimum quantity based on item, with specific logic for Fresh Fruit Salad Platter
+            let minQuantity;
+            if (itemTitle === "Fresh Fruit Salad Platter") {
+                minQuantity = 1;
+            } else {
+                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                minQuantity = selectedMode === 'simple' ? 4 : 12;
             }
-            resultDisplay.classList.remove('text-red-500'); // Remove error styling if quantity is valid
 
-            let totalCost = 0;
-            let pricePerUnit = 0;
+            // Enforce minimum quantity: if current quantity is less than min, set it to min
+            if (isNaN(quantity) || quantity < minQuantity) {
+                quantity = minQuantity;
+                quantityInput.value = minQuantity; // Update the input field as well
+            }
 
             if (sweet.simplePrice === "Inquire for Price") {
                 resultDisplay.textContent = "Inquire for Price";
                 return;
             }
 
-            const simplePriceNum = parsePrice(sweet.simplePrice);
-            const partyPriceNum = sweet.partyPrice && sweet.partyPrice !== "Inquire for Price" ? parsePrice(sweet.partyPrice) : simplePriceNum;
-            const halfDozenPriceNum = sweet.halfDozenPrice && sweet.halfDozenPrice !== "Inquire for Price" ? parsePrice(sweet.halfDozenPrice) : (simplePriceNum * 6);
-            const dozenPriceNum = sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price" ? parsePrice(sweet.dozenPrice) : (simplePriceNum * 12);
+            let totalCost = 0;
+            const simplePricePerUnit = parsePrice(sweet.simplePrice);
+            const partyPricePerUnit = sweet.partyPrice && sweet.partyPrice !== "Inquire for Price" ? parsePrice(sweet.partyPrice) : simplePricePerUnit;
+            const dozenPriceFixed = sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price" ? parsePrice(sweet.dozenPrice) : null;
 
-
-            if (selectedMode === 'simple') {
-                if (quantity === 6 && sweet.halfDozenPrice) {
-                    totalCost = halfDozenPriceNum;
-                    pricePerUnit = halfDozenPriceNum / 6;
-                } else if (quantity === 12 && sweet.dozenPrice) {
-                    totalCost = dozenPriceNum;
-                    pricePerUnit = dozenPriceNum / 12;
-                } else {
-                    totalCost = quantity * simplePriceNum;
-                    pricePerUnit = simplePriceNum;
-                }
-            } else if (selectedMode === 'party') {
-                if (quantity === 12 && sweet.dozenPrice) {
-                    totalCost = dozenPriceNum;
-                    pricePerUnit = dozenPriceNum / 12;
-                } else {
-                    // For party mode, if not 12, use the party price per each
-                    totalCost = quantity * partyPriceNum;
-                    pricePerUnit = partyPriceNum;
+            // Special handling for Fresh Fruit Salad Platter - always consistent price, min 1
+            if (itemTitle === "Fresh Fruit Salad Platter") {
+                totalCost = quantity * simplePricePerUnit;
+            } else {
+                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                if (selectedMode === 'simple') {
+                    // If quantity is exactly 12 and a dozen price is defined, use the dozen price
+                    if (dozenPriceFixed !== null && quantity === 12) {
+                        totalCost = dozenPriceFixed;
+                    } else {
+                        // Otherwise, calculate based on the simple price per unit
+                        totalCost = quantity * simplePricePerUnit;
+                    }
+                } else if (selectedMode === 'party') {
+                    // If quantity is exactly 12 and a dozen price is defined, use the dozen price
+                    if (dozenPriceFixed !== null && quantity === 12) {
+                        totalCost = dozenPriceFixed;
+                    } else {
+                        // Otherwise, calculate based on the party price per unit
+                        totalCost = quantity * partyPricePerUnit;
+                    }
                 }
             }
 
@@ -1321,8 +1321,13 @@
                 let currentVal = parseInt(quantityInput.value, 10);
                 if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
 
-                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
-                const minQuantity = selectedMode === 'simple' ? 4 : 12; // Get current mode's minimum
+                let minQuantity;
+                if (itemTitle === "Fresh Fruit Salad Platter") {
+                    minQuantity = 1;
+                } else {
+                    const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                    minQuantity = selectedMode === 'simple' ? 4 : 12;
+                }
 
                 let newVal = currentVal + delta;
                 // Ensure quantity doesn't go below the mode-specific minimum
@@ -1341,12 +1346,20 @@
             if (!pricesGrid) return;
 
             let htmlContent = '';
-            const initialQuantity = selectedMode === 'simple' ? 4 : 12;
-            const minQuantity = selectedMode === 'simple' ? 4 : 12;
 
             sweetsData.forEach(sweet => {
-                let currentPriceDisplay = ''; // This will show the price based on selectedMode
-                // Removed otherPricesHtml as per user request
+                let currentPriceDisplay = '';
+                // Determine initial quantity and min quantity based on item and mode
+                let initialQuantity;
+                let minQuantity;
+
+                if (sweet.title === "Fresh Fruit Salad Platter") {
+                    initialQuantity = 1;
+                    minQuantity = 1;
+                } else {
+                    initialQuantity = selectedMode === 'simple' ? 4 : 12;
+                    minQuantity = selectedMode === 'simple' ? 4 : 12;
+                }
 
                 if (sweet.simplePrice === "Inquire for Price") {
                     currentPriceDisplay = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePrice}</span>`;
@@ -1357,7 +1370,6 @@
                     } else if (selectedMode === 'party') {
                         currentPriceDisplay = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.partyPrice}</span>`;
                     }
-                    // No otherPricesHtml block here
                 }
 
 
@@ -1619,6 +1631,7 @@
             }
             updateOrderSummary(); // Clear the displayed summary
             populateOrderMenuSelection(); // Re-populate menu items with new prices
+            populatePricesPage(document.querySelector('input[name="priceMode"]:checked').value); // Re-populate prices page with new defaults
         }
 
         // Function for smooth scrolling without changing section visibility
