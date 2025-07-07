@@ -244,7 +244,7 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #4CAF50; /* Green for success */
+            background-color: #F8A4B8; /* Soft Pink for success as requested */
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
@@ -578,42 +578,6 @@
                 font-size: 1.5rem;
             }
         }
-
-        /* Styles for desktop and larger screens (md breakpoint and up) */
-        @media (min-width: 768px) { /* Tailwind's md breakpoint */
-            #menuSelectionContainer {
-                grid-auto-flow: column; /* Items flow into columns first */
-                grid-template-rows: repeat(4, minmax(0, 1fr)); /* 4 rows */
-                overflow-x: auto; /* Enable horizontal scrolling */
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-                scroll-snap-type: x mandatory; /* Snap to items horizontally */
-            }
-            #menuSelectionContainer .sweet-card {
-                width: 12rem; /* Fixed width for each card on desktop */
-                flex-shrink: 0; /* Prevent items from shrinking */
-                scroll-snap-align: start; /* Snap to the start of each card */
-            }
-            /* Hide scrollbar for aesthetic purposes, but keep functionality */
-            #menuSelectionContainer::-webkit-scrollbar {
-                height: 8px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 10px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-thumb {
-                background: #888;
-                border-radius: 10px;
-            }
-            #menuSelectionContainer::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-            /* For Firefox */
-            #menuSelectionContainer {
-                scrollbar-width: thin;
-                scrollbar-color: #888 #f1f1f1;
-            }
-        }
     </style>
 </head>
 <body>
@@ -873,14 +837,23 @@
                         </div>
                     </div>
 
-                    <!-- New: Select from Our Menu -->
+                    <!-- New: Select from Our Menu - Now with Dropdown Toggle -->
                     <div>
-                        <label class="block text-left text-lg font-medium text-gray-700 mb-4">Or, Select from Our Existing Menu:</label>
-                        <!-- Changed to grid and adjusted gap and padding for better mobile display -->
-                        <div id="menuSelectionContainer" class="gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
-                            <!-- Menu items will be dynamically loaded here by JavaScript -->
+                        <label class="block text-left text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mb-4 cursor-pointer" onclick="toggleMenuDropdown('top')">
+                            Or, Select from Our Existing Menu:
+                            <i id="menuDropdownIconTop" class="fas fa-chevron-down ml-2 text-base transition-transform duration-300"></i>
+                        </label>
+                        <div id="menuDropdownContent" style="display: none;">
+                            <div id="menuSelectionContainer" class="gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
+                                <!-- Menu items will be dynamically loaded here by JavaScript -->
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
+                            <!-- New dropdown arrow at the bottom -->
+                            <label class="block text-center text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mt-4 cursor-pointer" onclick="toggleMenuDropdown('bottom')">
+                                <i id="menuDropdownIconBottom" class="fas fa-chevron-up ml-2 text-base transition-transform duration-300"></i>
+                                Hide Menu Selections
+                            </label>
                         </div>
-                        <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
                     </div>
 
                     <!-- Selected Items Summary -->
@@ -1394,9 +1367,9 @@
                         <!-- Removed the div that contained otherPricesHtml -->
                         <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
-                                <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput="calculateCost('${sweet.title.replace(/'/g, "\\'")}')">
-                                <button type="button" onclick="adjustPriceQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" onclick="adjustPriceQuantity(${JSON.stringify(sweet.title)}, -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput="calculateCost(${JSON.stringify(sweet.title)})">
+                                <button type="button" onclick="adjustPriceQuantity(${JSON.stringify(sweet.title)}, 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
                             <!-- Removed the instructional text below the result -->
@@ -1451,13 +1424,13 @@
                         <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4>
                         ${priceText}
                         <div class="flex items-center justify-center gap-1 mt-1">
-                            <button type="button" onclick="adjustOrderQuantity('${sweet.title.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                            <button type="button" onclick="adjustOrderQuantity(${JSON.stringify(sweet.title)}, -1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                             <input type="number" id="${quantityInputId}" value="${initialQuantity}" min="${minQuantity}"
-                                   oninput="enforceMinQuantityForOrderForm('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}')"
+                                   oninput="enforceMinQuantityForOrderForm(${JSON.stringify(sweet.title)}, '${quantityInputId}')"
                                    data-unit-price="${calculatedUnitPrice}"
                                    class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
-                            <button type="button" onclick="adjustOrderQuantity('${sweet.title.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
-                            <button type="button" onclick="addToOrder('${sweet.title.replace(/'/g, "\\'")}', '${quantityInputId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
+                            <button type="button" onclick="adjustOrderQuantity(${JSON.stringify(sweet.title)}, 1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                            <button type="button" onclick="addToOrder(${JSON.stringify(sweet.title)}, '${quantityInputId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
                         </div>
                     </div>
                 `;
@@ -1553,6 +1526,8 @@
             }
 
             updateOrderSummary();
+            // Show notification
+            showMessage(`${quantity} ${itemTitle} added to your selections!`, false); // false for success message
             // Reset quantity input to its minimum based on the selected order type
             const resetQty = (itemTitle === "Fresh Fruit Salad Platter") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
             quantityInput.value = resetQty;
@@ -1630,11 +1605,11 @@
                                 <span class="text-sm text-gray-600 block sm:inline-block sm:ml-2">(${item.priceUsed})</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button type="button" onclick="adjustCartQuantity('${itemKey.replace(/'/g, "\\'")}', -1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                                <button type="button" onclick="adjustCartQuantity(${JSON.stringify(itemKey)}, -1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                                 <span class="font-bold text-gray-800 text-base">x${item.quantity}</span>
-                                <button type="button" onclick="adjustCartQuantity('${itemKey.replace(/'/g, "\\'")}', 1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" onclick="adjustCartQuantity(${JSON.stringify(itemKey)}, 1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                                 <span class="text-lg font-bold text-[#6F4E37] ml-3">${itemCalculatedPrice}</span>
-                                <button type="button" onclick="removeFromOrder('${itemKey.replace(/'/g, "\\'")}')" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
+                                <button type="button" onclick="removeFromOrder(${JSON.stringify(itemKey)})" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
                             </div>
                         </li>
                     `;
@@ -1728,6 +1703,27 @@
             if (autoSlideInterval) {
                 clearInterval(autoSlideInterval);
                 autoSlideInterval = null;
+            }
+        }
+
+        // New function to toggle the visibility of the menu dropdown content
+        function toggleMenuDropdown(caller = 'top') {
+            const menuDropdownContent = document.getElementById('menuDropdownContent');
+            const menuDropdownIconTop = document.getElementById('menuDropdownIconTop');
+            const menuDropdownIconBottom = document.getElementById('menuDropdownIconBottom');
+
+            if (menuDropdownContent.style.display === 'none' || menuDropdownContent.style.display === '') {
+                menuDropdownContent.style.display = 'block';
+                menuDropdownIconTop.classList.remove('fa-chevron-down');
+                menuDropdownIconTop.classList.add('fa-chevron-up');
+                menuDropdownIconBottom.classList.remove('fa-chevron-down'); // Ensure bottom icon is up
+                menuDropdownIconBottom.classList.add('fa-chevron-up');
+            } else {
+                menuDropdownContent.style.display = 'none';
+                menuDropdownIconTop.classList.remove('fa-chevron-up');
+                menuDropdownIconTop.classList.add('fa-chevron-down');
+                menuDropdownIconBottom.classList.remove('fa-chevron-up'); // Ensure bottom icon is down
+                menuDropdownIconBottom.classList.add('fa-chevron-down');
             }
         }
 
