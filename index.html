@@ -509,6 +509,7 @@
             }
             /* Adjust sweet-grid and prices-grid for very small screens */
             .sweet-grid, #prices-grid { /* Combined selector for consistent behavior */
+                display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
                 gap: 0.4rem; /* Further reduced gap */
                 margin: 0 auto !important; /* Center the grid horizontally */
@@ -1367,9 +1368,9 @@
                         <!-- Removed the div that contained otherPricesHtml -->
                         <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
-                                <button type="button" onclick="adjustPriceQuantity(${JSON.stringify(sweet.title)}, -1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput="calculateCost(${JSON.stringify(sweet.title)})">
-                                <button type="button" onclick="adjustPriceQuantity(${JSON.stringify(sweet.title)}, 1)" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" onclick='adjustPriceQuantity(${JSON.stringify(sweet.title)}, -1)' class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput='calculateCost(${JSON.stringify(sweet.title)})'>
+                                <button type="button" onclick='adjustPriceQuantity(${JSON.stringify(sweet.title)}, 1)' class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
                             <!-- Removed the instructional text below the result -->
@@ -1424,13 +1425,13 @@
                         <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4>
                         ${priceText}
                         <div class="flex items-center justify-center gap-1 mt-1">
-                            <button type="button" onclick="adjustOrderQuantity(${JSON.stringify(sweet.title)}, -1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                            <button type="button" onclick='adjustOrderQuantity(${JSON.stringify(sweet.title)}, -1)' class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                             <input type="number" id="${quantityInputId}" value="${initialQuantity}" min="${minQuantity}"
-                                   oninput="enforceMinQuantityForOrderForm(${JSON.stringify(sweet.title)}, '${quantityInputId}')"
+                                   oninput='enforceMinQuantityForOrderForm(${JSON.stringify(sweet.title)}, ${JSON.stringify(quantityInputId)})'
                                    data-unit-price="${calculatedUnitPrice}"
                                    class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
-                            <button type="button" onclick="adjustOrderQuantity(${JSON.stringify(sweet.title)}, 1)" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
-                            <button type="button" onclick="addToOrder(${JSON.stringify(sweet.title)}, '${quantityInputId}')" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
+                            <button type="button" onclick='adjustOrderQuantity(${JSON.stringify(sweet.title)}, 1)' class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                            <button type="button" onclick='addToOrder(${JSON.stringify(sweet.title)}, ${JSON.stringify(quantityInputId)})' class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
                         </div>
                     </div>
                 `;
@@ -1605,11 +1606,11 @@
                                 <span class="text-sm text-gray-600 block sm:inline-block sm:ml-2">(${item.priceUsed})</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button type="button" onclick="adjustCartQuantity(${JSON.stringify(itemKey)}, -1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                                <button type="button" onclick='adjustCartQuantity(${JSON.stringify(itemKey)}, -1)' class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
                                 <span class="font-bold text-gray-800 text-base">x${item.quantity}</span>
-                                <button type="button" onclick="adjustCartQuantity(${JSON.stringify(itemKey)}, 1)" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" onclick='adjustCartQuantity(${JSON.stringify(itemKey)}, 1)' class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
                                 <span class="text-lg font-bold text-[#6F4E37] ml-3">${itemCalculatedPrice}</span>
-                                <button type="button" onclick="removeFromOrder(${JSON.stringify(itemKey)})" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
+                                <button type="button" onclick='removeFromOrder(${JSON.stringify(itemKey)})' class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
                             </div>
                         </li>
                     `;
