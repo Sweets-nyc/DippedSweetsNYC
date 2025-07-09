@@ -2481,12 +2481,12 @@
                     }
                 });
 
-                // Close dropdown when an item is selected
-                sweetsDropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
-                    item.addEventListener('click', function() {
-                        sweetsDropdownMenu.classList.remove('active-dropdown');
-                    });
-                });
+                // Removed: Close dropdown when an item is selected
+                // sweetsDropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                //     item.addEventListener('click', function() {
+                //         sweetsDropdownMenu.classList.remove('active-dropdown');
+                //     });
+                // });
             }
             // --- END SWEETS DROPDOWN FIX ---
 
@@ -2498,11 +2498,9 @@
                     showSection('menu-only-section'); // Ensure the menu-only section is shown
                     populateSweetMenu(category, 'sweet-menu-grid-alt'); // Filter sweets by the selected category for the menu-only grid
 
-                    // Close the dropdown after an item is selected - this is handled by the global click listener, but good to have here too
-                    const parentDropdown = this.closest('.dropdown-menu');
-                    if (parentDropdown) {
-                        parentDropdown.classList.remove('active-dropdown');
-                    }
+                    // The dropdown will now only close on outside click, not on item selection.
+                    // Removed: const parentDropdown = this.closest('.dropdown-menu');
+                    // Removed: if (parentDropdown) { parentDropdown.classList.remove('active-dropdown'); }
                 });
             });
 
