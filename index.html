@@ -172,7 +172,7 @@
 
         /* Dropdown specific styles */
         .dropdown-menu {
-            display: none;
+            display: none; /* Hidden by default, controlled by JS */
             position: absolute;
             top: 100%; /* Position directly below the parent nav-link */
             left: 0; /* Align to the left edge of the parent nav-link */
@@ -184,8 +184,8 @@
             padding: 0.5rem 0;
         }
 
-        /* The nav-link parent div now controls dropdown visibility */
-        .nav-link.group:hover .dropdown-menu {
+        /* New class to show dropdown, controlled by JS click */
+        .dropdown-menu.active-dropdown {
             display: block;
         }
 
@@ -408,7 +408,7 @@
             }
             .sweet-card {
                 padding: 0.2rem; /* Reduced padding for compactness */
-                /* Ensure it takes full width of its grid cell */
+                /* Ensure it takes full full width of its grid cell */
                 width: 100%;
             }
             /* Reverted specific adjustments for #prices-grid sweet cards on screens <= 768px */
@@ -628,7 +628,7 @@
                 <a href="#create-order" class="nav-link text-lg" id="create-order-nav-link">Create Your Order</a>
                 <!-- Categories Dropdown changed to Sweets Dropdown - MOVED HERE -->
                 <div class="nav-link text-lg group">
-                    <a href="#menu" class="inline-flex items-center" id="sweets-nav-link">
+                    <a href="#menu" class="inline-flex items-center" id="sweets-nav-link" role="button" aria-haspopup="true">
                         Sweets <i class="fas fa-chevron-down ml-2 text-base"></i>
                     </a>
                     <div class="dropdown-menu">
@@ -1179,7 +1179,7 @@
                 cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
             },
             {
-                img: "chocolate dipped .jpg",
+                img: "c3a68bd5-1d2a-4bd7-8438-92f13ffa95ff.jpeg",
                 title: "Chocolate Dipped Pretzels",
                 description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
                 simplePrice: "$1.50/each",
@@ -2388,6 +2388,7 @@
             }
         }
 
+
         // Function to toggle between Sweets and Catering order forms
         function toggleOrderFormSections(selectedType) {
             const sweetsContent = document.getElementById('sweetsOrderFormContent');
@@ -2457,11 +2458,52 @@
             });
             document.getElementById('contact-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('contact-section'); });
             document.getElementById('about-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('about-section'); });
-            // Updated Sweets Nav Link behavior
-            document.getElementById('sweets-nav-link').addEventListener('click', function(e) {
-                e.preventDefault();
-                showSection('menu-only-section');
-                populateSweetMenu('AllSweets', 'sweet-menu-grid-alt'); // Show all sweets
+
+            // --- SWEETS DROPDOWN FIX ---
+            const sweetsNavLink = document.getElementById('sweets-nav-link');
+            const sweetsDropdownMenu = sweetsNavLink.nextElementSibling; // Assuming dropdown-menu is the next sibling
+
+            if (sweetsNavLink && sweetsDropdownMenu && sweetsDropdownMenu.classList.contains('dropdown-menu')) {
+                sweetsNavLink.addEventListener('click', function(e) {
+                    // Check if the click was on the nav link itself, not a dropdown item
+                    if (e.target.closest('#sweets-nav-link')) {
+                        e.preventDefault(); // Prevent default link behavior for the main "Sweets" link
+                        // Toggle the 'active-dropdown' class on the dropdown menu
+                        sweetsDropdownMenu.classList.toggle('active-dropdown');
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    // Check if the click was outside the sweetsNavLink and outside the sweetsDropdownMenu
+                    if (!sweetsNavLink.contains(e.target) && !sweetsDropdownMenu.contains(e.target)) {
+                        sweetsDropdownMenu.classList.remove('active-dropdown');
+                    }
+                });
+
+                // Close dropdown when an item is selected
+                sweetsDropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        sweetsDropdownMenu.classList.remove('active-dropdown');
+                    });
+                });
+            }
+            // --- END SWEETS DROPDOWN FIX ---
+
+            // Event listeners for dropdown category selection (for main menu categories)
+            document.querySelectorAll('.navbar-nav .dropdown-item[data-category]').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    const category = this.dataset.category; // Get the category from data-category attribute
+                    showSection('menu-only-section'); // Ensure the menu-only section is shown
+                    populateSweetMenu(category, 'sweet-menu-grid-alt'); // Filter sweets by the selected category for the menu-only grid
+
+                    // Close the dropdown after an item is selected - this is handled by the global click listener, but good to have here too
+                    const parentDropdown = this.closest('.dropdown-menu');
+                    if (parentDropdown) {
+                        parentDropdown.classList.remove('active-dropdown');
+                    }
+                });
             });
 
             // Event Listeners for Home Section Buttons
@@ -2564,16 +2606,6 @@
                 toggleOrderFormSections('sweets');
             });
 
-
-            // Event listeners for dropdown category selection (for main menu categories)
-            document.querySelectorAll('.navbar-nav .dropdown-item[data-category]').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent default link behavior
-                    const category = this.dataset.category; // Get the category from data-category attribute
-                    showSection('menu-only-section'); // Ensure the menu-only section is shown
-                    populateSweetMenu(category, 'sweet-menu-grid-alt'); // Filter sweets by the selected category for the menu-only grid
-                });
-            });
 
             // Event listeners for "View Prices" buttons on sweet cards (home and menu-only sections)
             document.querySelectorAll('.sweet-grid .view-prices-btn').forEach(button => {
