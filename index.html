@@ -5,7 +5,7 @@
     <!-- Viewport meta tag: initial-scale set to 0.65 as requested, for a zoomed-out view.
          shrink-to-fit=no is included for better mobile compatibility. -->
     <meta name="viewport" content="width=device-width, initial-scale=0.65, shrink-to-fit=no">
-    <title>Dipped Sweets NYC - Handcrafted Dipped Treats</title>
+    <title>Dipped Sweets NYC - Handcrafted Dipped Treats & Catering</title>
     <!-- Google Site Verification Tag -->
     <meta name="google-site-verification" content="gqFNam_QA1Zrgb68hx-MxOxsVTJN4NTKrzYs49EBHv8" />
 
@@ -21,8 +21,8 @@
 
     <!-- Open Graph (OG) Meta Tags for Social Media and Search Engine Image Previews -->
     <!-- This helps control the image shown next to your description in search results and social shares. -->
-    <meta property="og:title" content="Dipped Sweets NYC - Handcrafted Dipped Treats">
-    <meta property="og:description" content="Handcrafted dipped treats, made with love and the finest ingredients, delivered right to your door in NYC.">
+    <meta property="og:title" content="Dipped Sweets NYC - Handcrafted Dipped Treats & Catering">
+    <meta property="og:description" content="Handcrafted dipped treats and full-service catering, made with love and the finest ingredients, delivered right to your door in NYC.">
     <meta property="og:image" content="/db0735d2-681f-466d-a5d5-a7fceae3664c.jpeg"> <!-- Updated to your specified image -->
     <meta property="og:url" content="https://dippedsweetsnyc.netlify.app/"> <!-- IMPORTANT: Updated to your Netlify URL -->
     <meta property="og:type" content="website">
@@ -294,6 +294,23 @@
             z-index: 10;
         }
 
+        /* Specific ribbon for the catering button on home page */
+        .catering-ribbon {
+            position: absolute;
+            top: -10px; /* Adjust as needed to position above the button */
+            right: -10px; /* Adjust as needed */
+            background-color: #E0B400; /* Golden Yellow for "New" */
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(10deg); /* Slight rotation */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+
         /* Menu Selection Container for Order Form - Default (Mobile) */
         #menuSelectionContainer {
             display: grid;
@@ -382,7 +399,7 @@
                 text-align: center; /* Center text within dropdown items */
             }
             /* Adjust sweet-grid and prices-grid to be responsive and fit better */
-            .sweet-grid, #prices-grid { /* Combined selector for consistent behavior */
+            .sweet-grid, #prices-grid, #catering-grid { /* Combined selector for consistent behavior */
                 display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
                 gap: 0.6rem; /* Reduced gap for more compactness */
@@ -475,9 +492,6 @@
             .footer-links-group .flex.justify-center.md\:justify-start.gap-6.text-3xl i {
                 font-size: 1.5rem;
             }
-            .slider-container {
-                min-height: 300px; /* Increased min-height for larger images on smaller mobile screens */
-            }
         }
 
         /* Even smaller mobile screens (e.g., very narrow phone viewports) */
@@ -521,7 +535,7 @@
                 margin-bottom: 0.8rem;
             }
             /* Adjust sweet-grid and prices-grid for very small screens */
-            .sweet-grid, #prices-grid { /* Combined selector for consistent behavior */
+            .sweet-grid, #prices-grid, #catering-grid { /* Combined selector for consistent behavior */
                 display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
                 gap: 0.4rem; /* Further reduced gap */
@@ -602,30 +616,32 @@
         <div class="container-main flex flex-col md:flex-row justify-between items-center">
             <div class="mb-4 md:mb-0 logo-container">
                 <!-- Placeholder for your logo image -->
-                <a href="#home" class="block" onclick="showSection('home-menu-combined'); return false;">
+                <a href="#home" class="block" id="home-logo-link">
                     <img src="IMG_8127.PNG" alt="Dipped Sweets NYC Logo" class="h-20 w-20 mx-auto md:mx-0 rounded-full">
                 </a>
             </div>
             <nav class="navbar-nav flex flex-wrap justify-center gap-4">
-                <a href="#home" class="nav-link text-lg" onclick="showSection('home-menu-combined'); return false;">Home</a>
-                <a href="#prices" class="nav-link text-lg" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">Prices</a>
-                <a href="#create-order" class="nav-link text-lg" onclick="showSection('create-order-section'); return false;">Create Your Order</a>
-                <a href="#contact" class="nav-link text-lg" onclick="showSection('contact-section'); return false;">Contact</a>
-                <a href="#about" class="nav-link text-lg" onclick="showSection('about-section'); return false;">About Us</a>
-                <!-- Categories Dropdown - remains as requested -->
+                <a href="#home" class="nav-link text-lg" id="home-nav-link">Home</a>
+                <a href="#prices" class="nav-link text-lg" id="prices-nav-link">Prices</a>
+                <!-- Catering Link (NO DROPDOWN) -->
+                <a href="#catering" class="nav-link text-lg" id="catering-nav-link">Catering</a>
+                <a href="#create-order" class="nav-link text-lg" id="create-order-nav-link">Create Your Order</a>
+                <!-- Categories Dropdown changed to Sweets Dropdown - MOVED HERE -->
                 <div class="nav-link text-lg group">
-                    <a href="#menu" class="inline-flex items-center" onclick="showSection('menu-only-section'); return false;">
-                        Categories <i class="fas fa-chevron-down ml-2 text-base"></i>
+                    <a href="#menu" class="inline-flex items-center" id="sweets-nav-link">
+                        Sweets <i class="fas fa-chevron-down ml-2 text-base"></i>
                     </a>
                     <div class="dropdown-menu">
-                        <a href="#menu" class="dropdown-item" data-category="AllCategories" onclick="showSection('menu-only-section'); populateSweetMenu('AllCategories', 'sweet-menu-grid-alt'); return false;">All Other Treats</a>
-                        <a href="#menu" class="dropdown-item" data-category="Dipped Strawberries" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Strawberries', 'sweet-menu-grid-alt'); return false;">Dipped Strawberries</a>
-                        <a href="#menu" class="dropdown-item" data-category="Dipped Pretzels" onclick="showSection('menu-only-section'); populateSweetMenu('Dipped Pretzels', 'sweet-menu-grid-alt'); return false;">Dipped Pretzels</a>
-                        <a href="#menu" class="dropdown-item" data-category="Cake Pops" onclick="showSection('menu-only-section'); populateSweetMenu('Cake Pops', 'sweet-menu-grid-alt'); return false;">Cake Pops</a>
-                        <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes" onclick="showSection('menu-only-section'); populateSweetMenu('Rice Crispy & Dipped Cupcakes', 'sweet-menu-grid-alt'); return false;">Rice Crispy & Dipped Cupcakes</a>
-                        <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups" onclick="showSection('menu-only-section'); populateSweetMenu('Individual Sample Cups', 'sweet-menu-grid-alt'); return false;">Individual Sample Cups</a>
+                        <a href="#menu" class="dropdown-item" data-category="AllSweets">All Sweets</a>
+                        <a href="#menu" class="dropdown-item" data-category="Dipped Strawberries">Dipped Strawberries</a>
+                        <a href="#menu" class="dropdown-item" data-category="Dipped Pretzels">Dipped Pretzels</a>
+                        <a href="#menu" class="dropdown-item" data-category="Cake Pops">Cake Pops</a>
+                        <a href="#menu" class="dropdown-item" data-category="Rice Crispy & Dipped Cupcakes">Rice Crispy & Dipped Cupcakes</a>
+                        <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups">Individual Sample Cups</a>
                     </div>
                 </div>
+                <a href="#contact" class="nav-link text-lg" id="contact-nav-link">Contact</a>
+                <a href="#about" class="nav-link text-lg" id="about-nav-link">About Us</a>
             </nav>
         </div>
     </header>
@@ -642,10 +658,18 @@
                     <p class="hero-tagline text-xl mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
                         Handcrafted dipped treats, made with love and the finest ingredients, delivered right to your door in NYC.
                     </p>
-                    <!-- This button now scrolls to the menu, which is already visible below -->
-                    <a href="#menu-content" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl animate-fade-in-up delay-400" onclick="smoothScrollTo('menu-content'); return false;">
-                        Explore Our Delicious Menu <i class="fas fa-arrow-right ml-3"></i>
-                    </a>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                        <a href="#menu-content" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl animate-fade-in-up delay-400" id="explore-sweets-menu-btn">
+                            Explore our Sweets Menu <i class="fas fa-arrow-right ml-3"></i>
+                        </a>
+                        <!-- NEW: Explore Catering Menu Button with Ribbon -->
+                        <div class="relative inline-block animate-fade-in-up delay-500">
+                            <div class="catering-ribbon">NEW!</div>
+                            <a href="#catering" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl" id="explore-catering-menu-btn">
+                                Explore Catering Menu <i class="fas fa-utensils ml-3"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -682,17 +706,63 @@
                 <!-- Pricing Mode Selector -->
                 <div class="flex flex-wrap justify-center gap-4 mb-12 p-4 bg-white rounded-xl shadow-md">
                     <label class="flex items-center cursor-pointer">
-                        <input type="radio" name="priceMode" value="simple" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" checked onchange="populatePricesPage(this.value)">
+                        <input type="radio" name="priceMode" value="simple" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="priceModeSimple" checked>
                         <span class="ml-2 text-lg font-semibold text-gray-700">Simple Order</span>
                     </label>
                     <label class="flex items-center cursor-pointer">
-                        <input type="radio" name="priceMode" value="party" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" onchange="populatePricesPage(this.value)">
+                        <input type="radio" name="priceMode" value="party" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="priceModeParty">
                         <span class="ml-2 text-lg font-semibold text-gray-700">Party Order</span>
                     </label>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="prices-grid">
                     <!-- Price cards will be dynamically inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Catering Section (NEW) -->
+        <section id="catering-section" class="py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-b-[4rem]" style="display:none;">
+            <div class="container-main">
+                <h2 class="section-heading text-5xl text-center mb-10">Catering Menu</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12 text-center">
+                    Elevate your next gathering with our exquisite catering options! From delightful savory hors d'oeuvres to refreshing salads,
+                    we offer a range of handcrafted bites perfect for any occasion.
+                </p>
+
+                <!-- Catering Menu Filter (Re-introduced with new categories) -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12 p-4 bg-white rounded-xl shadow-md">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="cateringFilter" value="AllCatering" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="cateringFilterAll" checked>
+                        <span class="ml-2 text-lg font-semibold text-gray-700">All Catering Items</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="cateringFilter" value="Breakfast & Brunch" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="cateringFilterBreakfast">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Breakfast & Brunch</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="cateringFilter" value="Savory Bites & Hors d'oeuvres" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="cateringFilterSavory">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Savory Bites & Hors d'oeuvres</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="cateringFilter" value="Mini Sandwiches & Wraps" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="cateringFilterSandwiches">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Mini Sandwiches & Wraps</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="cateringFilter" value="Salads & Sides" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="cateringFilterSalads">
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Fresh Salads & Sides</span>
+                    </label>
+                    <!-- Removed Sweet Catering Platters from radio buttons as well -->
+                </div>
+
+                <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="catering-grid">
+                    <!-- Catering items will be dynamically inserted here by JavaScript -->
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#create-order" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-xl shadow-lg hover:shadow-xl" id="catering-quote-btn">
+                        Request a Catering Quote <i class="fas fa-clipboard-list ml-3"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -709,20 +779,20 @@
                             <img src="Bronx-1024x683.jpg" alt="Bronx Street View" class="slider-image">
                             <img src="upperwest.jpg" alt="Upper West Side Manhattan" class="slider-image">
                             <img src="2016_image1.jpg" alt="Sweet Treats 1" class="slider-image">
-                            <img src="Bronx_Zoo_sign.jpg" alt="Sweet Treats 2" class="slider-image">
-                            <img src="yank.jpg" alt="Sweet Treats 3" class="slider-image">
-                            <img src="cathedral.jpeg" alt="Sweet Treats 4" class="slider-image">
+                            <img src="Bronx_Zoo_sign.jpg" alt="Bronx Zoo Sign" class="slider-image">
+                            <img src="yank.jpg" alt="Yankee Stadium" class="slider-image">
+                            <img src="cathedral.jpeg" alt="Cathedral of St. John the Divine" class="slider-image">
 
 
                             <div class="slider-dots">
-                                <span class="dot active" onclick="currentSlide(1)"></span>
-                                <span class="dot" onclick="currentSlide(2)"></span>
-                                <span class="dot" onclick="currentSlide(3)"></span>
+                                <span class="dot active" data-slide="1"></span>
+                                <span class="dot" data-slide="2"></span>
+                                <span class="dot" data-slide="3"></span>
                                 <!-- New Dots Added -->
-                                <span class="dot" onclick="currentSlide(4)"></span>
-                                <span class="dot" onclick="currentSlide(5)"></span>
-                                <span class="dot" onclick="currentSlide(6)"></span>
-                                <span class="dot" onclick="currentSlide(7)"></span>
+                                <span class="dot" data-slide="4"></span>
+                                <span class="dot" data-slide="5"></span>
+                                <span class="dot" data-slide="6"></span>
+                                <span class="dot" data-slide="7"></span>
                             </div>
                         </div>
                     </div>
@@ -738,7 +808,7 @@
                             Thank you for letting us be a part of your sweet journey!
                         </p>
                         <div class="mt-8 text-center md:text-left">
-                            <a href="#create-order" class="cta-button inline-flex items-center px-6 py-3 rounded-full font-bold text-lg shadow-md hover:shadow-lg" onclick="showSection('create-order-section'); return false;">
+                            <a href="#create-order" class="cta-button inline-flex items-center px-6 py-3 rounded-full font-bold text-lg shadow-md hover:shadow-lg" id="about-order-btn">
                                 Create Your Custom Order <i class="fas fa-cookie-bite ml-2"></i>
                             </a>
                         </div>
@@ -757,7 +827,7 @@
                 <div class="contact-info flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-10 text-xl font-medium text-gray-800">
                     <p class="flex items-center gap-3">
                         <i class="fas fa-envelope text-[#F8A4B8] text-2xl"></i>
-                        <a href="mailto:DippedSweets.nyc@gmail.com" class="hover:text-[#E28FA0] transition-colors duration-300">DippedSweets.nyc@gmail.com</a>
+                        <a href="mailto:DippedSweets.nyc@gmail.com" class="hover:text-[#E28FA0] transition-colors duration-300">DippedSweets.nyc@gmail.0com</a>
                     </p>
                     <p class="flex items-center gap-3">
                         <i class="fas fa-phone-alt text-[#F8A4B8] text-2xl"></i>
@@ -822,106 +892,166 @@
                     <input type="hidden" name="form-name" value="custom_order">
                     <!-- Hidden field to store selected menu items as JSON -->
                     <input type="hidden" name="selected_menu_items" id="selectedItemsHiddenInput">
+                    <!-- Hidden field to store the selected order type (sweets or catering) -->
+                    <input type="hidden" name="order_type_chosen" id="orderTypeChosen">
 
-                    <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Tell Us About Your Custom Order</h3>
 
-                    <!-- IMPORTANT CLARIFICATION -->
+                    <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">What type of order are you placing?</h3>
+
+                    <!-- Order Type Selection (Sweets vs. Catering) -->
+                    <div class="text-left mb-6">
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <div class="flex items-center">
+                                <input type="radio" id="orderTypeChoiceSweets" name="orderTypeChoice" value="sweets" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
+                                <label for="orderTypeChoiceSweets" class="ml-2 text-lg text-gray-700 font-semibold cursor-pointer">Sweets Order</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="orderTypeChoiceCatering" name="orderTypeChoice" value="catering" class="h-5 w-5 text-[#E0B400] focus:ring-[#E0B400] border-gray-300 rounded">
+                                <label for="orderTypeChoiceCatering" class="ml-2 text-lg text-gray-700 font-semibold cursor-pointer">Catering Order</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IMPORTANT CLARIFICATION - Common to both, so outside conditional divs -->
                     <p class="text-lg text-gray-800 font-semibold bg-[#F8E6DD] p-4 rounded-xl border border-[#F8A4B8] shadow-sm mb-6">
                         <i class="fas fa-info-circle text-[#F8A4B8] mr-2"></i> This is an **inquiry form**. No payment is required now. We'll contact you to discuss details and calculate the final cost after you send your request!
                     </p>
 
-                    <!-- Order Details -->
-                    <div>
-                        <label for="orderDetails" class="block text-left text-lg font-medium text-gray-700 mb-2">What treats are you dreaming of?</label>
-                        <textarea id="orderDetails" name="orderDetails" rows="8" placeholder="e.g., 3 dozen chocolate dipped strawberries with gold flakes, 2 dozen custom themed cake pops for a birthday party..." class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]"></textarea>
-                    </div>
+                    <!-- Sweets Order Form Content -->
+                    <div id="sweetsOrderFormContent" style="display:none;">
+                        <h3 class="text-2xl font-bold text-[#6F4E37] mb-6">Details for Your Sweets Order</h3>
 
-                    <!-- Order Type -->
-                    <div class="text-left">
-                        <label class="block text-lg font-medium text-gray-700 mb-3">Is this for a simple order or a larger event?</label>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex items-center">
-                                <input type="radio" id="orderTypeSimple" name="orderType" value="simple" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" checked onchange="handleOrderTypeChange()">
-                                <label for="orderTypeSimple" class="ml-2 text-lg text-gray-700">Simple / Individual Order</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="radio" id="orderTypeParty" name="orderType" value="party" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" onchange="handleOrderTypeChange()">
-                                <label for="orderTypeParty" class="ml-2 text-lg text-gray-700">Party / Event Order</label>
+                        <!-- Order Details - for general custom requests -->
+                        <div>
+                            <label for="orderDetails" class="block text-left text-lg font-medium text-gray-700 mb-2">What treats are you dreaming of?</label>
+                            <textarea id="orderDetails" name="orderDetails" rows="8" placeholder="e.g., 3 dozen chocolate dipped strawberries with gold flakes, 2 dozen custom themed cake pops for a birthday party..." class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]"></textarea>
+                        </div>
+
+                        <!-- Order Type - Simple/Party (for sweets only) -->
+                        <div class="text-left">
+                            <label class="block text-lg font-medium text-gray-700 mb-3">Is this for a simple order or a larger event?</label>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="flex items-center">
+                                    <input type="radio" id="orderTypeSimple" name="sweetsOrderType" value="simple" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" checked>
+                                    <label for="orderTypeSimple" class="ml-2 text-lg text-gray-700">Simple / Individual Order</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="orderTypeParty" name="sweetsOrderType" value="party" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
+                                    <label for="orderTypeParty" class="ml-2 text-lg text-gray-700">Party / Event Order</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- New: Select from Our Menu - Now with Dropdown Toggle -->
-                    <div>
-                        <label class="block text-left text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mb-4 cursor-pointer" onclick="toggleMenuDropdown('top')">
-                            Or, Select from Our Existing Menu:
-                            <i id="menuDropdownIconTop" class="fas fa-chevron-down ml-2 text-base transition-transform duration-300"></i>
-                        </label>
-                        <div id="menuDropdownContent" style="display: none;">
-                            <div id="menuSelectionContainer" class="gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
-                                <!-- Menu items will be dynamically loaded here by JavaScript -->
-                            </div>
-                            <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
-                            <!-- New dropdown arrow at the bottom -->
-                            <label class="block text-center text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mt-4 cursor-pointer" onclick="toggleMenuDropdown('bottom')">
-                                <i id="menuDropdownIconBottom" class="fas fa-chevron-up ml-2 text-base transition-transform duration-300"></i>
-                                Hide Menu Selections
+                        <!-- Select from Our Menu - Now with Dropdown Toggle -->
+                        <div>
+                            <label class="block text-left text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mb-4 cursor-pointer" id="menu-dropdown-toggle-top">
+                                Or, Select from Our Existing Menu:
+                                <i id="menuDropdownIconTop" class="fas fa-chevron-down ml-2 text-base transition-transform duration-300"></i>
                             </label>
-                        </div>
-                    </div>
-
-                    <!-- Selected Items Summary -->
-                    <div id="selectedItemsSummary" class="bg-gray-100 p-4 rounded-xl border border-gray-200 min-h-[100px]">
-                        <h4 class="text-xl font-bold text-[#6F4E37] mb-3 text-left">Your Selections:</h4>
-                        <ul id="selectedItemsList" class="list-none text-left text-gray-700 space-y-2">
-                            <!-- Selected items will appear here -->
-                            <li id="no-items-message">No items selected yet.</li>
-                        </ul>
-                        <div id="cartTotal" class="text-right text-xl font-bold text-[#6F4E37] mt-4 pt-3 border-t border-gray-300">
-                            Total: $0.00
-                        </div>
-                    </div>
-
-                    <!-- Inspiration Photos Upload -->
-                    <div>
-                        <label for="inspirationPhotos" class="block text-left text-lg font-medium text-gray-700 mb-2">Inspiration Photos (Optional)</label>
-                        <p class="text-sm text-gray-600 mb-2 text-left">Have a design, color scheme, or vision in mind? Upload up to 5 photos!</p>
-                        <input type="file" id="inspirationPhotos" name="inspirationPhotos" accept="image/*" multiple class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#F8A4B8] file:text-white hover:file:bg-[#E28FA0]">
-                    </div>
-
-                    <!-- Contact Information -->
-                    <div>
-                        <label for="orderName" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Name</label>
-                        <input type="text" id="orderName" name="orderName" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
-                    </div>
-                    <div>
-                        <label for="orderEmail" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Email</label>
-                        <input type="email" id="orderEmail" name="orderEmail" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
-                    </div>
-                    <div>
-                        <label for="orderPhone" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Phone (Optional)</label>
-                        <input type="tel" id="orderPhone" name="orderPhone" placeholder="Your Phone Number" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
-                    </div>
-
-                    <!-- Preferred Contact Method -->
-                    <div class="text-left">
-                        <label class="block text-lg font-medium text-gray-700 mb-3">Preferred Contact Method:</label>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex items-center">
-                                <input type="radio" id="contactText" name="contactMethod" value="Text Message" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" checked>
-                                <label for="contactText" class="ml-2 text-lg text-gray-700">Text Message</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="radio" id="contactPhone" name="contactMethod" value="Phone Call" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
-                                <label for="contactPhone" class="ml-2 text-lg text-gray-700">Phone Call</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="radio" id="contactEmail" name="contactMethod" value="Email" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
-                                <label for="contactEmail" class="ml-2 text-lg text-gray-700">Email</label>
+                            <div id="menuDropdownContent" style="display: none;">
+                                <div id="menuSelectionContainer" class="gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 pb-4">
+                                    <!-- Menu items will be dynamically loaded here by JavaScript -->
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2 text-left">Scroll horizontally to see all options!</p>
+                                <!-- New dropdown arrow at the bottom -->
+                                <label class="block text-center text-lg font-medium bg-[#F8E6DD] p-3 rounded-lg shadow-md font-bold text-xl text-[#6F4E37] mt-4 cursor-pointer" id="menu-dropdown-toggle-bottom">
+                                    <i id="menuDropdownIconBottom" class="fas fa-chevron-up ml-2 text-base transition-transform duration-300"></i>
+                                    Hide Menu Selections
+                                </label>
                             </div>
                         </div>
-                    </div>
 
+                        <!-- Selected Items Summary -->
+                        <div id="selectedItemsSummary" class="bg-gray-100 p-4 rounded-xl border border-gray-200 min-h-[100px]">
+                            <h4 class="text-xl font-bold text-[#6F4E37] mb-3 text-left">Your Selections:</h4>
+                            <ul id="selectedItemsList" class="list-none text-left text-gray-700 space-y-2">
+                                <!-- Selected items will appear here -->
+                                <li id="no-items-message">No items selected yet.</li>
+                            </ul>
+                            <div id="cartTotal" class="text-right text-xl font-bold text-[#6F4E37] mt-4 pt-3 border-t border-gray-300">
+                                Total: $0.00
+                            </div>
+                        </div>
+
+                        <!-- Inspiration Photos Upload -->
+                        <div>
+                            <label for="inspirationPhotos" class="block text-left text-lg font-medium text-gray-700 mb-2">Inspiration Photos (Optional)</label>
+                            <p class="text-sm text-gray-600 mb-2 text-left">Have a design, color scheme, or vision in mind? Upload up to 5 photos!</p>
+                            <input type="file" id="inspirationPhotos" name="inspirationPhotos" accept="image/*" multiple class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#F8A4B8] file:text-white hover:file:bg-[#E28FA0]">
+                        </div>
+                    </div> <!-- End sweetsOrderFormContent -->
+
+                    <!-- Catering Order Form Content -->
+                    <div id="cateringOrderFormContent" style="display:none;">
+                        <h3 class="text-2xl font-bold text-[#6F4E37] mb-6">Details for Your Catering Order</h3>
+
+                        <!-- Event Type -->
+                        <div>
+                            <label for="eventType" class="block text-left text-lg font-medium text-gray-700 mb-2">Type of Event:</label>
+                            <input type="text" id="eventType" name="eventType" placeholder="e.g., Birthday Party, Corporate Event, Wedding" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E0B400]">
+                        </div>
+
+                        <!-- Event Date -->
+                        <div>
+                            <label for="eventDate" class="block text-left text-lg font-medium text-gray-700 mb-2">Event Date:</label>
+                            <input type="date" id="eventDate" name="eventDate" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E0B400]">
+                        </div>
+
+                        <!-- Number of Guests -->
+                        <div>
+                            <label for="numGuests" class="block text-left text-lg font-medium text-gray-700 mb-2">Approximate Number of Guests:</label>
+                            <input type="number" id="numGuests" name="numGuests" min="1" placeholder="e.g., 50" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E0B400]">
+                        </div>
+
+                        <!-- Catering Details -->
+                        <div>
+                            <label for="cateringDetails" class="block text-left text-lg font-medium text-gray-700 mb-2">Tell us about your catering needs:</label>
+                            <textarea id="cateringDetails" name="cateringDetails" rows="8" placeholder="e.g., We'd like a mix of savory bites and mini sandwiches for a lunch event. Please suggest options for 50 people. Dietary restrictions: 2 vegetarian, 1 gluten-free." class="w-full p-4 border border-gray-300 rounded-xl resize-y focus:outline-none focus:ring-2 focus:ring-[#E0B400]"></textarea>
+                        </div>
+
+                        <!-- Catering Specific Inspiration Photos (optional, can share with sweets) -->
+                         <div>
+                            <label for="cateringInspirationPhotos" class="block text-left text-lg font-medium text-gray-700 mb-2">Catering Inspiration Photos (Optional)</label>
+                            <p class="text-sm text-gray-600 mb-2 text-left">Upload photos of event themes, food presentation, or specific dishes you like!</p>
+                            <input type="file" id="cateringInspirationPhotos" name="cateringInspirationPhotos" accept="image/*" multiple class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E0B400] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#E0B400] file:text-white hover:file:bg-[#FFD700]">
+                        </div>
+                    </div> <!-- End cateringOrderFormContent -->
+
+                    <!-- Common Contact Information (outside conditional divs) -->
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-bold text-[#6F4E37] mb-6">Your Contact Information</h3>
+                        <div>
+                            <label for="orderName" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="orderName" name="orderName" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                        </div>
+                        <div>
+                            <label for="orderEmail" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Email</label>
+                            <input type="email" id="orderEmail" name="orderEmail" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                        </div>
+                        <div>
+                            <label for="orderPhone" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Phone (Optional)</label>
+                            <input type="tel" id="orderPhone" name="orderPhone" placeholder="Your Phone Number" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]">
+                        </div>
+
+                        <!-- Preferred Contact Method -->
+                        <div class="text-left">
+                            <label class="block text-lg font-medium text-gray-700 mb-3">Preferred Contact Method:</label>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="flex items-center">
+                                    <input type="radio" id="contactText" name="contactMethod" value="Text Message" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded" checked>
+                                    <label for="contactText" class="ml-2 text-lg text-gray-700">Text Message</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="contactPhone" name="contactMethod" value="Phone Call" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
+                                    <label for="contactPhone" class="ml-2 text-lg text-gray-700">Phone Call</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="contactEmail" name="contactMethod" value="Email" class="h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8] border-gray-300 rounded">
+                                    <label for="contactEmail" class="ml-2 text-lg text-gray-700">Email</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <button type="submit" class="cta-button w-full px-6 py-3 rounded-full text-xl shadow-md">
                         Send Your Custom Order Request <i class="fas fa-cookie-bite ml-2"></i>
@@ -941,11 +1071,12 @@
             <div class="footer-links-group">
                 <h4 class="text-2xl font-bold mb-4 text-[#F8A4B8]">Quick Links</h4>
                 <ul class="space-y-2 text-lg">
-                    <li><a href="#home" class="footer-link" onclick="showSection('home-menu-combined'); return false;">Home</a></li>
-                    <li><a href="#prices" class="footer-link" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">Prices</a></li>
-                    <li><a href="#create-order" class="footer-link" onclick="showSection('create-order-section'); return false;">Create Your Order</a></li>
-                    <li><a href="#contact" class="footer-link" onclick="showSection('contact-section'); return false;">Contact</a></li>
-                    <li><a href="#about" class="footer-link" onclick="showSection('about-section'); return false;">About Us</a></li>
+                    <li><a href="#home" class="footer-link" id="footer-home-link">Home</a></li>
+                    <li><a href="#prices" class="footer-link" id="footer-prices-link">Prices</a></li>
+                    <li><a href="#catering" class="footer-link" id="footer-catering-link">Catering</a></li>
+                    <li><a href="#create-order" class="footer-link" id="footer-create-order-link">Create Your Order</a></li>
+                    <li><a href="#contact" class="footer-link" id="footer-contact-link">Contact</a></li>
+                    <li><a href="#about" class="footer-link" id="footer-about-link">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">
@@ -969,10 +1100,11 @@
                 description: "Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.",
                 simplePrice: "$3.00/each",
                 partyPrice: "$2.50/each",
-                // Removed halfDozenPrice as it's not in the new list
                 dozenPrice: "$30.00/dozen",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
             },
             {
                 img: "2b0fd04a-dfe1-42b1-b087-2e3c51fe7a3b.jpeg",
@@ -982,7 +1114,9 @@
                 partyPrice: "$2.75/each",
                 dozenPrice: "$33.00/dozen",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "927b7bcd-ac6a-4c5b-b5b6-df40e195cf4e.jpeg",
@@ -992,7 +1126,9 @@
                 partyPrice: "$3.00/each",
                 dozenPrice: "$36.00/dozen",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "5bc5629f-61c9-422b-8882-d1e3b3390d3e.jpeg",
@@ -1002,7 +1138,9 @@
                 partyPrice: "$2.75/each",
                 dozenPrice: "$33.00/dozen",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "43MGOODAVXURGXTKKV6QSADP.webp",
@@ -1012,7 +1150,9 @@
                 partyPrice: "Inquire for Price",
                 dozenPrice: "Inquire for Price",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "Clean-Eating-Chocolate-Dipped-Strawberries-CleanFoodCrush.jpg",
@@ -1022,27 +1162,33 @@
                 partyPrice: "$3.00/each",
                 dozenPrice: "$36.00/dozen",
                 category: "Dipped Strawberries",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "fruit.avif",
                 title: "Fresh Fruit Salad Platter",
                 description: "A refreshing mix of seasonal fresh fruits, perfect for a large gathering.",
                 simplePrice: "$65.00/platter",
-                partyPrice: "$65.00/platter", // Assuming no party discount for platters
-                category: "Individual Sample Cups",
+                partyPrice: "$65.00/platter",
+                category: "Individual Sample Cups", // Main menu category
+                type: "sweet",
                 displayOnMainMenu: true,
-                isNew: true // Set to true to show the ribbon
+                isNew: true,
+                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
             },
             {
-                img: "c3a68bd5-1d2a-4bd7-8438-92e2190ad0ae.jpeg",
+                img: "c3a68bd5-1d2a-4bd7-8438-92f13ffa95ff.jpeg",
                 title: "Chocolate Dipped Pretzels",
                 description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
                 simplePrice: "$1.50/each",
                 partyPrice: "$1.25/each",
                 dozenPrice: "$15.00/dozen",
                 category: "Dipped Pretzels",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "45819452-78ee-497a-96f1-3f913ffa95ff.jpeg",
@@ -1050,9 +1196,11 @@
                 description: "Long pretzel rods elegantly dipped and decorated with various toppings.",
                 simplePrice: "$1.50/each",
                 partyPrice: "$1.25/each",
-                dozenPrice: "$15.00/dozen", // Assuming this based on the previous item
+                dozenPrice: "$15.00/dozen",
                 category: "Dipped Pretzels",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
@@ -1062,7 +1210,9 @@
                 partyPrice: "$2.83/each",
                 dozenPrice: "$34.00/dozen",
                 category: "Cake Pops",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg",
@@ -1072,7 +1222,9 @@
                 partyPrice: "$2.92/each",
                 dozenPrice: "$35.00/dozen",
                 category: "Cake Pops",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "94801b50-345d-4d51-afc8-73c332b3a0d6.jpeg",
@@ -1081,8 +1233,10 @@
                 simplePrice: "$2.75/each",
                 partyPrice: "$2.25/each",
                 dozenPrice: "$27.00/dozen",
-                category: "Cake Pops",
-                displayOnMainMenu: false
+                category: "Cake Pops", // This is its main menu category
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
             },
             {
                 img: "793e79b7-20a1-46cf-afa0-5f55534205ee.jpeg",
@@ -1092,7 +1246,9 @@
                 partyPrice: "$2.92/each",
                 dozenPrice: "$35.00/dozen",
                 category: "Cake Pops",
-                displayOnMainMenu: false
+                type: "sweet",
+                displayOnMainMenu: false,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "rice krispies.jpg",
@@ -1102,7 +1258,9 @@
                 partyPrice: "$2.75/each",
                 dozenPrice: "$33.00/dozen",
                 category: "Rice Crispy & Dipped Cupcakes",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "a67682b1-e2ad-4e9b-8dce-a834af8df359.jpeg",
@@ -1112,7 +1270,9 @@
                 partyPrice: "$2.00/each",
                 dozenPrice: "$24.00/dozen",
                 category: "Rice Crispy & Dipped Cupcakes",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "tres leches.jpg",
@@ -1121,7 +1281,9 @@
                 simplePrice: "$2.50/each",
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "flan.jpg",
@@ -1130,7 +1292,9 @@
                 simplePrice: "$2.50/each",
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "cheescake.jpg",
@@ -1139,7 +1303,9 @@
                 simplePrice: "$2.50/each",
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "churrrr.jpg",
@@ -1148,7 +1314,440 @@
                 simplePrice: "$3.00/each",
                 partyPrice: "$2.00/each",
                 category: "Individual Sample Cups",
-                displayOnMainMenu: true // Keep on home screen
+                type: "sweet",
+                displayOnMainMenu: true,
+                cateringCategory: "Sweet Catering Platters"
+            },
+            // --- NEW CATERING ITEMS (SAVORY) ---
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Coconut+Shrimp",
+                title: "Coconut Shrimp",
+                description: "Crispy, golden coconut-crusted shrimp served with a sweet chili dipping sauce.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Sliders",
+                title: "Assorted Sliders",
+                description: "Miniature burgers, pulled pork, and chicken sliders with various toppings.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Gochujang+Chicken",
+                title: "Gochujang Fried Chicken Bites",
+                description: "Crispy fried chicken bites tossed in a spicy and savory Korean gochujang glaze.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Grilled+Chicken",
+                title: "Grilled Chicken Garlic Parmesan",
+                description: "Tender grilled chicken breast coated in a rich garlic parmesan sauce.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Spicy+Shrimp",
+                title: "Spicy Shrimp Fajita",
+                description: "Sizzling spicy shrimp with colorful bell peppers and onions.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Chicken+Pasta",
+                title: "Grilled Chicken Broccoli Pasta Alfredo",
+                description: "Creamy Alfredo pasta with tender grilled chicken and fresh broccoli florets.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Chicken+Shawarma",
+                title: "Grilled Chicken Shawarma Pita",
+                description: "Marinated grilled chicken shawarma served in warm pita bread with fresh toppings.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Filet+of+Sole",
+                title: "Filet of Sole Oreganata",
+                description: "Delicate filet of sole baked with seasoned breadcrumbs and herbs.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Skewers",
+                title: "Chicken and Beef Skewers",
+                description: "Tender chunks of marinated chicken and beef grilled on skewers.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=BBQ+Meatballs",
+                title: "BBQ Beef Meatballs",
+                description: "Savory beef meatballs simmered in a tangy and sweet BBQ sauce.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Hanger+Steak",
+                title: "Grilled Hanger Steak",
+                description: "Juicy grilled hanger steak, perfectly seasoned and sliced.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Cajun+Shrimp",
+                title: "Cajun Shrimp",
+                description: "Spicy Cajun-seasoned shrimp, pan-seared to perfection.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Filet+Mignon",
+                title: "Filet Mignon Bites",
+                description: "Tender, bite-sized pieces of premium filet mignon.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Pigs+in+Blanket",
+                title: "Pigs in a Blanket",
+                description: "Classic mini hot dogs wrapped in flaky pastry, baked golden brown.",
+                simplePrice: "$2.00/each",
+                partyPrice: "$1.75/each",
+                dozenPrice: "$21.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Veg+Empanadas",
+                title: "Vegetable Empanadas",
+                description: "Crispy empanadas filled with a savory mix of seasoned vegetables.",
+                simplePrice: "$3.00/each",
+                partyPrice: "$2.50/each",
+                dozenPrice: "$30.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Beef+Empanadas",
+                title: "Beef Empanadas",
+                description: "Golden empanadas generously filled with seasoned ground beef.",
+                simplePrice: "$3.50/each",
+                partyPrice: "$3.00/each",
+                dozenPrice: "$36.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Spring+Rolls",
+                title: "Vegetable Spring Rolls",
+                description: "Crispy spring rolls filled with fresh vegetables, served with sweet chili sauce.",
+                simplePrice: "$2.50/each",
+                partyPrice: "$2.00/each",
+                dozenPrice: "$24.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            // --- EXISTING CATERING ITEMS (SAVORY) ---
+            {
+                img: "mini-quiche.jpg",
+                title: "Mini Quiches Assortment",
+                description: "Bite-sized quiches with various fillings like spinach & feta, Lorraine, and mushroom.",
+                simplePrice: "$3.50/each",
+                partyPrice: "$3.00/each",
+                dozenPrice: "$36.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres", // Main menu category
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres" // Added for catering dropdown
+            },
+            {
+                img: "caprese-skewers.jpg",
+                title: "Caprese Skewers",
+                description: "Fresh mozzarella, cherry tomatoes, and basil, drizzled with balsamic glaze.",
+                simplePrice: "$2.75/each",
+                partyPrice: "$2.25/each",
+                dozenPrice: "$27.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "chicken-satay.jpg",
+                title: "Chicken Satay Skewers",
+                description: "Grilled chicken skewers served with a rich peanut dipping sauce.",
+                simplePrice: "$4.00/each",
+                partyPrice: "$3.50/each",
+                dozenPrice: "$42.00/dozen",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
+            },
+            {
+                img: "mini-sandwiches.jpg",
+                title: "Assorted Mini Sandwiches (per platter)",
+                description: "A selection of gourmet mini sandwiches: turkey & provolone, ham & swiss, veggie delight.",
+                simplePrice: "$45.00/platter",
+                partyPrice: "$40.00/platter",
+                category: "Mini Sandwiches & Wraps",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Mini Sandwiches & Wraps"
+            },
+            {
+                img: "mini-wraps.jpg",
+                title: "Vegetable Pinwheel Wraps (per platter)",
+                description: "Spinach tortillas filled with cream cheese, fresh vegetables, and herbs, sliced into pinwheels.",
+                simplePrice: "$35.00/platter",
+                partyPrice: "$30.00/platter",
+                category: "Mini Sandwiches & Wraps",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Mini Sandwiches & Wraps"
+            },
+            {
+                img: "garden-salad.jpg",
+                title: "Large Garden Salad (serves 10-12)",
+                description: "Crisp mixed greens, cherry tomatoes, cucumbers, carrots, with a choice of dressing.",
+                simplePrice: "$30.00/bowl",
+                partyPrice: "$25.00/bowl",
+                category: "Salads & Sides",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            {
+                img: "pasta-salad.jpg",
+                title: "Creamy Pasta Salad (serves 10-12)",
+                description: "Rotini pasta, bell peppers, olives, and a creamy Italian dressing.",
+                simplePrice: "$35.00/bowl",
+                partyPrice: "$30.00/bowl",
+                category: "Salads & Sides",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            // --- NEW CATERING ITEMS (SIDES) ---
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Yellow+Rice",
+                title: "Vegetable Yellow Rice",
+                description: "Fluffy yellow rice with a colorful mix of diced vegetables.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Salads & Sides",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Jasmine+Rice",
+                title: "Jasmine Rice",
+                description: "Fragrant and fluffy jasmine rice, a perfect accompaniment to any meal.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Salads & Sides",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Brussels+Sprouts",
+                title: "Roasted Brussels Sprouts",
+                description: "Perfectly roasted Brussels sprouts with a hint of crispiness.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Salads & Sides",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Mac+and+Cheese",
+                title: "Signature Mac and Cheese",
+                description: "Our special blend of creamy cheeses baked with macaroni to golden perfection.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Salads & Sides", // Can be a side or a main
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Salads & Sides"
+            },
+            // --- NEW BREAKFAST ITEMS ---
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Bagels",
+                title: "Assorted Bagel & Cream Cheese Platter",
+                description: "A selection of freshly baked bagels with various cream cheese spreads.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch", // New category
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Coffee",
+                title: "Coffee & Tea Station",
+                description: "Freshly brewed coffee and a selection of teas with all the accompaniments.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch",
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Cheese+Crackers",
+                title: "Artisan Cheese & Cracker Board",
+                description: "A curated selection of fine cheeses, gourmet crackers, and fresh fruit garnishes.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch",
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Pancakes",
+                title: "Mini Pancakes & Waffles Platter",
+                description: "Fluffy mini pancakes and waffles, served with syrup and fresh berries.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch",
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Eggs+Sausage",
+                title: "Scrambled Eggs & Breakfast Sausage",
+                description: "Classic scrambled eggs with savory breakfast sausage links.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch",
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Fruit+Cocktail",
+                title: "Fresh Fruit Cocktail Bowls",
+                description: "Individual servings of refreshing mixed fruit, perfect for any time of day.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Breakfast & Brunch",
+                type: "breakfast",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Breakfast & Brunch"
+            },
+            {
+                img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Assorted+Platters",
+                title: "Assorted Catering Platters",
+                description: "Customizable platters featuring a mix of our savory bites and appetizers. Inquire for options.",
+                simplePrice: "Inquire for Price",
+                partyPrice: "Inquire for Price",
+                category: "Savory Bites & Hors d'oeuvres",
+                type: "savory",
+                displayOnMainMenu: false,
+                isNew: true,
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
             }
         ];
 
@@ -1211,28 +1810,29 @@
 
                 if (targetGridId === 'sweet-menu-grid') { // This is the home screen grid
                     filteredSweets = sweetsData.filter(sweet => sweet.displayOnMainMenu === true);
-                } else if (filterType === 'AllCategories') { // This is for 'All Other Treats' category on the menu page
-                    filteredSweets = sweetsData; // Show all items for the 'All Other Treats' category
+                } else if (filterType === 'AllSweets') { // This is for 'All Sweets' category on the menu page
+                    // Show all items that are of type 'sweet'
+                    filteredSweets = sweetsData.filter(sweet => sweet.type === 'sweet');
                 } else { // This is for specific categories on the menu-only section
                     filteredSweets = sweetsData.filter(sweet => sweet.category === filterType);
                 }
 
                 // If no sweets found for a category, display a message
                 if (filteredSweets.length === 0) {
-                    htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No sweets found in the selected category yet. Check back soon!</p>`;
+                    htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No items found in the selected category yet. Check back soon!</p>`;
                 } else {
                     filteredSweets.forEach(sweet => {
                         htmlContent += `
                             <div class="sweet-card p-6 flex flex-col items-center text-center">
-                                ${sweet.isNew ? '<div class="ribbon">Now Serving!!</div>' : ''} <!-- Ribbon added here with "!!" -->
+                                ${sweet.isNew && sweet.displayOnMainMenu ? '<div class="ribbon">Now Serving!!</div>' : ''}
                                 <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
                                 <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
                                 <p class="text-gray-600 text-lg mb-4 flex-grow">
                                     ${sweet.description}
                                 </p>
                                 <!-- Re-added "View Prices" button and removed direct price display -->
-                                <button class="cta-button px-6 py-3 rounded-full text-lg shadow-md mb-3" onclick="showSection('prices-section'); populatePricesPage('simple'); return false;">View Prices</button>
-                                <button class="order-button px-6 py-3 rounded-full text-lg shadow-md" onclick="showSection('create-order-section'); return false;">Order Now</button>
+                                <button class="cta-button px-6 py-3 rounded-full text-lg shadow-md mb-3 view-prices-btn" data-item-title="${sweet.title}">View Prices</button>
+                                <button class="order-button px-6 py-3 rounded-full text-lg shadow-md order-now-btn" data-item-title="${sweet.title}">Order Now</button>
                             </div>
                         `;
                     });
@@ -1241,13 +1841,52 @@
             }
         }
 
+        // Function to populate the catering menu grid based on filterType
+        function populateCateringMenu(filterType = 'AllCatering') {
+            const cateringGrid = document.getElementById('catering-grid');
+            if (!cateringGrid) return;
+
+            let htmlContent = '';
+            let filteredCateringItems = [];
+
+            if (filterType === 'AllCatering') {
+                // Show all items that have a cateringCategory defined, excluding "Sweet Catering Platters"
+                filteredCateringItems = sweetsData.filter(item => item.cateringCategory && item.cateringCategory !== "Sweet Catering Platters");
+            } else {
+                // Filter by specific catering category
+                filteredCateringItems = sweetsData.filter(item => item.cateringCategory === filterType);
+            }
+
+            if (filteredCateringItems.length === 0) {
+                htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No items found in this catering category yet. Check back soon!</p>`;
+            } else {
+                filteredCateringItems.forEach(item => {
+                    htmlContent += `
+                        <div class="sweet-card p-6 flex flex-col items-center text-center">
+                            ${item.isNew ? '<div class="ribbon">New!</div>' : ''}
+                            <img src="${item.img}" alt="${item.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
+                            <h3 class="sweet-title text-3xl font-bold mb-2">${item.title}</h3>
+                            <p class="text-gray-600 text-lg mb-4 flex-grow">
+                                ${item.description}
+                            </p>
+                            <!-- For catering, we mostly want "Inquire for Price" or a general price for platters -->
+                            <span class="sweet-price text-2xl font-extrabold mb-4">${item.partyPrice || item.simplePrice}</span>
+                            <button class="order-button px-6 py-3 rounded-full text-lg shadow-md inquire-catering-btn" data-item-title="${item.title}">Inquire for Catering</button>
+                        </div>
+                    `;
+                });
+            }
+            cateringGrid.innerHTML = htmlContent;
+        }
+
+
         // Function to parse price string to number, returns 0 for "Inquire for Price"
         const parsePrice = (priceStr) => {
-            if (priceStr === "Inquire for Price") {
+            if (priceStr === "Inquire for Price" || !priceStr) {
                 return 0; // Or handle as a special case if you want to show "Inquire" in total
             }
             // Remove currency symbols, commas, and unit descriptors, then parse
-            return parseFloat(priceStr.replace(/[$,/each/dozen/slice/platter]/g, ''));
+            return parseFloat(priceStr.replace(/[$,/each/dozen/slice/platter/bowl]/g, ''));
         };
 
         function calculateCost(itemTitle) {
@@ -1258,10 +1897,10 @@
             const resultDisplay = document.getElementById(`result-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
             let quantity = parseInt(quantityInput.value, 10);
 
-            // Determine minimum quantity based on item, with specific logic for Fresh Fruit Salad Platter
+            // Determine minimum quantity based on item, with specific logic for Fresh Fruit Salad Platter and other catering items
             let minQuantity;
-            if (itemTitle === "Fresh Fruit Salad Platter") {
-                minQuantity = 1;
+            if (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") {
+                minQuantity = 1; // Catering items and platters can be ordered individually (per platter/bowl)
             } else {
                 const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
                 minQuantity = selectedMode === 'simple' ? 4 : 12;
@@ -1283,9 +1922,9 @@
             const partyPricePerUnit = sweet.partyPrice && sweet.partyPrice !== "Inquire for Price" ? parsePrice(sweet.partyPrice) : simplePricePerUnit;
             const dozenPriceFixed = sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price" ? parsePrice(sweet.dozenPrice) : null;
 
-            // Special handling for Fresh Fruit Salad Platter - always consistent price, min 1
-            if (itemTitle === "Fresh Fruit Salad Platter") {
-                totalCost = quantity * simplePricePerUnit;
+            // Special handling for Fresh Fruit Salad Platter and savory items - always consistent price, min 1
+            if (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") {
+                totalCost = quantity * simplePricePerUnit; // Use simplePrice as base for these
             } else {
                 const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
                 if (selectedMode === 'simple') {
@@ -1317,8 +1956,10 @@
                 let currentVal = parseInt(quantityInput.value, 10);
                 if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
 
+                const sweet = sweetsData.find(s => s.title === itemTitle);
                 let minQuantity;
-                if (itemTitle === "Fresh Fruit Salad Platter") {
+
+                if (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") {
                     minQuantity = 1;
                 } else {
                     const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
@@ -1343,7 +1984,10 @@
 
             let htmlContent = '';
 
-            sweetsData.forEach(sweet => {
+            // Filter for only 'sweet' items for the prices page
+            const sweetItemsForPrices = sweetsData.filter(item => item.type === 'sweet');
+
+            sweetItemsForPrices.forEach(sweet => {
                 let currentPriceDisplay = '';
                 // Determine initial quantity and min quantity based on item and mode
                 let initialQuantity;
@@ -1371,7 +2015,7 @@
 
                 htmlContent += `
                     <div class="sweet-card p-6 flex flex-col items-center text-center">
-                        ${sweet.isNew ? '<div class="ribbon">Now Serving!!</div>' : ''}
+                        ${sweet.isNew && sweet.displayOnMainMenu ? '<div class="ribbon">Now Serving!!</div>' : ''}
                         <img src="${sweet.img}" alt="${sweet.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/F8E6DD/6F4E37?text=Image+Not+Found';" class="sweet-image w-full h-auto mb-4">
                         <h3 class="sweet-title text-3xl font-bold mb-2">${sweet.title}</h3>
                         <p class="text-gray-600 text-lg mb-4 flex-grow">
@@ -1381,9 +2025,9 @@
                         <!-- Removed the div that contained otherPricesHtml -->
                         <div class="mt-auto pt-2 w-full"> <!-- Added w-full to make controls take full width -->
                             <div class="flex items-center justify-center mt-4 gap-2">
-                                <button type="button" onclick='adjustPriceQuantity(${JSON.stringify(sweet.title)}, -1)' class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
-                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]" oninput='calculateCost(${JSON.stringify(sweet.title)})'>
-                                <button type="button" onclick='adjustPriceQuantity(${JSON.stringify(sweet.title)}, 1)' class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors adjust-price-qty-btn" data-item-title="${sweet.title}" data-delta="-1">-</button>
+                                <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialQuantity}" min="${minQuantity}" class="w-20 p-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] price-qty-input" data-item-title="${sweet.title}">
+                                <button type="button" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors adjust-price-qty-btn" data-item-title="${sweet.title}" data-delta="1">+</button>
                             </div>
                             <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
                             <!-- Removed the instructional text below the result -->
@@ -1394,7 +2038,7 @@
             pricesGrid.innerHTML = htmlContent;
 
             // After populating, ensure initial calculation for all items
-            sweetsData.forEach(sweet => calculateCost(sweet.title));
+            sweetItemsForPrices.forEach(sweet => calculateCost(sweet.title));
         }
 
 
@@ -1403,7 +2047,7 @@
             const menuSelectionContainer = document.getElementById('menuSelectionContainer');
             if (!menuSelectionContainer) return;
 
-            const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
             let htmlContent = '';
 
             sweetsData.forEach(sweet => {
@@ -1413,7 +2057,8 @@
                 let initialQuantity;
                 let minQuantity;
 
-                if (sweet.title === "Fresh Fruit Salad Platter") {
+                // Determine min quantity based on item type and selected order type
+                if (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") {
                     initialQuantity = 1;
                     minQuantity = 1;
                 } else {
@@ -1429,7 +2074,8 @@
                 } else {
                     const priceToDisplay = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
                     priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${priceToDisplay}</span></p>`;
-                    calculatedUnitPrice = parsePrice(priceToDisplay);
+                    // FIX: Use priceToDisplay here, not basePriceString
+                    calculatedUnitPrice = parseFloat(priceToDisplay.replace(/[$,/each/dozen/slice/platter/bowl]/g, ''));
                 }
 
                 htmlContent += `
@@ -1438,13 +2084,12 @@
                         <h4 class="font-bold text-xs text-[#6F4E37] mb-0.5">${sweet.title}</h4>
                         ${priceText}
                         <div class="flex items-center justify-center gap-1 mt-1">
-                            <button type="button" onclick='adjustOrderQuantity(${JSON.stringify(sweet.title)}, -1)' class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                            <button type="button" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${sweet.title}" data-delta="-1">-</button>
                             <input type="number" id="${quantityInputId}" value="${initialQuantity}" min="${minQuantity}"
-                                   oninput='enforceMinQuantityForOrderForm(${JSON.stringify(sweet.title)}, ${JSON.stringify(quantityInputId)})'
                                    data-unit-price="${calculatedUnitPrice}"
-                                   class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8]">
-                            <button type="button" onclick='adjustOrderQuantity(${JSON.stringify(sweet.title)}, 1)' class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
-                            <button type="button" onclick='addToOrder(${JSON.stringify(sweet.title)}, ${JSON.stringify(quantityInputId)})' class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors">Add</button>
+                                   class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] order-qty-input" data-item-title="${sweet.title}">
+                            <button type="button" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${sweet.title}" data-delta="1">+</button>
+                            <button type="button" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors add-to-order-btn" data-item-title="${sweet.title}" data-quantity-input-id="${quantityInputId}">Add</button>
                         </div>
                     </div>
                 `;
@@ -1461,8 +2106,9 @@
             let currentVal = parseInt(quantityInput.value, 10);
             if (isNaN(currentVal)) currentVal = 0;
 
-            const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
-            let minQuantity = (itemTitle === "Fresh Fruit Salad Platter") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
+            const sweet = sweetsData.find(s => s.title === itemTitle);
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
+            let minQuantity = (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
 
             let newVal = currentVal + delta;
             if (newVal < minQuantity) {
@@ -1481,8 +2127,9 @@
             if (!quantityInput) return;
 
             let currentVal = parseInt(quantityInput.value, 10);
-            const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
-            let minQuantity = (itemTitle === "Fresh Fruit Salad Platter") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
+            const sweet = sweetsData.find(s => s.title === itemTitle);
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
+            let minQuantity = (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
 
             if (isNaN(currentVal) || currentVal < minQuantity) {
                 quantityInput.value = minQuantity;
@@ -1500,7 +2147,7 @@
             const sweet = sweetsData.find(s => s.title === itemTitle);
             if (!sweet) return;
 
-            const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
 
             let priceUsed = '';
             let unit = '';
@@ -1514,15 +2161,16 @@
                 // Determine the base price string based on order type
                 let basePriceString = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
 
-                // Extract unit from the price string (e.g., "/each", "/dozen", "/slice", "/platter")
+                // Extract unit from the price string (e.g., "/each", "/dozen", "/slice", "/platter", "/bowl")
                 if (basePriceString.includes('/each')) unit = 'each';
                 else if (basePriceString.includes('/dozen')) unit = 'dozen';
                 else if (basePriceString.includes('/slice')) unit = 'slice';
                 else if (basePriceString.includes('/platter')) unit = 'platter';
+                else if (basePriceString.includes('/bowl')) unit = 'bowl';
                 else unit = ''; // Fallback for other cases
 
                 priceUsed = basePriceString; // Use the full price string
-                calculatedUnitPrice = parsePrice(basePriceString);
+                calculatedUnitPrice = parseFloat(basePriceString.replace(/[$,/each/dozen/slice/platter/bowl]/g, ''));
             }
 
             // If the item is already in the cart with the same unit, update quantity
@@ -1542,8 +2190,8 @@
             updateOrderSummary();
             // Show notification
             showMessage(`${quantity} ${itemTitle} added to your selections!`, false); // false for success message
-            // Reset quantity input to its minimum based on the selected order type
-            const resetQty = (itemTitle === "Fresh Fruit Salad Platter") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
+            // Reset quantity input to its minimum based on the selected order type and item type
+            const resetQty = (sweet.type === 'savory' || sweet.title === "Fresh Fruit Salad Platter" || sweet.type === "breakfast") ? 1 : (selectedOrderType === 'simple' ? 4 : 12);
             quantityInput.value = resetQty;
         }
 
@@ -1555,10 +2203,10 @@
 
                 // Determine min quantity for the item
                 let minQuantity;
-                if (currentItem.title === "Fresh Fruit Salad Platter") {
+                if (currentItem.type === 'savory' || currentItem.title === "Fresh Fruit Salad Platter" || currentItem.type === "breakfast") {
                     minQuantity = 1;
                 } else {
-                    const selectedOrderType = document.querySelector('input[name="orderType"]:checked').value;
+                    const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
                     minQuantity = selectedOrderType === 'simple' ? 4 : 12;
                 }
 
@@ -1619,11 +2267,11 @@
                                 <span class="text-sm text-gray-600 block sm:inline-block sm:ml-2">(${item.priceUsed})</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button type="button" onclick='adjustCartQuantity(${JSON.stringify(itemKey)}, -1)' class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">-</button>
+                                <button type="button" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-cart-qty-btn" data-item-key="${itemKey}" data-delta="-1">-</button>
                                 <span class="font-bold text-gray-800 text-base">x${item.quantity}</span>
-                                <button type="button" onclick='adjustCartQuantity(${JSON.stringify(itemKey)}, 1)' class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors">+</button>
+                                <button type="button" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-cart-qty-btn" data-item-key="${itemKey}" data-delta="1">+</button>
                                 <span class="text-lg font-bold text-[#6F4E37] ml-3">${itemCalculatedPrice}</span>
-                                <button type="button" onclick='removeFromOrder(${JSON.stringify(itemKey)})' class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold">Remove</button>
+                                <button type="button" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold remove-from-order-btn" data-item-key="${itemKey}">Remove</button>
                             </div>
                         </li>
                     `;
@@ -1641,15 +2289,14 @@
             })));
         }
 
-        // Function to handle changes in order type radio buttons
-        function handleOrderTypeChange() {
+        // Function to handle changes in order type radio buttons (for sweets only)
+        function handleSweetsOrderTypeChange() {
             // Clear current selections as pricing structure changes
             for (const key in selectedOrderItems) {
                 delete selectedOrderItems[key];
             }
             updateOrderSummary(); // Clear the displayed summary
             populateOrderMenuSelection(); // Re-populate menu items with new prices
-            // No need to call populatePricesPage here, as it's for the separate Prices section
         }
 
         // Function for smooth scrolling without changing section visibility
@@ -1721,7 +2368,7 @@
         }
 
         // New function to toggle the visibility of the menu dropdown content
-        function toggleMenuDropdown(caller = 'top') {
+        function toggleMenuDropdown() {
             const menuDropdownContent = document.getElementById('menuDropdownContent');
             const menuDropdownIconTop = document.getElementById('menuDropdownIconTop');
             const menuDropdownIconBottom = document.getElementById('menuDropdownIconBottom');
@@ -1741,12 +2388,118 @@
             }
         }
 
+        // Function to toggle between Sweets and Catering order forms
+        function toggleOrderFormSections(selectedType) {
+            const sweetsContent = document.getElementById('sweetsOrderFormContent');
+            const cateringContent = document.getElementById('cateringOrderFormContent');
+            const orderTypeChosenInput = document.getElementById('orderTypeChosen');
+
+            if (selectedType === 'sweets') {
+                sweetsContent.style.display = 'block';
+                cateringContent.style.display = 'none';
+                orderTypeChosenInput.value = 'Sweets Order';
+                // Reset catering specific fields when switching to sweets
+                document.getElementById('eventType').value = '';
+                document.getElementById('eventDate').value = '';
+                document.getElementById('numGuests').value = '';
+                document.getElementById('cateringDetails').value = '';
+                document.getElementById('cateringInspirationPhotos').value = ''; // Clear file input
+            } else if (selectedType === 'catering') {
+                sweetsContent.style.display = 'none';
+                cateringContent.style.display = 'block';
+                orderTypeChosenInput.value = 'Catering Order';
+                // Reset sweets specific fields when switching to catering
+                document.getElementById('orderDetails').value = '';
+                document.getElementById('inspirationPhotos').value = ''; // Clear file input
+                // Also clear selected sweets items
+                for (const key in selectedOrderItems) {
+                    delete selectedOrderItems[key];
+                }
+                updateOrderSummary();
+            } else { // No type selected, hide both
+                sweetsContent.style.display = 'none';
+                cateringContent.style.display = 'none';
+                orderTypeChosenInput.value = '';
+            }
+        }
+
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initially show the combined home and menu section
             showSection('home-menu-combined');
             populateSweetMenu('MainMenuDefault', 'sweet-menu-grid'); // Populate the default menu grid
-            populateOrderMenuSelection(); // Populate the menu selection for the order form
-            updateOrderSummary(); // Initialize empty summary
+            // Do NOT populate order menu selection or update summary here, as we need to wait for order type choice
+            // populateOrderMenuSelection();
+            // updateOrderSummary();
+
+            // Event Listeners for Navigation Links
+            document.getElementById('home-logo-link').addEventListener('click', function(e) { e.preventDefault(); showSection('home-menu-combined'); });
+            document.getElementById('home-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('home-menu-combined'); });
+            document.getElementById('prices-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('prices-section'); populatePricesPage('simple'); });
+            // Updated Catering Nav Link behavior
+            document.getElementById('catering-nav-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('catering-section');
+                // Ensure the "All Catering Items" radio button is checked and populate the menu
+                const allCateringRadio = document.getElementById('cateringFilterAll');
+                if (allCateringRadio) {
+                    allCateringRadio.checked = true;
+                }
+                populateCateringMenu('AllCatering');
+            });
+            document.getElementById('create-order-nav-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('create-order-section');
+                // On navigating to create order, ensure nothing is selected initially
+                document.getElementById('orderTypeChoiceSweets').checked = false;
+                document.getElementById('orderTypeChoiceCatering').checked = false;
+                toggleOrderFormSections(''); // Hide both forms
+            });
+            document.getElementById('contact-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('contact-section'); });
+            document.getElementById('about-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('about-section'); });
+            // Updated Sweets Nav Link behavior
+            document.getElementById('sweets-nav-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('menu-only-section');
+                populateSweetMenu('AllSweets', 'sweet-menu-grid-alt'); // Show all sweets
+            });
+
+            // Event Listeners for Home Section Buttons
+            document.getElementById('explore-sweets-menu-btn').addEventListener('click', function(e) { e.preventDefault(); smoothScrollTo('menu-content'); });
+            document.getElementById('explore-catering-menu-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('catering-section');
+                const allCateringRadio = document.getElementById('cateringFilterAll');
+                if (allCateringRadio) {
+                    allCateringRadio.checked = true;
+                }
+                populateCateringMenu('AllCatering');
+            });
+
+            // Event Listeners for Footer Links
+            document.getElementById('footer-home-link').addEventListener('click', function(e) { e.preventDefault(); showSection('home-menu-combined'); });
+            document.getElementById('footer-prices-link').addEventListener('click', function(e) { e.preventDefault(); showSection('prices-section'); populatePricesPage('simple'); });
+            // Updated Footer Catering Link behavior
+            document.getElementById('footer-catering-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('catering-section');
+                const allCateringRadio = document.getElementById('cateringFilterAll');
+                if (allCateringRadio) {
+                    allCateringRadio.checked = true;
+                }
+                populateCateringMenu('AllCatering');
+            });
+            document.getElementById('footer-create-order-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('create-order-section');
+                // On navigating to create order, ensure nothing is selected initially
+                document.getElementById('orderTypeChoiceSweets').checked = false;
+                document.getElementById('orderTypeChoiceCatering').checked = false;
+                toggleOrderFormSections(''); // Hide both forms
+            });
+            document.getElementById('footer-contact-link').addEventListener('click', function(e) { e.preventDefault(); showSection('contact-section'); });
+            document.getElementById('footer-about-link').addEventListener('click', function(e) { e.preventDefault(); showSection('about-section'); });
+
 
             // Add event listeners for the About Us slider container for pause/resume on hover
             const aboutUsSlider = document.getElementById('about-us-slider');
@@ -1764,7 +2517,7 @@
                     startX = e.touches[0].clientX;
                     isSwiping = false;
                     stopAutoSlide(); // Pause auto-slide when touch starts
-                });
+                }, { passive: false }); // Use { passive: false } to allow preventDefault
 
                 aboutUsSlider.addEventListener('touchmove', (e) => {
                     // Only prevent default if we're clearly swiping horizontally
@@ -1795,14 +2548,161 @@
                 });
             }
 
-            // Event listeners for dropdown category selection
-            document.querySelectorAll('.dropdown-item').forEach(item => {
+            // Event listeners for About Us slider dots
+            document.querySelectorAll('.slider-dots .dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    currentSlide(parseInt(this.dataset.slide));
+                });
+            });
+
+            // Event listener for About Us "Create Your Custom Order" button
+            document.getElementById('about-order-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('create-order-section');
+                // Auto-select sweets and show sweets form when coming from "About Us" order button
+                document.getElementById('orderTypeChoiceSweets').checked = true;
+                toggleOrderFormSections('sweets');
+            });
+
+
+            // Event listeners for dropdown category selection (for main menu categories)
+            document.querySelectorAll('.navbar-nav .dropdown-item[data-category]').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault(); // Prevent default link behavior
                     const category = this.dataset.category; // Get the category from data-category attribute
                     showSection('menu-only-section'); // Ensure the menu-only section is shown
                     populateSweetMenu(category, 'sweet-menu-grid-alt'); // Filter sweets by the selected category for the menu-only grid
                 });
+            });
+
+            // Event listeners for "View Prices" buttons on sweet cards (home and menu-only sections)
+            document.querySelectorAll('.sweet-grid .view-prices-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSection('prices-section');
+                    populatePricesPage('simple');
+                });
+            });
+
+            // Event listeners for "Order Now" buttons on sweet cards (home and menu-only sections)
+            document.querySelectorAll('.sweet-grid .order-now-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSection('create-order-section');
+                    // Auto-select sweets and show sweets form
+                    document.getElementById('orderTypeChoiceSweets').checked = true;
+                    toggleOrderFormSections('sweets');
+                    // Pre-fill order details with the item title
+                    document.getElementById('orderDetails').value += `I am interested in: ${this.dataset.itemTitle}. `;
+                });
+            });
+
+            // Event listener for "Inquire for Catering" buttons on catering cards
+            document.querySelectorAll('.sweet-grid .inquire-catering-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSection('create-order-section');
+                    // Auto-select catering and show catering form
+                    document.getElementById('orderTypeChoiceCatering').checked = true;
+                    toggleOrderFormSections('catering');
+                    const itemTitle = this.dataset.itemTitle;
+                    document.getElementById('cateringDetails').value += `I am interested in catering for: ${itemTitle}. `;
+                });
+            });
+
+            // Event listeners for Price Mode radio buttons
+            document.getElementById('priceModeSimple').addEventListener('change', function() {
+                populatePricesPage(this.value);
+            });
+            document.getElementById('priceModeParty').addEventListener('change', function() {
+                populatePricesPage(this.value);
+            });
+
+            // Event listeners for Catering Filter radio buttons
+            document.getElementById('cateringFilterAll').addEventListener('change', function() {
+                populateCateringMenu(this.value);
+            });
+            document.getElementById('cateringFilterBreakfast').addEventListener('change', function() {
+                populateCateringMenu(this.value);
+            });
+            document.getElementById('cateringFilterSavory').addEventListener('change', function() {
+                populateCateringMenu(this.value);
+            });
+            document.getElementById('cateringFilterSandwiches').addEventListener('change', function() {
+                populateCateringMenu(this.value);
+            });
+            document.getElementById('cateringFilterSalads').addEventListener('change', function() {
+                populateCateringMenu(this.value);
+            });
+
+
+            // Event listeners for quantity adjustment buttons on prices page
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('adjust-price-qty-btn')) {
+                    const itemTitle = e.target.dataset.itemTitle;
+                    const delta = parseInt(e.target.dataset.delta);
+                    adjustPriceQuantity(itemTitle, delta);
+                }
+            });
+
+            // Event listeners for quantity input on prices page
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('price-qty-input')) {
+                    const itemTitle = e.target.dataset.itemTitle;
+                    calculateCost(itemTitle);
+                }
+            });
+
+            // Event listeners for order type radio buttons in "Create Your Order" (for sweets only)
+            document.getElementById('orderTypeSimple').addEventListener('change', handleSweetsOrderTypeChange);
+            document.getElementById('orderTypeParty').addEventListener('change', handleSweetsOrderTypeChange);
+
+            // Event listeners for menu dropdown toggle in "Create Your Order"
+            document.getElementById('menu-dropdown-toggle-top').addEventListener('click', toggleMenuDropdown);
+            document.getElementById('menu-dropdown-toggle-bottom').addEventListener('click', toggleMenuDropdown);
+
+            // Event listeners for quantity adjustment buttons in order form
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('adjust-order-qty-btn')) {
+                    const itemTitle = e.target.dataset.itemTitle;
+                    const delta = parseInt(e.target.dataset.delta);
+                    adjustOrderQuantity(itemTitle, delta);
+                }
+            });
+
+            // Event listeners for quantity input in order form
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('order-qty-input')) {
+                    const itemTitle = e.target.dataset.itemTitle;
+                    const quantityInputId = e.target.id;
+                    enforceMinQuantityForOrderForm(itemTitle, quantityInputId);
+                }
+            });
+
+            // Event listeners for "Add" button in order form
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-order-btn')) {
+                    const itemTitle = e.target.dataset.itemTitle;
+                    const quantityInputId = e.target.dataset.quantityInputId;
+                    addToOrder(itemTitle, quantityInputId);
+                }
+            });
+
+            // Event listeners for quantity adjustment buttons in cart summary
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('adjust-cart-qty-btn')) {
+                    const itemKey = e.target.dataset.itemKey;
+                    const delta = parseInt(e.target.dataset.delta);
+                    adjustCartQuantity(itemKey, delta);
+                }
+            });
+
+            // Event listeners for "Remove" button in cart summary
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-from-order-btn')) {
+                    const itemKey = e.target.dataset.itemKey;
+                    removeFromOrder(itemKey);
+                }
             });
 
             // Handle submission of the contact form
@@ -1815,10 +2715,9 @@
 
                     if (!name || !email || !message) {
                         showMessage("Please fill in all required fields for the contact form.", true);
-                        e.preventDefault(); // Prevent submission if validation fails
+                        e.preventDefault();
                         return;
                     }
-                    // The form will now submit to Netlify.
                 });
             }
 
@@ -1826,45 +2725,73 @@
             const customOrderForm = document.getElementById('customOrderForm');
             if (customOrderForm) {
                 customOrderForm.addEventListener('submit', function(e) {
-                    const orderDetails = document.getElementById('orderDetails').value;
+                    const orderTypeChosen = document.getElementById('orderTypeChosen').value;
                     const orderName = document.getElementById('orderName').value;
                     const orderEmail = document.getElementById('orderEmail').value;
 
-                    const selectedMenuOrder = Object.values(selectedOrderItems).map(item => ({
-                        title: item.title,
-                        quantity: item.quantity,
-                        unit: item.unit, // Include the unit in the submitted data
-                        price: item.priceUsed,
-                        totalItemCost: (item.priceUsed === "Inquire for Price" ? "Inquire" : (item.calculatedUnitPrice * item.quantity).toFixed(2))
-                    }));
-
-                    // Add selected menu items as a hidden field to the form
-                    let hiddenInput = document.getElementById('selectedItemsHiddenInput');
-                    if (!hiddenInput) {
-                        hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.id = 'selectedItemsHiddenInput';
-                        hiddenInput.name = 'selected_menu_items'; // Name for Netlify to capture
-                        customOrderForm.appendChild(hiddenInput);
-                    }
-                    hiddenInput.value = JSON.stringify(selectedMenuOrder);
-
-                    // Basic validation
-                    if (!orderDetails && selectedMenuOrder.length === 0) {
-                        showMessage("Please provide order details or select items from the menu.", true);
-                        e.preventDefault(); // Prevent submission if validation fails
-                        return;
-                    }
-                    if (!orderName || !orderEmail) {
-                        showMessage("Please fill in Your Name and Your Email.", true);
-                        e.preventDefault(); // Prevent submission if validation fails
+                    if (!orderTypeChosen) {
+                        showMessage("Please select either 'Sweets Order' or 'Catering Order'.", true);
+                        e.preventDefault();
                         return;
                     }
 
-                    // The form will now submit to Netlify.
-                    // Netlify will handle the success message by default.
+                    if (orderTypeChosen === 'Sweets Order') {
+                        const orderDetails = document.getElementById('orderDetails').value;
+                        const selectedMenuOrder = Object.values(selectedOrderItems).map(item => ({
+                            title: item.title,
+                            quantity: item.quantity,
+                            unit: item.unit,
+                            price: item.priceUsed,
+                            totalItemCost: (item.priceUsed === "Inquire for Price" ? "Inquire" : (item.calculatedUnitPrice * item.quantity).toFixed(2))
+                        }));
+
+                        // Basic validation for Sweets Order
+                        if (!orderDetails && selectedMenuOrder.length === 0) {
+                            showMessage("Please provide order details or select items from the menu for your sweets order.", true);
+                            e.preventDefault();
+                            return;
+                        }
+                        if (!orderName || !orderEmail) {
+                            showMessage("Please fill in Your Name and Your Email for your sweets order.", true);
+                            e.preventDefault();
+                            return;
+                        }
+
+                        // Update the hidden input for Netlify form submission for sweets
+                        document.getElementById('selectedItemsHiddenInput').value = JSON.stringify(selectedMenuOrder);
+
+                    } else if (orderTypeChosen === 'Catering Order') {
+                        const eventType = document.getElementById('eventType').value;
+                        const eventDate = document.getElementById('eventDate').value;
+                        const numGuests = document.getElementById('numGuests').value;
+                        const cateringDetails = document.getElementById('cateringDetails').value;
+
+                        // Basic validation for Catering Order
+                        if (!eventType || !eventDate || !numGuests || !cateringDetails) {
+                            showMessage("Please fill in all required catering details (Event Type, Event Date, Number of Guests, and Catering Details).", true);
+                            e.preventDefault();
+                            return;
+                        }
+                         if (!orderName || !orderEmail) {
+                            showMessage("Please fill in Your Name and Your Email for your catering order.", true);
+                            e.preventDefault();
+                            return;
+                        }
+                        // For catering, you might want to clear the sweets-specific hidden input if it was previously populated
+                        document.getElementById('selectedItemsHiddenInput').value = '';
+                    }
                 });
             }
+
+            // Event listeners for the new order type choice radio buttons
+            document.getElementById('orderTypeChoiceSweets').addEventListener('change', function() {
+                toggleOrderFormSections('sweets');
+                populateOrderMenuSelection(); // Populate sweets menu when selected
+                updateOrderSummary(); // Initialize/clear summary for sweets
+            });
+            document.getElementById('orderTypeChoiceCatering').addEventListener('change', function() {
+                toggleOrderFormSections('catering');
+            });
         });
     </script>
 </body>
