@@ -324,6 +324,60 @@
             overflow-x: hidden; /* Hide horizontal overflow by default on mobile */
         }
 
+        /* Testimonials Section Styles */
+        .testimonial-card {
+            background-color: #FFFFFF;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+            padding: 1.5rem; /* Reduced padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .testimonial-card .star-rating {
+            color: #FFD700; /* Golden yellow for stars */
+            font-size: 1.5rem; /* Reduced font size */
+            margin-bottom: 0.5rem; /* Reduced margin */
+        }
+        .testimonial-card .testimonial-text {
+            font-size: 1rem; /* Reduced font size */
+            color: #555555;
+            line-height: 1.5;
+            margin-bottom: 0.75rem; /* Reduced margin */
+            flex-grow: 1; /* Allows text to take available space */
+        }
+        .testimonial-card .reviewer-name {
+            font-weight: 700;
+            color: #6F4E37;
+            font-size: 1.1rem; /* Reduced font size */
+            margin-top: auto; /* Pushes name to the bottom */
+        }
+        .testimonial-card .ordered-items {
+            font-size: 0.85rem; /* Reduced font size */
+            color: #8A6F5C;
+            margin-top: 0.4rem; /* Reduced margin */
+        }
+
+        /* Star Rating in Form */
+        .star-rating-form label {
+            cursor: pointer;
+            color: #ccc; /* Default grey color for unselected stars */
+            transition: color 0.2s ease-in-out;
+        }
+        .star-rating-form label:hover,
+        .star-rating-form label:hover ~ label {
+            color: #FFD700; /* Yellow on hover and for previous stars */
+        }
+        .star-rating-form input[type="radio"]:checked ~ label {
+            color: #FFD700; /* Yellow for selected star and all preceding stars */
+        }
+        /* Ensure the checked star itself is yellow even if mouse moves off */
+        .star-rating-form input[type="radio"]:checked + label {
+            color: #FFD700;
+        }
+
+
         /* Responsive Adjustments: These will apply when the *actual device screen width* is smaller. */
 
         /* Styles for medium-sized screens (e.g., tablets in landscape, large phones) */
@@ -399,7 +453,7 @@
                 text-align: center; /* Center text within dropdown items */
             }
             /* Adjust sweet-grid and prices-grid to be responsive and fit better */
-            .sweet-grid, #prices-grid, #catering-grid { /* Combined selector for consistent behavior */
+            .sweet-grid, #prices-grid, #catering-grid, #testimonials-grid { /* Combined selector for consistent behavior */
                 display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
                 gap: 0.6rem; /* Reduced gap for more compactness */
@@ -535,7 +589,7 @@
                 margin-bottom: 0.8rem;
             }
             /* Adjust sweet-grid and prices-grid for very small screens */
-            .sweet-grid, #prices-grid, #catering-grid { /* Combined selector for consistent behavior */
+            .sweet-grid, #prices-grid, #catering-grid, #testimonials-grid { /* Combined selector for consistent behavior */
                 display: grid !important; /* Force grid layout */
                 grid-template-columns: repeat(2, 1fr) !important; /* Ensure 2 columns */
                 gap: 0.4rem; /* Further reduced gap */
@@ -640,6 +694,7 @@
                         <a href="#menu" class="dropdown-item" data-category="Individual Sample Cups">Individual Sample Cups</a>
                     </div>
                 </div>
+                <a href="#testimonials-section" class="nav-link text-lg" id="testimonials-nav-link">Testimonials</a> <!-- NEW Testimonials Nav Link -->
                 <a href="#contact" class="nav-link text-lg" id="contact-nav-link">Contact</a>
                 <a href="#about" class="nav-link text-lg" id="about-nav-link">About Us</a>
             </nav>
@@ -680,6 +735,56 @@
                     <div class="sweet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="sweet-menu-grid">
                         <!-- Sweet cards will be inserted here by JavaScript -->
                     </div>
+                </div>
+            </div>
+
+            <!-- Testimonials Section (NOW PART OF HOME PAGE) -->
+            <div id="testimonials-section" class="py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-t-[4rem] rounded-b-[4rem] shadow-lg">
+                <div class="container-main">
+                    <h2 class="section-heading text-5xl text-center mb-10">What Our Sweet Customers Say!</h2>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12 text-center">
+                        Hear directly from those who've experienced the Dipped Sweets NYC difference.
+                    </p>
+
+                    <!-- Existing Testimonials Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="testimonials-grid">
+                        <!-- Testimonial cards will be inserted here by JavaScript -->
+                    </div>
+
+                    <!-- Testimonial Submission Form -->
+                    <form id="testimonialForm" class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl mt-16 space-y-6">
+                        <h3 class="text-3xl font-bold text-[#6F4E37] mb-6">Share Your Sweet Experience!</h3>
+
+                        <div>
+                            <label for="testimonialName" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="testimonialName" name="testimonialName" placeholder="e.g., Jane D." class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-left text-lg font-medium text-gray-700 mb-2">Your Rating</label>
+                            <div class="flex justify-center gap-2 text-3xl star-rating-form">
+                                <input type="radio" id="star5" name="rating" value="5" class="hidden" checked><label for="star5" data-value="5"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4" class="hidden"><label for="star4" data-value="4"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3" class="hidden"><label for="star3" data-value="3"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2" class="hidden"><label for="star2" data-value="2"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1" class="hidden"><label for="star1" data-value="1"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="orderId" class="block text-left text-lg font-medium text-gray-700 mb-2">Order ID</label>
+                            <input type="text" id="orderId" name="orderId" placeholder="e.g., DS-NYC-12345" class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]" required>
+                        </div>
+
+                        <div>
+                            <label for="testimonialMessage" class="block text-left text-lg font-medium text-gray-700 mb-2">Your Message</label>
+                            <textarea id="testimonialMessage" name="testimonialMessage" rows="6" placeholder="Tell us about your experience!" class="w-full p-4 border border-gray-300 rounded-xl resize-y focus:outline-none focus:ring-2 focus:ring-[#F8A4B8]" required></textarea>
+                        </div>
+
+                        <button type="submit" class="cta-button w-full px-6 py-3 rounded-full text-xl shadow-md">
+                            Submit Testimonial <i class="fas fa-heart ml-2"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -816,6 +921,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- Contact Section -->
         <section id="contact-section" class="py-20" style="display:none;">
@@ -1075,6 +1181,7 @@
                     <li><a href="#prices" class="footer-link" id="footer-prices-link">Prices</a></li>
                     <li><a href="#catering" class="footer-link" id="footer-catering-link">Catering</a></li>
                     <li><a href="#create-order" class="footer-link" id="footer-create-order-link">Create Your Order</a></li>
+                    <li><a href="#testimonials-section" class="footer-link" id="footer-testimonials-link">Testimonials</a></li> <!-- NEW Testimonials Footer Link -->
                     <li><a href="#contact" class="footer-link" id="footer-contact-link">Contact</a></li>
                     <li><a href="#about" class="footer-link" id="footer-about-link">About Us</a></li>
                 </ul>
@@ -1751,6 +1858,40 @@
             }
         ];
 
+        // Data for pre-populated testimonials
+        const testimonialsData = [
+            {
+                name: "Sarah L.",
+                rating: 5,
+                message: "Absolutely delightful! The chocolate dipped strawberries were fresh and beautifully decorated. Perfect for my daughter's birthday party. Everyone loved them!",
+                ordered: "2 dozen Classic Dipped Strawberries"
+            },
+            {
+                name: "David K.",
+                rating: 5,
+                message: "Dipped Sweets NYC is my new go-to for treats. The mini dipped cupcakes were a huge hit at our office event. So moist and flavorful, and the chocolate coating was divine.",
+                ordered: "Mini Dipped Cupcakes, Gourmet Pretzel Rods"
+            },
+            {
+                name: "Maria G.",
+                rating: 5,
+                message: "I ordered the Tres Leches cups and they were heavenly! So creamy and perfectly sweet. Dipped Sweets NYC truly delivers on quality and taste.",
+                ordered: "Tres Leches Cups (Sample)"
+            },
+            {
+                name: "Jessica R.",
+                rating: 5,
+                message: "The Oreo Crunch Strawberries are a game-changer! So addictive and unique. The team was also incredibly helpful with my custom order request. Highly recommend!",
+                ordered: "Oreo Crunch Strawberries, Custom Dipped Strawberries"
+            },
+            {
+                name: "Chris T.",
+                rating: 5,
+                message: "We got the catering for our office party, and wow! The mini sandwiches and fruit platters were a huge hit. Everyone kept asking where they were from. Passing them out was super easy too, definitely made the event feel special.",
+                ordered: "Assorted Mini Sandwiches, Fresh Fruit Salad Platter"
+            }
+        ];
+
         // Global object to store selected order items
         const selectedOrderItems = {}; // Stores { 'Item Title-unit': { sweetData, quantity, currentPriceUsed, calculatedUnitPrice } }
 
@@ -1782,6 +1923,14 @@
             allSections.forEach(section => {
                 section.style.display = 'none'; // Hide all sections
             });
+
+            // Special handling for testimonials which is now part of home-menu-combined
+            if (sectionId === 'testimonials-section') {
+                document.getElementById('home-menu-combined').style.setProperty('display', 'block', 'important');
+                smoothScrollTo('testimonials-section'); // Scroll to testimonials within home-menu-combined
+                stopAutoSlide(); // Ensure slider stops if it was playing
+                return; // Exit after handling testimonials
+            }
 
             const activeSection = document.getElementById(sectionId);
             if (activeSection) {
@@ -2075,7 +2224,7 @@
                     const priceToDisplay = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
                     priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${priceToDisplay}</span></p>`;
                     // FIX: Use priceToDisplay here, not basePriceString
-                    calculatedUnitPrice = parseFloat(priceToDisplay.replace(/[$,/each/dozen/slice/platter/bowl]/g, ''));
+                    calculatedUnitPrice = parseFloat(basePriceString.replace(/[$,/each/dozen/slice/platter/bowl]/g, ''));
                 }
 
                 htmlContent += `
@@ -2424,11 +2573,45 @@
             }
         }
 
+        // Function to render testimonials
+        function renderTestimonials() {
+            const testimonialsGrid = document.getElementById('testimonials-grid');
+            if (!testimonialsGrid) return;
+
+            let htmlContent = '';
+            testimonialsData.forEach(testimonial => {
+                const starsHtml = '<i class="fas fa-star"></i>'.repeat(testimonial.rating);
+                htmlContent += `
+                    <div class="testimonial-card">
+                        <div class="star-rating">${starsHtml}</div>
+                        <p class="testimonial-text">"${testimonial.message}"</p>
+                        <p class="reviewer-name">- ${testimonial.name}</p>
+                        <p class="ordered-items">Ordered: ${testimonial.ordered}</p>
+                    </div>
+                `;
+            });
+            testimonialsGrid.innerHTML = htmlContent;
+        }
+
+        // Function to update star display based on selected rating
+        function updateStarDisplay(selectedRating) {
+            const starLabels = document.querySelectorAll('.star-rating-form label');
+            starLabels.forEach(label => {
+                const starValue = parseInt(label.dataset.value);
+                if (starValue <= selectedRating) {
+                    label.style.color = '#FFD700'; // Yellow
+                } else {
+                    label.style.color = '#ccc'; // Grey
+                }
+            });
+        }
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // Initially show the combined home and menu section
             showSection('home-menu-combined');
             populateSweetMenu('MainMenuDefault', 'sweet-menu-grid'); // Populate the default menu grid
+            renderTestimonials(); // Render pre-populated testimonials on load
             // Do NOT populate order menu selection or update summary here, as we need to wait for order type choice
             // populateOrderMenuSelection();
             // updateOrderSummary();
@@ -2456,6 +2639,7 @@
                 document.getElementById('orderTypeChoiceCatering').checked = false;
                 toggleOrderFormSections(''); // Hide both forms
             });
+            document.getElementById('testimonials-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('testimonials-section'); }); // NEW Testimonials Nav Link
             document.getElementById('contact-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('contact-section'); });
             document.getElementById('about-nav-link').addEventListener('click', function(e) { e.preventDefault(); showSection('about-section'); });
 
@@ -2537,6 +2721,7 @@
                 document.getElementById('orderTypeChoiceCatering').checked = false;
                 toggleOrderFormSections(''); // Hide both forms
             });
+            document.getElementById('footer-testimonials-link').addEventListener('click', function(e) { e.preventDefault(); showSection('testimonials-section'); }); // NEW Testimonials Footer Link
             document.getElementById('footer-contact-link').addEventListener('click', function(e) { e.preventDefault(); showSection('contact-section'); });
             document.getElementById('footer-about-link').addEventListener('click', function(e) { e.preventDefault(); showSection('about-section'); });
 
@@ -2627,7 +2812,7 @@
                 });
             });
 
-            // Event listener for "Inquire for Catering" buttons on catering cards
+            // Event listeners for "Inquire for Catering" buttons on catering cards
             document.querySelectorAll('.sweet-grid .inquire-catering-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2822,6 +3007,60 @@
             document.getElementById('orderTypeChoiceCatering').addEventListener('change', function() {
                 toggleOrderFormSections('catering');
             });
+
+            // Testimonial Form Submission Handler
+            const testimonialForm = document.getElementById('testimonialForm');
+            if (testimonialForm) {
+                testimonialForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Prevent actual form submission
+
+                    const orderIdInput = document.getElementById('orderId');
+                    const orderId = orderIdInput.value.trim();
+
+                    // Simulate Order ID validation: always fail for now
+                    if (orderId) {
+                        showMessage("Sorry, that Order ID does not exist. Please try again.", true);
+                    } else {
+                        showMessage("Please enter an Order ID.", true);
+                    }
+
+                    // Optionally clear the form fields after attempt
+                    document.getElementById('testimonialName').value = '';
+                    document.getElementById('testimonialMessage').value = '';
+                    document.getElementById('orderId').value = '';
+                    document.getElementById('star5').checked = true; // Reset rating to 5 stars
+                    updateStarDisplay(5); // Visually reset stars to 5
+                });
+
+                // Star Rating Interactivity
+                const starRatingForm = testimonialForm.querySelector('.star-rating-form');
+                if (starRatingForm) {
+                    const starLabels = starRatingForm.querySelectorAll('label');
+                    const starRadios = starRatingForm.querySelectorAll('input[type="radio"]');
+
+                    // Initial display based on default checked radio (5 stars)
+                    updateStarDisplay(parseInt(document.querySelector('input[name="rating"]:checked').value));
+
+                    starLabels.forEach(label => {
+                        label.addEventListener('mouseover', function() {
+                            const value = parseInt(this.dataset.value);
+                            updateStarDisplay(value);
+                        });
+
+                        label.addEventListener('mouseout', function() {
+                            const selectedRadio = document.querySelector('input[name="rating"]:checked');
+                            const selectedRating = selectedRadio ? parseInt(selectedRadio.value) : 0;
+                            updateStarDisplay(selectedRating);
+                        });
+                    });
+
+                    starRadios.forEach(radio => {
+                        radio.addEventListener('change', function() {
+                            updateStarDisplay(parseInt(this.value));
+                        });
+                    });
+                }
+            }
         });
     </script>
 </body>
