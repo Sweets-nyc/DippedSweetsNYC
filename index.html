@@ -487,14 +487,6 @@
             .package-features li {
                 font-size: 0.9rem;
             }
-            /* Contact Section Adjustments */
-            .contact-info {
-                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on medium screens */
-                gap: 2rem !important; /* Increase gap */
-            }
-            .contact-details-group {
-                padding: 1.5rem !important; /* Add padding to the group */
-            }
         }
 
         /* Specific mobile styling - now truly responsive to device width. */
@@ -650,19 +642,6 @@
             .package-cta {
                 font-size: 0.9rem;
                 padding: 0.6rem 1.5rem;
-            }
-            /* Contact Section Adjustments */
-            .contact-info {
-                grid-template-columns: repeat(1, 1fr) !important; /* Force 1 column on small screens */
-                gap: 1.5rem !important; /* Adjust gap */
-                padding: 0 1rem; /* Add horizontal padding */
-            }
-            .contact-info p {
-                justify-content: flex-start; /* Align items to start */
-                text-align: left;
-            }
-            .contact-details-group {
-                padding: 1rem !important; /* Add padding to the group */
             }
         }
 
@@ -1106,45 +1085,38 @@
 
 
         <!-- Contact Section -->
-        <section id="contact-section" class="py-20 bg-gradient-to-br from-[#FFF8F0] to-[#FCEBCC] rounded-b-[4rem]" style="display:none;">
+        <section id="contact-section" class="py-20" style="display:none;">
             <div class="container-main text-center">
                 <h2 class="section-heading text-5xl mb-10">Get in Touch with Sweetness!</h2>
                 <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
                     Have a question, a custom order request, or just want to share your favorite dipped treat? We'd love to hear from you!
                 </p>
-                <!-- Contact Info - Now a grid for better spacing -->
-                <div class="contact-info grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-xl font-medium text-gray-800 max-w-4xl mx-auto mb-16">
-                    <p class="flex items-center gap-3 justify-center md:justify-start">
+                <div class="contact-info flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-10 text-xl font-medium text-gray-800">
+                    <p class="flex items-center gap-3">
                         <i class="fas fa-envelope text-[#F8A4B8] text-2xl"></i>
                         <a href="mailto:DippedSweets.nyc@gmail.com" class="hover:text-[#E28FA0] transition-colors duration-300">DippedSweets.nyc@gmail.com</a>
                     </p>
-                    <p class="flex items-center gap-3 justify-center md:justify-start">
+                    <p class="flex items-center gap-3">
                         <i class="fas fa-phone-alt text-[#F8A4B8] text-2xl"></i>
                         <a href="tel:+1-929-323-9892" class="hover:text-[#E28FA0] transition-colors duration-300">+1 (929) 323-9892</a>
                     </p>
-                    <p class="flex items-center gap-3 justify-center md:justify-start">
+                    <p class="flex items-center gap-3">
                         <i class="fab fa-instagram text-[#F8A4B8] text-2xl"></i>
                         <a href="https://www.instagram.com/dippedsweets_nyc/" target="_blank" rel="noopener noreferrer" class="hover:text-[#E28FA0] transition-colors duration-300">@dippedsweets_nyc</a>
                     </p>
-                    <p class="flex items-center gap-3 justify-center md:justify-start">
+                    <p class="flex items-center gap-3">
                         <i class="fab fa-facebook text-[#F8A4B8] text-2xl"></i>
                         <a href="https://www.facebook.com/profile.php?id=61578114530851" target="_blank" rel="noopener noreferrer" class="hover:text-[#E28FA0] transition-colors duration-300">Dipped Sweets NYC on Facebook</a>
                     </p>
-                    <!-- Added TikTok for consistency -->
-                    <p class="flex items-center gap-3 justify-center md:justify-start">
-                        <i class="fab fa-tiktok text-[#F8A4B8] text-2xl"></i>
-                        <a href="https://www.tiktok.com/@dippedsweetsnyc?lang=en" target="_blank" rel="noopener noreferrer" class="hover:text-[#E28FA0] transition-colors duration-300">@dippedsweetsnyc</a>
-                    </p>
                 </div>
 
-                <!-- Contact Details Group - Enhanced spacing and alignment -->
-                <div class="contact-details-group max-w-2xl mx-auto text-lg text-gray-700 space-y-8 p-8 bg-white rounded-3xl shadow-xl">
-                    <p class="flex flex-col sm:flex-row items-start sm:items-center gap-3 text-left">
-                        <i class="fas fa-map-marker-alt text-[#F8A4B8] text-2xl mt-1 flex-shrink-0"></i>
+                <div class="contact-details-group max-w-2xl mx-auto text-lg text-gray-700 space-y-6">
+                    <p class="flex items-start md:items-center gap-3 text-left">
+                        <i class="fas fa-map-marker-alt text-[#F8A4B8] text-2xl mt-1 md:mt-0 flex-shrink-0"></i>
                         <span class="text-gray-700">Delivering across The Bronx, Upper East Side & Upper West Side Manhattan, and Astoria, Queens!</span>
                     </p>
-                    <p class="flex flex-col sm:flex-row items-start gap-3 text-left">
-                        <i class="fas fa-clock text-[#F8A4B8] text-2xl mt-1 flex-shrink-0"></i>
+                    <p class="flex items-start md:items-center gap-3 text-left">
+                        <i class="fas fa-clock text-[#F8A4B8] text-2xl mt-1 md:mt-0 flex-shrink-0"></i>
                         <span class="text-gray-700">
                             <span class="font-bold text-[#6F4E37]">Business Hours (Suggested):</span><br>
                             Mon-Fri: 11:00 AM - 7:00 PM<br>
@@ -2520,20 +2492,9 @@
                     priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">Inquire for Price</span></p>`;
                     calculatedUnitPrice = 0; // Cannot calculate for "Inquire"
                 } else {
-                    // Determine the base price string based on order type
-                    let basePriceString = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
-
-                    // Extract unit from the price string (e.g., "/each", "/dozen", "/slice", "/platter", "/bowl", "/station")
-                    if (basePriceString.includes('/each')) unit = 'each';
-                    else if (basePriceString.includes('/dozen')) unit = 'dozen';
-                    else if (basePriceString.includes('/slice')) unit = 'slice';
-                    else if (basePriceString.includes('/platter')) unit = 'platter';
-                    else if (basePriceString.includes('/bowl')) unit = 'bowl';
-                    else if (basePriceString.includes('/station')) unit = 'station';
-                    else unit = ''; // Fallback for other cases
-
-                    priceUsed = basePriceString; // Use the full price string
-                    calculatedUnitPrice = parseFloat(basePriceString.replace(/[$,/each/dozen/slice/platter/bowl/station]/g, ''));
+                    const priceToDisplay = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
+                    priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${escapeHtmlAttribute(priceToDisplay)}</span></p>`;
+                    calculatedUnitPrice = parseFloat(priceToDisplay.replace(/[$,/each/dozen/slice/platter/bowl/station]/g, ''));
                 }
 
                 htmlContent += `
