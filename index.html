@@ -930,11 +930,11 @@
                 <div class="flex flex-wrap justify-center gap-4 mb-12 p-4 bg-white rounded-xl shadow-md">
                     <label class="flex items-center cursor-pointer">
                         <input type="radio" name="priceMode" value="simple" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="priceModeSimple" checked>
-                        <span class="ml-2 text-lg font-semibold text-gray-700">Simple Order</span>
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Simple Order (Min. 6 per item)</span>
                     </label>
                     <label class="flex items-center cursor-pointer">
                         <input type="radio" name="priceMode" value="party" class="form-radio h-5 w-5 text-[#F8A4B8] focus:ring-[#F8A4B8]" id="priceModeParty">
-                        <span class="ml-2 text-lg font-semibold text-gray-700">Party Order</span>
+                        <span class="ml-2 text-lg font-semibold text-gray-700">Party Order (Min. 12 per item)</span>
                     </label>
                 </div>
 
@@ -1389,21 +1389,27 @@
                 img: "db0735d2-681f-466d-a5d5-a7fceae3664c.jpeg",
                 title: "Classic Dipped Strawberries",
                 description: "Fresh, juicy strawberries hand-dipped in premium milk, dark, or white chocolate.",
-                simplePrice: "$3.00/each",
-                partyPrice: "$2.50/each",
-                dozenPrice: "$30.00/dozen",
+                simplePriceEach: "$3.00",
+                partyPriceEach: "$2.50",
+                dozenPrice: "$30.00", // Price per dozen (discounted)
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: true,
-                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "2b0fd04a-dfe1-42b1-b087-2e3c51fe7a3b.jpeg",
                 title: "White Chocolate Drizzle Strawberries",
                 description: "Fresh strawberries dipped in milk chocolate, elegantly drizzled with white chocolate.",
-                simplePrice: "$3.25/each",
-                partyPrice: "$2.75/each",
-                dozenPrice: "$33.00/dozen",
+                simplePriceEach: "$3.25",
+                partyPriceEach: "$2.75",
+                dozenPrice: "$33.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1413,9 +1419,12 @@
                 img: "927b7bcd-ac6a-4c5b-b5b6-df40e195cf4e.jpeg",
                 title: "Oreo Crunch Strawberries",
                 description: "Strawberries dipped in white chocolate and coated with crushed Oreo cookies.",
-                simplePrice: "$3.50/each",
-                partyPrice: "$3.00/each",
-                dozenPrice: "$36.00/dozen",
+                simplePriceEach: "$3.50",
+                partyPriceEach: "$3.00",
+                dozenPrice: "$36.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1425,9 +1434,12 @@
                 img: "5bc5629f-61c9-422b-8882-d1e3b3390d3e.jpeg",
                 title: "Confetti Dream Strawberries",
                 description: "Milk chocolate-dipped strawberries adorned with festive, colorful sprinkles.",
-                simplePrice: "$3.25/each",
-                partyPrice: "$2.75/each",
-                dozenPrice: "$33.00/dozen",
+                simplePriceEach: "$3.25",
+                partyPriceEach: "$2.75",
+                dozenPrice: "$33.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1437,9 +1449,12 @@
                 img: "43MGOODAVXURGXTKKV6QSADP.webp",
                 title: "Custom Dipped Strawberries",
                 description: "Design your own! Choose your chocolate, toppings, and drizzles for a truly unique treat.",
-                simplePrice: "Inquire for Price",
-                partyPrice: "Inquire for Price",
+                simplePriceEach: "Inquire for Price", // No fixed price
+                partyPriceEach: "Inquire for Price",
                 dozenPrice: "Inquire for Price",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1449,9 +1464,12 @@
                 img: "Clean-Eating-Chocolate-Dipped-Strawberries-CleanFoodCrush.jpg",
                 title: "Nuty Strawberries",
                 description: "Fresh strawberries dipped in rich milk chocolate, adorned with dried cut nuts of your choice.",
-                simplePrice: "$3.50/each",
-                partyPrice: "$3.00/each",
-                dozenPrice: "$36.00/dozen",
+                simplePriceEach: "$3.50",
+                partyPriceEach: "$3.00",
+                dozenPrice: "$36.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Strawberries",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1461,21 +1479,27 @@
                 img: "fruit.avif",
                 title: "Fresh Fruit Salad Platter",
                 description: "A refreshing mix of seasonal fresh fruits, perfect for a large gathering. Serves 10-12.",
-                simplePrice: "$65.00/platter",
-                partyPrice: "$65.00/platter",
-                category: "Individual Sample Cups", // Main menu category
+                simplePricePlatter: "$65.00", // Price per platter
+                partyPricePlatter: "$65.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1, // Minimum is 1 platter
+                minPartyOrder: 1,
+                category: "Individual Sample Cups",
                 type: "sweet",
                 displayOnMainMenu: true,
                 isNew: true,
-                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "chocolate dipped .jpg",
                 title: "Chocolate Dipped Pretzels",
                 description: "Crunchy pretzel twists coated in chocolate and sprinkled with joy.",
-                simplePrice: "$1.50/each",
-                partyPrice: "$1.25/each",
-                dozenPrice: "$15.00/dozen",
+                simplePriceEach: "$1.50",
+                partyPriceEach: "$1.25",
+                dozenPrice: "$15.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Pretzels",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1485,9 +1509,12 @@
                 img: "45819452-78ee-497a-96f1-3f913ffa95ff.jpeg",
                 title: "Gourmet Pretzel Rods",
                 description: "Long pretzel rods elegantly dipped and decorated with various toppings.",
-                simplePrice: "$1.50/each",
-                partyPrice: "$1.25/each",
-                dozenPrice: "$15.00/dozen",
+                simplePriceEach: "$1.50",
+                partyPriceEach: "$1.25",
+                dozenPrice: "$15.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Dipped Pretzels",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1497,9 +1524,12 @@
                 img: "7d70783c-71df-41f5-9a6f-1bb84b1dec8a.jpeg",
                 title: "Classic Cake Pops",
                 description: "Moist cake bites on a stick, hand-dipped in chocolate and decorated with sprinkles.",
-                simplePrice: "$3.17/each",
-                partyPrice: "$2.83/each",
-                dozenPrice: "$34.00/dozen",
+                simplePriceEach: "$3.17",
+                partyPriceEach: "$2.83",
+                dozenPrice: "$34.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Cake Pops",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1509,9 +1539,12 @@
                 img: "273f61a4-d741-4cb7-822f-0bf7e9edffb1.jpeg",
                 title: "Brownie Batter Cake Pops",
                 description: "Rich brownie-flavored cake pops dipped in dark chocolate and topped with mini chocolate chips.",
-                simplePrice: "$3.25/each",
-                partyPrice: "$2.92/each",
-                dozenPrice: "$35.00/dozen",
+                simplePriceEach: "$3.25",
+                partyPriceEach: "$2.92",
+                dozenPrice: "$35.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Cake Pops",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1521,21 +1554,27 @@
                 img: "94801b50-345d-4d51-afc8-73c332b3a0d6.jpeg",
                 title: "Simple Chocolate Covered Oreos",
                 description: "Classic Oreos dipped in smooth chocolate, available in various colors and simple drizzles.",
-                simplePrice: "$2.75/each",
-                partyPrice: "$2.25/each",
-                dozenPrice: "$27.00/dozen",
-                category: "Cake Pops", // This is its main menu category
+                simplePriceEach: "$2.75",
+                partyPriceEach: "$2.25",
+                dozenPrice: "$27.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
+                category: "Cake Pops",
                 type: "sweet",
                 displayOnMainMenu: false,
-                cateringCategory: "Sweet Catering Platters" // Added for catering dropdown
+                cateringCategory: "Sweet Catering Platters"
             },
             {
                 img: "793e79b7-20a1-46cf-afa0-5f55534205ee.jpeg",
                 title: "Cookie Dough Cake Pops",
                 description: "Sweet cookie dough cake pops dipped in milk chocolate, a delightful treat.",
-                simplePrice: "$3.25/each",
-                partyPrice: "$2.92/each",
-                dozenPrice: "$35.00/dozen",
+                simplePriceEach: "$3.25",
+                partyPriceEach: "$2.92",
+                dozenPrice: "$35.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Cake Pops",
                 type: "sweet",
                 displayOnMainMenu: false,
@@ -1545,9 +1584,12 @@
                 img: "rice krispies.jpg",
                 title: "Dipped Rice Crispy Treats",
                 description: "Chewy rice crispy treats generously coated in rich chocolate and fun toppings.",
-                simplePrice: "$3.25/each",
-                partyPrice: "$2.75/each",
-                dozenPrice: "$33.00/dozen",
+                simplePriceEach: "$3.25",
+                partyPriceEach: "$2.75",
+                dozenPrice: "$33.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Rice Crispy & Dipped Cupcakes",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1557,9 +1599,12 @@
                 img: "a67682b1-e2ad-4e9b-8dce-a834af8df359.jpeg",
                 title: "Mini Dipped Cupcakes",
                 description: "Delightful mini cupcakes, frosted and then partially dipped in chocolate.",
-                simplePrice: "$2.50/each",
-                partyPrice: "$2.00/each",
-                dozenPrice: "$24.00/dozen",
+                simplePriceEach: "$2.50",
+                partyPriceEach: "$2.00",
+                dozenPrice: "$24.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Rice Crispy & Dipped Cupcakes",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1567,10 +1612,13 @@
             },
             {
                 img: "tres leches.jpg",
-                title: "Tres Leches Cups (Sample)",
+                title: "Tres Leches Cups",
                 description: "Small, moist sponge cakes soaked in three kinds of milk, a creamy delight.",
-                simplePrice: "$2.50/each",
-                partyPrice: "$2.00/each",
+                simplePriceEach: "$2.50",
+                partyPriceEach: "$2.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Individual Sample Cups",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1578,10 +1626,13 @@
             },
             {
                 img: "flan.jpg",
-                title: "Individual Flan Desserts (Sample)",
+                title: "Individual Flan Desserts",
                 description: "Rich, creamy caramel custard baked to perfection, a classic Latin dessert.",
-                simplePrice: "$2.50/each",
-                partyPrice: "$2.00/each",
+                simplePriceEach: "$2.50",
+                partyPriceEach: "$2.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Individual Sample Cups",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1591,8 +1642,11 @@
                 img: "cheescake.jpg",
                 title: "Cheesecakes (Oreo, Graham, Strawberry)",
                 description: "Creamy cheesecakes available in Oreo, Graham Cracker, and Normal Strawberry flavors.",
-                simplePrice: "$2.50/each",
-                partyPrice: "$2.00/each",
+                simplePriceEach: "$2.50",
+                partyPriceEach: "$2.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Individual Sample Cups",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1602,8 +1656,11 @@
                 img: "churrrr.jpg",
                 title: "Dipped Churro Bites",
                 description: "Crispy churro bites, dipped in chocolate and dusted with cinnamon sugar.",
-                simplePrice: "$3.00/each",
-                partyPrice: "$2.00/each",
+                simplePriceEach: "$3.00",
+                partyPriceEach: "$2.00",
+                baseUnit: "each",
+                minSimpleOrder: 6,
+                minPartyOrder: 12,
                 category: "Individual Sample Cups",
                 type: "sweet",
                 displayOnMainMenu: true,
@@ -1613,9 +1670,12 @@
             {
                 img: "IMG_8406.WEBP",
                 title: "Coconut Shrimp",
-                description: "Crispy, golden coconut-crusted shrimp served with a sweet chili dipping sauce. Minimum 1 dozen.",
-                simplePrice: "$24.00/dozen",
-                partyPrice: "$24.00/dozen",
+                description: "Crispy, golden coconut-crusted shrimp served with a sweet chili dipping sauce. Serves 10-12.",
+                simplePricePlatter: "$36.00", // Price per platter
+                partyPricePlatter: "$36.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1625,9 +1685,12 @@
             {
                 img: "slider.jpg",
                 title: "Assorted Sliders",
-                description: "Miniature burgers, pulled pork, and chicken sliders with various toppings. Minimum 1 dozen.",
-                simplePrice: "$25.00/dozen",
-                partyPrice: "$25.00/dozen",
+                description: "Miniature burgers, pulled pork, and chicken sliders with various toppings. Serves 10-12.",
+                simplePricePlatter: "$35.00",
+                partyPricePlatter: "$35.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1638,8 +1701,11 @@
                 img: "gochuchang.avif",
                 title: "Gochujang Fried Chicken Bites",
                 description: "Crispy fried chicken bites tossed in a spicy and savory Korean gochujang glaze. Serves 10-12.",
-                simplePrice: "$55.00/platter",
-                partyPrice: "$55.00/platter",
+                simplePricePlatter: "$55.00",
+                partyPricePlatter: "$55.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1650,8 +1716,11 @@
                 img: "parmesan chicken .jpg",
                 title: "Grilled Chicken Garlic Parmesan",
                 description: "Tender grilled chicken breast coated in a rich garlic parmesan sauce. Serves 10-12.",
-                simplePrice: "$60.00/platter",
-                partyPrice: "$60.00/platter",
+                simplePricePlatter: "$60.00",
+                partyPricePlatter: "$60.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1662,8 +1731,11 @@
                 img: "shrimp fajita.jpg",
                 title: "Spicy Shrimp Fajita",
                 description: "Sizzling spicy shrimp with colorful bell peppers and onions. Serves 10-12.",
-                simplePrice: "$60.00/platter",
-                partyPrice: "$60.00/platter",
+                simplePricePlatter: "$60.00",
+                partyPricePlatter: "$60.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1674,8 +1746,11 @@
                 img: "broccoli alfredo .jpg",
                 title: "Grilled Chicken Broccoli Pasta Alfredo",
                 description: "Creamy Alfredo pasta with tender grilled chicken and fresh broccoli florets. Serves 10-12.",
-                simplePrice: "$60.00/platter",
-                partyPrice: "$60.00/platter",
+                simplePricePlatter: "$60.00",
+                partyPricePlatter: "$60.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1685,9 +1760,12 @@
             {
                 img: "pita.jpg",
                 title: "Grilled Chicken Shawarma Pita",
-                description: "Marinated grilled chicken shawarma served in warm pita bread with fresh toppings. Minimum 1 dozen.",
-                simplePrice: "$42.00/dozen",
-                partyPrice: "$42.00/dozen",
+                description: "Marinated grilled chicken shawarma served in warm pita bread with fresh toppings. Serves 10-12.",
+                simplePricePlatter: "$42.00",
+                partyPricePlatter: "$42.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1698,8 +1776,11 @@
                 img: "fillet sole.png",
                 title: "Filet of Sole Oreganata",
                 description: "Delicate filet of sole baked with seasoned breadcrumbs and herbs. Serves 10-12.",
-                simplePrice: "$70.00/platter",
-                partyPrice: "$70.00/platter",
+                simplePricePlatter: "$70.00",
+                partyPricePlatter: "$70.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1709,9 +1790,12 @@
             {
                 img: "skewers.jpg",
                 title: "Chicken and Beef Skewers",
-                description: "Tender chunks of marinated chicken and beef grilled on skewers. Minimum 1 dozen.",
-                simplePrice: "$30.00/dozen",
-                partyPrice: "$30.00/dozen",
+                description: "Tender chunks of marinated chicken and beef grilled on skewers. Serves 10-12.",
+                simplePricePlatter: "$38.00",
+                partyPricePlatter: "$38.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1722,8 +1806,11 @@
                 img: "bbq.webp",
                 title: "BBQ Beef Meatballs",
                 description: "Savory beef meatballs simmered in a tangy and sweet BBQ sauce. Serves 10-12.",
-                simplePrice: "$50.00/platter",
-                partyPrice: "$50.00/platter",
+                simplePricePlatter: "$50.00",
+                partyPricePlatter: "$50.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1734,8 +1821,11 @@
                 img: "hanger.jpg",
                 title: "Grilled Hanger Steak",
                 description: "Juicy grilled hanger steak, perfectly seasoned and sliced. Serves 10-12.",
-                simplePrice: "$70.00/platter",
-                partyPrice: "$70.00/platter",
+                simplePricePlatter: "$70.00",
+                partyPricePlatter: "$70.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1746,8 +1836,11 @@
                 img: "cajun shimp.jpg",
                 title: "Cajun Shrimp",
                 description: "Spicy Cajun-seasoned shrimp, pan-seared to perfection. Serves 10-12.",
-                simplePrice: "$65.00/platter",
-                partyPrice: "$65.00/platter",
+                simplePricePlatter: "$65.00",
+                partyPricePlatter: "$65.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1757,9 +1850,12 @@
             {
                 img: "filet mignon.jpg",
                 title: "Filet Mignon Crostini Bites",
-                description: "Tender, bite-sized pieces of premium filet mignon. Minimum 1 dozen.",
-                simplePrice: "$35.00/dozen",
-                partyPrice: "$35.00/dozen",
+                description: "Tender, bite-sized pieces of premium filet mignon. Serves 10-12.",
+                simplePricePlatter: "$40.00",
+                partyPricePlatter: "$40.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1769,9 +1865,12 @@
             {
                 img: "pigsinblanket.jpg",
                 title: "Pigs in a Blanket",
-                description: "Classic mini hot dogs wrapped in flaky pastry, baked golden brown. Minimum 1 dozen.",
-                simplePrice: "$24.00/dozen",
-                partyPrice: "$24.00/dozen",
+                description: "Classic mini hot dogs wrapped in flaky pastry, baked golden brown. Serves 10-12.",
+                simplePricePlatter: "$24.00",
+                partyPricePlatter: "$24.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1781,9 +1880,12 @@
             {
                 img: "bege.jpg",
                 title: "Vegetable Empanadas",
-                description: "Crispy empanadas filled with a savory mix of seasoned vegetables. Minimum 1 dozen.",
-                simplePrice: "$35.00/dozen",
-                partyPrice: "$35.00/dozen",
+                description: "Crispy empanadas filled with a savory mix of seasoned vegetables. Serves 10-12.",
+                simplePricePlatter: "$36.00",
+                partyPricePlatter: "$36.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1793,9 +1895,12 @@
             {
                 img: "beefempanads.jpg",
                 title: "Beef Empanadas",
-                description: "Golden empanadas generously filled with seasoned ground beef. Minimum 1 dozen.",
-                simplePrice: "$35.00/dozen",
-                partyPrice: "$35.00/dozen",
+                description: "Golden empanadas generously filled with seasoned ground beef. Serves 10-12.",
+                simplePricePlatter: "$36.00",
+                partyPricePlatter: "$36.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1805,9 +1910,12 @@
             {
                 img: "spring rolls.jpg",
                 title: "Vegetable Spring Rolls",
-                description: "Crispy spring rolls filled with fresh vegetables, served with sweet chili sauce. Minimum 1 dozen.",
-                simplePrice: "$30.00/dozen",
-                partyPrice: "$30.00/dozen",
+                description: "Crispy spring rolls filled with fresh vegetables, served with sweet chili sauce. Serves 10-12.",
+                simplePricePlatter: "$30.00",
+                partyPricePlatter: "$30.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1818,21 +1926,27 @@
             {
                 img: "quiches.png",
                 title: "Mini Quiches Assortment",
-                description: "Bite-sized quiches with various fillings like spinach & feta, Lorraine, and mushroom. Minimum 1 dozen.",
-                simplePrice: "$30.00/dozen",
-                partyPrice: "$30.00/dozen",
-                category: "Savory Bites & Hors d'oeuvres", // Main menu category
+                description: "Bite-sized quiches with various fillings like spinach & feta, Lorraine, and mushroom. Serves 10-12.",
+                simplePricePlatter: "$35.00",
+                partyPricePlatter: "$35.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
+                category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
                 isNew: true,
-                cateringCategory: "Savory Bites & Hors d'oeuvres" // Added for catering dropdown
+                cateringCategory: "Savory Bites & Hors d'oeuvres"
             },
             {
                 img: "caprese.avif",
                 title: "Caprese Skewers",
-                description: "Fresh mozzarella, cherry tomatoes, and basil, drizzled with balsamic glaze. Minimum 1 dozen.",
-                simplePrice: "$30.00/dozen",
-                partyPrice: "$30.00/dozen",
+                description: "Fresh mozzarella, cherry tomatoes, and basil, drizzled with balsamic glaze. Serves 10-12.",
+                simplePricePlatter: "$33.00",
+                partyPricePlatter: "$33.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1842,9 +1956,12 @@
             {
                 img: "chicketsatay.jpg",
                 title: "Chicken Satay Skewers",
-                description: "Grilled chicken skewers served with a rich peanut dipping sauce. Minimum 1 dozen.",
-                simplePrice: "$48.00/dozen",
-                partyPrice: "$48.00/dozen",
+                description: "Grilled chicken skewers served with a rich peanut dipping sauce. Serves 10-12.",
+                simplePricePlatter: "$48.00",
+                partyPricePlatter: "$48.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1853,10 +1970,13 @@
             },
             {
                 img: "IMG_6375.png",
-                title: "Assorted Mini Sandwiches (per platter)",
-                description: "A selection of gourmet mini sandwiches: turkey & provolone, ham & swiss, veggie delight. Approx. 20-24 pieces/platter.",
-                simplePrice: "$45.00/platter",
-                partyPrice: "$45.00/platter",
+                title: "Assorted Mini Sandwiches",
+                description: "A selection of gourmet mini sandwiches: turkey & provolone, ham & swiss, veggie delight. Approx. 20-24 pieces per platter.",
+                simplePricePlatter: "$45.00",
+                partyPricePlatter: "$45.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Mini Sandwiches & Wraps",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1865,10 +1985,13 @@
             },
             {
                 img: "pinwheel.jpg",
-                title: "Vegetable Pinwheel Wraps (per platter)",
-                description: "Spinach tortillas filled with cream cheese, fresh vegetables, and herbs, sliced into pinwheels. Approx. 20-24 pieces/platter.",
-                simplePrice: "$35.00/platter",
-                partyPrice: "$35.00/platter",
+                title: "Vegetable Pinwheel Wraps",
+                description: "Spinach tortillas filled with cream cheese, fresh vegetables, and herbs, sliced into pinwheels. Approx. 20-24 pieces per platter.",
+                simplePricePlatter: "$35.00",
+                partyPricePlatter: "$35.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Mini Sandwiches & Wraps",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1877,10 +2000,13 @@
             },
             {
                 img: "garne.jpg",
-                title: "Large Garden Salad (serves 10-12)",
+                title: "Large Garden Salad",
                 description: "Crisp mixed greens, cherry tomatoes, cucumbers, carrots, with a choice of dressing. Serves 10-12.",
-                simplePrice: "$30.00/bowl",
-                partyPrice: "$30.00/bowl",
+                simplePriceBowl: "$30.00",
+                partyPriceBowl: "$30.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1889,10 +2015,13 @@
             },
             {
                 img: "pasta salad.webp",
-                title: "Creamy Pasta Salad (serves 10-12)",
+                title: "Creamy Pasta Salad",
                 description: "Rotini pasta, bell peppers, olives, and a creamy Italian dressing. Serves 10-12.",
-                simplePrice: "$35.00/bowl",
-                partyPrice: "$35.00/bowl",
+                simplePriceBowl: "$35.00",
+                partyPriceBowl: "$35.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1904,8 +2033,11 @@
                 img: "yellow rice.webp",
                 title: "Vegetable Yellow Rice",
                 description: "Fluffy yellow rice with a colorful mix of diced vegetables. Serves 10-12.",
-                simplePrice: "$30.00/bowl",
-                partyPrice: "$30.00/bowl",
+                simplePriceBowl: "$30.00",
+                partyPriceBowl: "$30.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1916,8 +2048,11 @@
                 img: "white rice.jpg",
                 title: "Jasmine Rice",
                 description: "Fragrant and fluffy jasmine rice, a perfect accompaniment to any meal. Serves 10-12.",
-                simplePrice: "$25.00/bowl",
-                partyPrice: "$25.00/bowl",
+                simplePriceBowl: "$25.00",
+                partyPriceBowl: "$25.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1928,8 +2063,11 @@
                 img: "brussles.jpg",
                 title: "Roasted Brussels Sprouts",
                 description: "Perfectly roasted Brussels sprouts with a hint of crispiness. Serves 10-12.",
-                simplePrice: "$35.00/bowl",
-                partyPrice: "$35.00/bowl",
+                simplePriceBowl: "$35.00",
+                partyPriceBowl: "$35.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -1940,9 +2078,12 @@
                 img: "mac and chees.jpg",
                 title: "Signature Mac and Cheese",
                 description: "Our special blend of creamy cheeses baked with macaroni to golden perfection. Serves 10-12.",
-                simplePrice: "$50.00/bowl",
-                partyPrice: "$50.00/bowl",
-                category: "Salads & Sides", // Can be a side or a main
+                simplePriceBowl: "$50.00",
+                partyPriceBowl: "$50.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
+                category: "Salads & Sides",
                 type: "savory",
                 displayOnMainMenu: false,
                 isNew: true,
@@ -1953,9 +2094,12 @@
                 img: "geeee.jpg",
                 title: "Assorted Bagel & Cream Cheese Platter",
                 description: "A selection of freshly baked bagels with various cream cheese spreads. Serves 10-12.",
-                simplePrice: "$45.00/platter",
-                partyPrice: "$45.00/platter",
-                category: "Breakfast & Brunch", // New category
+                simplePricePlatter: "$45.00",
+                partyPricePlatter: "$45.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
+                category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
                 isNew: true,
@@ -1965,8 +2109,11 @@
                 img: "coffee.jpg",
                 title: "Coffee & Tea Station",
                 description: "Freshly brewed coffee and a selection of teas with all the accompaniments. Serves 10-15.",
-                simplePrice: "$55.00/station",
-                partyPrice: "$55.00/station",
+                simplePriceStation: "$55.00",
+                partyPriceStation: "$55.00",
+                baseUnit: "station",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
@@ -1977,8 +2124,11 @@
                 img: "IMG_0718.png",
                 title: "Artisan Cheese & Cracker Board",
                 description: "A curated selection of fine cheeses, gourmet crackers, and fresh fruit garnishes. Serves 10-15.",
-                simplePrice: "$70.00/platter",
-                partyPrice: "$70.00/platter",
+                simplePricePlatter: "$70.00",
+                partyPricePlatter: "$70.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
@@ -1989,8 +2139,11 @@
                 img: "https://placehold.co/300x200/F8E6DD/6F4E37?text=Pancakes",
                 title: "Mini Pancakes & Waffles Platter",
                 description: "Fluffy mini pancakes and waffles, served with syrup and fresh berries. Serves 10-12.",
-                simplePrice: "$50.00/platter",
-                partyPrice: "$50.00/platter",
+                simplePricePlatter: "$50.00",
+                partyPricePlatter: "$50.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
@@ -2001,8 +2154,11 @@
                 img: "scrambled.jpeg",
                 title: "Scrambled Eggs & Breakfast Sausage",
                 description: "Classic scrambled eggs with savory breakfast sausage links. Serves 10-12.",
-                simplePrice: "$50.00/platter",
-                partyPrice: "$50.00/platter",
+                simplePricePlatter: "$50.00",
+                partyPricePlatter: "$50.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
@@ -2012,9 +2168,12 @@
             {
                 img: "fruit bowl.jpg",
                 title: "Fresh Fruit Cocktail Bowls",
-                description: "Individual servings of refreshing mixed fruit, perfect for any time of day. Minimum 1 dozen.",
-                simplePrice: "$30.00/dozen",
-                partyPrice: "$30.00/dozen",
+                description: "Individual servings of refreshing mixed fruit, perfect for any time of day. Serves 10-12.",
+                simplePriceBowl: "$30.00",
+                partyPriceBowl: "$30.00",
+                baseUnit: "bowl",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Breakfast & Brunch",
                 type: "breakfast",
                 displayOnMainMenu: false,
@@ -2025,8 +2184,11 @@
                 img: "IMG_5653.PNG",
                 title: "Assorted Catering Platters",
                 description: "Customizable platters featuring a mix of our savory bites and appetizers. Price varies based on selection and serving sizes.",
-                simplePrice: "$75.00/platter",
-                partyPrice: "$75.00/platter",
+                simplePricePlatter: "$75.00",
+                partyPricePlatter: "$75.00",
+                baseUnit: "platter",
+                minSimpleOrder: 1,
+                minPartyOrder: 1,
                 category: "Savory Bites & Hors d'oeuvres",
                 type: "savory",
                 displayOnMainMenu: false,
@@ -2058,7 +2220,7 @@
             {
                 name: "Jessica Ramos.",
                 rating: 5,
-                message: "I recently booked Dipped Sweets NYC for catering and I couldn’t be happier! I ordered the hors d’oeuvres, and everything was absolutely delicious and beautifully presented. The team who passed everything around was professional, friendly, and made sure all my guests were taken care of. Highly recommend for anyone looking to impress their guests with amazing bites and great service!",
+                message: "I recently booked Dipped Sweets NYC for catering and I couldn’t be happier! I ordered the hors d’oeuvres, and everything was absolutely delicious and beautifully presented. The team who passed everything around was professional, friendly, and made sure all my guests were taken out. Highly recommend for anyone looking to impress their guests with amazing bites and great service!",
                 ordered: "Pigs in blanket, Sliders, Coconut shrimp, Filet Mignon Crostini, chicken and beef skewers"
             },
             {
@@ -2275,7 +2437,12 @@
                                 ${escapeHtmlAttribute(item.description)}
                             </p>
                             <!-- For catering, we mostly want "Inquire for Price" or a general price for platters -->
-                            <span class="sweet-price text-2xl font-extrabold mb-1">${escapeHtmlAttribute(item.simplePrice)}</span>
+                            <span class="sweet-price text-2xl font-extrabold mb-1">
+                                ${item.simplePricePlatter ? `$${parsePrice(item.simplePricePlatter).toFixed(2)}/${item.baseUnit}` :
+                                  item.simplePriceBowl ? `$${parsePrice(item.simplePriceBowl).toFixed(2)}/${item.baseUnit}` :
+                                  item.simplePriceStation ? `$${parsePrice(item.simplePriceStation).toFixed(2)}/${item.baseUnit}` :
+                                  'Inquire for Price'}
+                            </span>
                             <div class="mt-1 pt-1 w-full">
                                 <div class="flex items-center justify-center mt-1 gap-1">
                                     <button type="button" class="bg-[#F8A4B8] text-white px-1.5 py-0.5 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors adjust-catering-qty-btn" data-item-title="${escapeHtmlAttribute(item.title)}" data-delta="-1">-</button>
@@ -2311,27 +2478,19 @@
                 quantityInput.value = 1; // Update the input field
             }
 
-            if (item.simplePrice === "Inquire for Price") {
+            let pricePerUnit = 0;
+            let priceProperty = '';
+            if (item.baseUnit === 'platter') priceProperty = 'simplePricePlatter';
+            else if (item.baseUnit === 'bowl') priceProperty = 'simplePriceBowl';
+            else if (item.baseUnit === 'station') priceProperty = 'simplePriceStation';
+
+            if (item[priceProperty] === "Inquire for Price" || !item[priceProperty]) {
                 resultDisplay.textContent = "Inquire for Price";
                 return;
             }
 
-            let pricePerUnit;
-            // For catering items, use partyPrice as the bulk price if available, otherwise simplePrice
-            if (item.partyPrice && item.partyPrice !== "Inquire for Price") {
-                pricePerUnit = parsePrice(item.partyPrice);
-            } else {
-                pricePerUnit = parsePrice(item.simplePrice);
-            }
-
-            let totalCost;
-            // If the input quantity is 1, display the price for the default unit (dozen, platter, etc.)
-            if (quantity === 1) {
-                totalCost = pricePerUnit; // pricePerUnit already represents the price for 1 dozen/platter/each
-            } else {
-                // Otherwise, calculate based on the actual input quantity
-                totalCost = quantity * pricePerUnit;
-            }
+            pricePerUnit = parsePrice(item[priceProperty]);
+            let totalCost = quantity * pricePerUnit;
 
             resultDisplay.textContent = `$${totalCost.toFixed(2)}`;
         }
@@ -2356,13 +2515,13 @@
 
         // Function to parse price string to number, returns 0 for "Inquire for Price"
         const parsePrice = (priceStr) => {
-            if (priceStr === "Inquire for Price" || !priceStr) {
-                return 0; // Or handle as a special case if you want to show "Inquire" in total
+            if (typeof priceStr !== 'string' || priceStr === "Inquire for Price" || !priceStr) {
+                return 0;
             }
-            // Remove currency symbols, commas, and unit descriptors, then parse
-            return parseFloat(priceStr.replace(/[$,/each/dozen/slice/platter/bowl/station]/g, ''));
+            return parseFloat(priceStr.replace(/[$,]/g, ''));
         };
 
+        // Function to calculate cost for sweets on the prices page
         function calculateCost(itemTitle) {
             const sweet = sweetsData.find(s => s.title === itemTitle);
             if (!sweet) return;
@@ -2371,47 +2530,50 @@
             const resultDisplay = document.getElementById(`result-${itemTitle.replace(/\s+/g, '-').toLowerCase()}`);
             let quantity = parseInt(quantityInput.value, 10);
 
-            // Ensure quantity is at least 1
-            if (isNaN(quantity) || quantity < 1) {
-                quantity = 1;
-                quantityInput.value = 1; // Update the input field
-            }
+            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+            const minQuantity = selectedMode === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
 
-            if (sweet.simplePrice === "Inquire for Price") {
+            // Enforce minimum quantity
+            if (isNaN(quantity) || quantity < minQuantity) {
+                quantity = minQuantity;
+                quantityInput.value = minQuantity; // Update the input field
+            }
+            quantityInput.min = minQuantity; // Set the min attribute on the input
+
+            let totalCost = 0;
+            let pricePerUnit = 0;
+            let priceUnitSuffix = ''; // e.g., "/each", "/dozen", "/platter"
+
+            if (sweet.simplePriceEach === "Inquire for Price") {
                 resultDisplay.textContent = "Inquire for Price";
                 return;
             }
 
-            let totalCost = 0;
-            const simplePricePerUnit = parsePrice(sweet.simplePrice);
-            const partyPricePerUnit = sweet.partyPrice && sweet.partyPrice !== "Inquire for Price" ? parsePrice(sweet.partyPrice) : simplePricePerUnit;
-            const dozenPriceFixed = sweet.dozenPrice && sweet.dozenPrice !== "Inquire for Price" ? parsePrice(sweet.dozenPrice) : null;
-
-            const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
-
-            // If quantity is 1, display the price for the default unit (dozen, each, etc.)
-            if (quantity === 1) {
-                if (selectedMode === 'simple') {
-                    if (sweet.dozenPrice) { // If it has a dozen price, show that for 1 "unit" (meaning 1 dozen)
-                        totalCost = dozenPriceFixed !== null ? dozenPriceFixed : simplePricePerUnit;
-                    } else { // Otherwise, it's per each, platter, bowl, etc.
-                        totalCost = simplePricePerUnit;
-                    }
-                } else if (selectedMode === 'party') {
-                    if (sweet.dozenPrice) { // If it has a dozen price, show that for 1 "unit" (meaning 1 dozen)
-                        totalCost = dozenPriceFixed !== null ? dozenPriceFixed : partyPricePerUnit;
-                    } else { // Otherwise, it's per each, platter, bowl, etc.
-                        totalCost = partyPricePerUnit;
-                    }
+            if (sweet.baseUnit === 'each') {
+                // Check if dozen price applies
+                if (sweet.dozenPrice && quantity >= 12 && quantity % 12 === 0) {
+                    pricePerUnit = parsePrice(sweet.dozenPrice) / 12; // Price per each when buying by dozen
+                    totalCost = (quantity / 12) * parsePrice(sweet.dozenPrice);
+                    priceUnitSuffix = '/dozen'; // Indicate that dozen pricing is applied
+                } else {
+                    pricePerUnit = selectedMode === 'simple' ? parsePrice(sweet.simplePriceEach) : parsePrice(sweet.partyPriceEach);
+                    totalCost = quantity * pricePerUnit;
+                    priceUnitSuffix = '/each';
                 }
-            } else {
-                // If quantity is not 1, calculate based on the actual input quantity
-                if (selectedMode === 'simple') {
-                    totalCost = quantity * simplePricePerUnit;
-                } else if (selectedMode === 'party') {
-                    totalCost = quantity * partyPricePerUnit;
-                }
+            } else if (sweet.baseUnit === 'platter') {
+                pricePerUnit = selectedMode === 'simple' ? parsePrice(sweet.simplePricePlatter) : parsePrice(sweet.partyPricePlatter);
+                totalCost = quantity * pricePerUnit;
+                priceUnitSuffix = '/platter';
+            } else if (sweet.baseUnit === 'bowl') {
+                pricePerUnit = selectedMode === 'simple' ? parsePrice(sweet.simplePriceBowl) : parsePrice(sweet.partyPriceBowl);
+                totalCost = quantity * pricePerUnit;
+                priceUnitSuffix = '/bowl';
+            } else if (sweet.baseUnit === 'station') {
+                pricePerUnit = selectedMode === 'simple' ? parsePrice(sweet.simplePriceStation) : parsePrice(sweet.partyPriceStation);
+                totalCost = quantity * pricePerUnit;
+                priceUnitSuffix = '/station';
             }
+
             resultDisplay.textContent = `$${totalCost.toFixed(2)}`;
         }
 
@@ -2422,9 +2584,13 @@
                 let currentVal = parseInt(quantityInput.value, 10);
                 if (isNaN(currentVal)) currentVal = 0; // Handle non-numeric input
 
+                const sweet = sweetsData.find(s => s.title === itemTitle);
+                const selectedMode = document.querySelector('input[name="priceMode"]:checked').value;
+                const minQuantity = selectedMode === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
+
                 let newVal = currentVal + delta;
-                if (newVal < 1) { // Minimum quantity is 1
-                    newVal = 1;
+                if (newVal < minQuantity) { // Minimum quantity based on mode
+                    newVal = minQuantity;
                 }
 
                 quantityInput.value = newVal;
@@ -2446,21 +2612,29 @@
                  htmlContent = `<p class="col-span-full text-center text-xl text-gray-600 p-10">No sweet treat prices available yet. Check back soon!</p>`;
             } else {
                 sweetItemsForPrices.forEach(sweet => {
-                    let currentPriceDisplay = '';
-                    // Initial quantity for display is always 1
-                    const initialInputQuantity = 1;
+                    let priceDisplayString = '';
+                    let minQty = selectedMode === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
 
-                    if (sweet.simplePrice === "Inquire for Price") {
-                        currentPriceDisplay = `<span class="sweet-price text-2xl font-extrabold mb-4">${escapeHtmlAttribute(sweet.simplePrice)}</span>`;
+                    if (sweet.simplePriceEach === "Inquire for Price") {
+                        priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">Inquire for Price</span>`;
                     } else {
-                        // Display current mode's price
-                        if (selectedMode === 'simple') {
-                            currentPriceDisplay = `<span class="sweet-price text-2xl font-extrabold mb-4">${escapeHtmlAttribute(sweet.simplePrice)}</span>`;
-                        } else if (selectedMode === 'party') {
-                            currentPriceDisplay = `<span class="sweet-price text-2xl font-extrabold mb-4">${escapeHtmlAttribute(sweet.partyPrice)}</span>`;
+                        let basePrice = selectedMode === 'simple' ? sweet.simplePriceEach : sweet.partyPriceEach;
+                        let dozenPrice = sweet.dozenPrice;
+
+                        if (sweet.baseUnit === 'each' && dozenPrice) {
+                            priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">
+                                ${basePrice}/each <br> <span class="text-xl text-gray-700">or ${dozenPrice}/dozen</span>
+                            </span>`;
+                        } else if (sweet.baseUnit === 'platter') {
+                             priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePricePlatter}/platter</span>`;
+                        } else if (sweet.baseUnit === 'bowl') {
+                             priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePriceBowl}/bowl</span>`;
+                        } else if (sweet.baseUnit === 'station') {
+                             priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">${sweet.simplePriceStation}/station</span>`;
+                        } else {
+                            priceDisplayString = `<span class="sweet-price text-2xl font-extrabold mb-4">${basePrice}/${sweet.baseUnit}</span>`;
                         }
                     }
-
 
                     htmlContent += `
                         <div class="sweet-card p-6 flex flex-col items-center text-center">
@@ -2470,11 +2644,12 @@
                             <p class="text-gray-600 text-lg mb-4 flex-grow">
                                 ${escapeHtmlAttribute(sweet.description)}
                             </p>
-                            ${currentPriceDisplay}
+                            ${priceDisplayString}
                             <div class="mt-auto pt-2 w-full">
                                 <div class="flex items-center justify-center mt-4 gap-2">
                                     <button type="button" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors adjust-price-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="-1">-</button>
-                                    <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${initialInputQuantity}" min="1" class="w-16 p-0.5 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] price-qty-input" data-item-title="${escapeHtmlAttribute(sweet.title)}">
+                                    <input type="number" id="qty-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" value="${minQty}" min="${minQty}"
+                                           class="w-16 p-0.5 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] price-qty-input" data-item-title="${escapeHtmlAttribute(sweet.title)}">
                                     <button type="button" class="bg-[#F8A4B8] text-white px-2 py-1 rounded-full text-sm font-semibold hover:bg-[#E28FA0] transition-colors adjust-price-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="1">+</button>
                                 </div>
                                 <p id="result-${sweet.title.replace(/\s+/g, '-').toLowerCase()}" class="text-lg font-bold text-[#6F4E37] mt-3"></p>
@@ -2495,40 +2670,43 @@
             const menuSelectionContainer = document.getElementById('menuSelectionContainer');
             if (!menuSelectionContainer) return;
 
-            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value;
             let htmlContent = '';
 
             sweetsData.forEach(sweet => {
                 // Only show sweets in this order form selection
                 if (sweet.type !== 'sweet') return;
 
-                const quantityInputId = `qty-order-${sweet.title.replace(/\s+/g, '-').toLowerCase()}`; // Unique ID for order form quantities
+                const quantityInputId = `qty-order-${sweet.title.replace(/\s+/g, '-').toLowerCase()}`;
+                const minOrderForType = selectedOrderType === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
 
                 let priceText = '';
-                // Initial quantity for order form is always 1
-                const initialInputQuantity = 1;
-                let minQuantity = 1; // Always allow starting at 1 for the input field
+                let calculatedUnitPrice = 0;
+                let unitLabel = sweet.baseUnit; // Default unit label
 
-                let calculatedUnitPrice = 0; // Store the numerical unit price for calculation
-
-                if (sweet.simplePrice === "Inquire for Price") {
+                if (sweet.simplePriceEach === "Inquire for Price") {
                     priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">Inquire for Price</span></p>`;
-                    calculatedUnitPrice = 0; // Cannot calculate for "Inquire"
                 } else {
-                    // Determine the base price string based on order type
-                    let basePriceString = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
+                    let basePriceString = selectedOrderType === 'simple' ? sweet.simplePriceEach : sweet.partyPriceEach;
+                    let dozenPriceString = sweet.dozenPrice;
 
-                    // Extract unit from the price string (e.g., "/each", "/dozen", "/slice", "/platter", "/bowl", "/station")
-                    if (basePriceString.includes('/each')) unit = 'each';
-                    else if (basePriceString.includes('/dozen')) unit = 'dozen';
-                    else if (basePriceString.includes('/slice')) unit = 'slice';
-                    else if (basePriceString.includes('/platter')) unit = 'platter';
-                    else if (basePriceString.includes('/bowl')) unit = 'bowl';
-                    else if (basePriceString.includes('/station')) unit = 'station';
-                    else unit = ''; // Fallback for other cases
-
-                    priceUsed = basePriceString; // Use the full price string
-                    calculatedUnitPrice = parseFloat(basePriceString.replace(/[$,/each/dozen/slice/platter/bowl/station]/g, ''));
+                    // Display 'per each' or 'per platter/bowl/station'
+                    if (sweet.baseUnit === 'each') {
+                        priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${basePriceString}/each</span>`;
+                        if (dozenPriceString) {
+                            priceText += `<br><span class="text-xs text-gray-500">(${dozenPriceString}/dozen)</span>`;
+                        }
+                        priceText += `</p>`;
+                    } else if (sweet.baseUnit === 'platter') {
+                        priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${selectedOrderType === 'simple' ? sweet.simplePricePlatter : sweet.partyPricePlatter}/platter</span></p>`;
+                        unitLabel = 'platter';
+                    } else if (sweet.baseUnit === 'bowl') {
+                        priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${selectedOrderType === 'simple' ? sweet.simplePriceBowl : sweet.partyPriceBowl}/bowl</span></p>`;
+                        unitLabel = 'bowl';
+                    } else if (sweet.baseUnit === 'station') {
+                        priceText = `<p class="text-xs text-gray-600 mb-1">Price: <span class="font-semibold text-[#E0B400]">${selectedOrderType === 'simple' ? sweet.simplePriceStation : sweet.partyPriceStation}/station</span></p>`;
+                        unitLabel = 'station';
+                    }
                 }
 
                 htmlContent += `
@@ -2538,8 +2716,7 @@
                         ${priceText}
                         <div class="flex items-center justify-center gap-1 mt-1">
                             <button type="button" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="-1">-</button>
-                            <input type="number" id="${quantityInputId}" value="${initialInputQuantity}" min="${minQuantity}"
-                                   data-unit-price="${calculatedUnitPrice}"
+                            <input type="number" id="${quantityInputId}" value="${minOrderForType}" min="${minOrderForType}"
                                    class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] order-qty-input" data-item-title="${escapeHtmlAttribute(sweet.title)}">
                             <button type="button" class="bg-[#F8A4B8] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="1">+</button>
                             <button type="button" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors add-to-order-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-quantity-input-id="${quantityInputId}">Add</button>
@@ -2559,9 +2736,13 @@
             let currentVal = parseInt(quantityInput.value, 10);
             if (isNaN(currentVal)) currentVal = 0;
 
+            const sweet = sweetsData.find(s => s.title === itemTitle);
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value;
+            const minQuantity = selectedOrderType === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
+
             let newVal = currentVal + delta;
-            if (newVal < 1) { // Minimum quantity is always 1 for the input field
-                newVal = 1;
+            if (newVal < minQuantity) {
+                newVal = minQuantity;
             }
 
             quantityInput.value = newVal;
@@ -2573,8 +2754,12 @@
             if (!quantityInput) return;
 
             let currentVal = parseInt(quantityInput.value, 10);
-            if (isNaN(currentVal) || currentVal < 1) {
-                quantityInput.value = 1; // Minimum quantity is always 1 for the input field
+            const sweet = sweetsData.find(s => s.title === itemTitle);
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value;
+            const minQuantity = selectedOrderType === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
+
+            if (isNaN(currentVal) || currentVal < minQuantity) {
+                quantityInput.value = minQuantity;
             }
         }
 
@@ -2582,38 +2767,51 @@
         function addToOrder(itemTitle, quantityInputId) {
             const quantityInput = document.getElementById(quantityInputId);
             let quantity = parseInt(quantityInput.value, 10);
-            if (isNaN(quantity) || quantity < 1) {
-                quantity = 1; // Default to 1 if invalid
-            }
-
             const sweet = sweetsData.find(s => s.title === itemTitle);
+
             if (!sweet) return;
 
-            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value; // Changed name to sweetsOrderType
+            const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value;
+            const minQuantity = selectedOrderType === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
+
+            // Enforce minimum quantity when adding to order
+            if (isNaN(quantity) || quantity < minQuantity) {
+                quantity = minQuantity;
+                quantityInput.value = minQuantity; // Update input field
+                showMessage(`Minimum order for ${itemTitle} is ${minQuantity}. Quantity adjusted.`, true); // Show error message
+            }
 
             let priceUsed = '';
-            let unit = '';
-            let calculatedUnitPrice = 0;
+            let unit = sweet.baseUnit; // Default to base unit
+            let calculatedUnitPrice = 0; // Price per base unit (e.g., per each)
 
-            if (sweet.simplePrice === "Inquire for Price") {
+            if (sweet.simplePriceEach === "Inquire for Price") {
                 priceUsed = "Inquire for Price";
-                unit = "custom"; // For items that are "Inquire for Price"
                 calculatedUnitPrice = 0;
             } else {
-                // Determine the base price string based on order type
-                let basePriceString = selectedOrderType === 'simple' ? sweet.simplePrice : sweet.partyPrice;
-
-                // Extract unit from the price string (e.g., "/each", "/dozen", "/slice", "/platter", "/bowl", "/station")
-                if (basePriceString.includes('/each')) unit = 'each';
-                else if (basePriceString.includes('/dozen')) unit = 'dozen';
-                else if (basePriceString.includes('/slice')) unit = 'slice';
-                else if (basePriceString.includes('/platter')) unit = 'platter';
-                else if (basePriceString.includes('/bowl')) unit = 'bowl';
-                else if (basePriceString.includes('/station')) unit = 'station';
-                else unit = ''; // Fallback for other cases
-
-                priceUsed = basePriceString; // Use the full price string
-                calculatedUnitPrice = parseFloat(basePriceString.replace(/[$,/each/dozen/slice/platter/bowl/station]/g, ''));
+                if (sweet.baseUnit === 'each') {
+                    if (sweet.dozenPrice && quantity >= 12 && quantity % 12 === 0) {
+                        priceUsed = sweet.dozenPrice; // "$30.00"
+                        calculatedUnitPrice = parsePrice(sweet.dozenPrice) / 12; // Price per each from dozen price
+                        unit = 'dozen'; // Unit for display in summary
+                    } else {
+                        priceUsed = selectedOrderType === 'simple' ? sweet.simplePriceEach : sweet.partyPriceEach;
+                        calculatedUnitPrice = parsePrice(priceUsed); // Price per each
+                        unit = 'each'; // Unit for display in summary
+                    }
+                } else if (sweet.baseUnit === 'platter') {
+                    priceUsed = selectedOrderType === 'simple' ? sweet.simplePricePlatter : sweet.partyPricePlatter;
+                    calculatedUnitPrice = parsePrice(priceUsed);
+                    unit = 'platter';
+                } else if (sweet.baseUnit === 'bowl') {
+                    priceUsed = selectedOrderType === 'simple' ? sweet.simplePriceBowl : sweet.partyPriceBowl;
+                    calculatedUnitPrice = parsePrice(priceUsed);
+                    unit = 'bowl';
+                } else if (sweet.baseUnit === 'station') {
+                    priceUsed = selectedOrderType === 'simple' ? sweet.simplePriceStation : sweet.partyPriceStation;
+                    calculatedUnitPrice = parsePrice(priceUsed);
+                    unit = 'station';
+                }
             }
 
             // If the item is already in the cart with the same unit, update quantity
@@ -2624,35 +2822,37 @@
                 selectedOrderItems[existingItemKey] = {
                     ...sweet,
                     quantity: quantity,
-                    unit: unit,
-                    priceUsed: priceUsed,
-                    calculatedUnitPrice: calculatedUnitPrice // Store the numerical unit price
+                    unit: unit, // Store the actual unit used for display (e.g., 'each', 'dozen', 'platter')
+                    priceUsed: priceUsed, // Store the price string (e.g., "$3.00", "$30.00")
+                    calculatedUnitPrice: calculatedUnitPrice // Store the numerical unit price (e.g., 3.00, 2.50)
                 };
             }
 
             updateOrderSummary();
-            // Show notification
-            showMessage(`${quantity} ${itemTitle} added to your selections!`, false); // false for success message
-            // Reset quantity input to 1 after adding to cart
-            quantityInput.value = 1;
+            showMessage(`${quantity} ${itemTitle} added to your selections!`, false);
+            quantityInput.value = minQuantity; // Reset quantity input to its minimum after adding
         }
 
         // New function to adjust quantity of an item already in the cart
         function adjustCartQuantity(itemKey, delta) {
             if (selectedOrderItems[itemKey]) {
                 let currentItem = selectedOrderItems[itemKey];
+                const sweet = sweetsData.find(s => s.title === currentItem.title);
+                const selectedOrderType = document.querySelector('input[name="sweetsOrderType"]:checked').value;
+                const minQuantity = selectedOrderType === 'simple' ? sweet.minSimpleOrder : sweet.minPartyOrder;
+
                 let newQuantity = currentItem.quantity + delta;
 
-                // Enforce minimum quantity of 1 for items in cart
-                if (newQuantity < 1) {
-                    newQuantity = 1;
+                // Enforce minimum quantity based on the item's minimum order
+                if (newQuantity < minQuantity) {
+                    newQuantity = minQuantity;
+                    showMessage(`Minimum order for ${currentItem.title} is ${minQuantity}. Quantity adjusted.`, true);
                 }
 
                 currentItem.quantity = newQuantity;
 
                 // If quantity becomes 0 (or less than min after adjustment) and min is > 0, remove it.
-                // Or, if newQuantity is 0 and min is also 0 (not our case), remove.
-                if (currentItem.quantity === 0) { // Should not happen with our current mins
+                if (currentItem.quantity === 0) {
                      delete selectedOrderItems[itemKey];
                 }
 
@@ -2680,16 +2880,24 @@
             }
             else {
                 items.forEach(item => {
-                    const displayUnit = item.unit === 'custom' || item.unit === '' ? '' : item.unit;
                     const itemKey = `${item.title}-${item.unit}`; // Reconstruct key for removal/adjustment
 
-                    let itemCalculatedPrice = item.calculatedUnitPrice * item.quantity;
+                    let itemCalculatedPrice = 0;
                     if (item.priceUsed === "Inquire for Price") {
                         itemCalculatedPrice = "Inquire"; // Display "Inquire" for this item's total
                     } else {
+                        // Calculate total based on the stored calculatedUnitPrice (per base unit) and quantity
+                        itemCalculatedPrice = item.calculatedUnitPrice * item.quantity;
                         grandTotal += itemCalculatedPrice;
                         itemCalculatedPrice = `$${itemCalculatedPrice.toFixed(2)}`;
                     }
+
+                    // Determine how to display the quantity and unit
+                    let displayQuantityAndUnit = `x${item.quantity} ${item.unit}`;
+                    if (item.unit === 'each' && item.quantity >= 12 && item.quantity % 12 === 0) {
+                        displayQuantityAndUnit = `x${item.quantity / 12} dozen`;
+                    }
+
 
                     summaryHtml += `
                         <li class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-2 px-3 bg-white rounded-lg shadow-sm mb-1">
@@ -2699,7 +2907,7 @@
                             </div>
                             <div class="flex items-center gap-2">
                                 <button type="button" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-cart-qty-btn" data-item-key="${escapeHtmlAttribute(itemKey)}" data-delta="-1">-</button>
-                                <span class="font-bold text-gray-800 text-base">x${item.quantity}</span>
+                                <span class="font-bold text-gray-800 text-base">${displayQuantityAndUnit}</span>
                                 <button type="button" class="bg-[#F8A4B8] text-white px-2 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-cart-qty-btn" data-item-key="${escapeHtmlAttribute(itemKey)}" data-delta="1">+</button>
                                 <span class="text-lg font-bold text-[#6F4E37] ml-3">${itemCalculatedPrice}</span>
                                 <button type="button" class="text-red-500 hover:text-red-700 text-sm ml-4 font-semibold remove-from-order-btn" data-item-key="${escapeHtmlAttribute(itemKey)}">Remove</button>
