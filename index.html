@@ -13,7 +13,7 @@
     <!-- It's crucial these files are in the ROOT directory of your GitHub repository. -->
     <!-- The leading slash '/' refers to the root of your website. -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32x.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -489,8 +489,8 @@
             }
             /* Contact Section Adjustments */
             .contact-info {
-                grid-template-columns: repeat(2, 1fr); /* Force 2 columns on medium screens */
-                gap: 2rem; /* Increase gap */
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on medium screens */
+                gap: 2rem !important; /* Increase gap */
             }
             .contact-details-group {
                 padding: 1.5rem; /* Add padding to the group */
@@ -555,8 +555,8 @@
             }
             /* Adjust sweet-grid and prices-grid to be responsive and fit better */
             .sweet-grid, #prices-grid, #catering-grid, #testimonials-grid, #catering-packages-grid { /* Combined selector for consistent behavior */
-                display: grid; /* Force grid layout */
-                grid-template-columns: repeat(2, 1fr); /* Force 2 equal columns */
+                display: grid !important; /* Force grid layout */
+                grid-template-columns: repeat(2, 1fr) !important; /* Force 2 equal columns */
                 gap: 0.6rem; /* Reduced gap for more compactness */
                 width: 100%; /* Ensure full width */
                 margin: 0 auto; /* Center the grid horizontally */
@@ -653,8 +653,8 @@
             }
             /* Contact Section Adjustments */
             .contact-info {
-                grid-template-columns: repeat(1, 1fr); /* Force 1 column on small screens */
-                gap: 1.5rem; /* Adjust gap */
+                grid-template-columns: repeat(1, 1fr) !important; /* Force 1 column on small screens */
+                gap: 1.5rem !important; /* Adjust gap */
                 padding: 0 1rem; /* Add horizontal padding */
                 justify-items: center; /* Center items within grid cells */
             }
@@ -709,8 +709,8 @@
             }
             /* Adjust sweet-grid and prices-grid for very small screens */
             .sweet-grid, #prices-grid, #catering-grid, #testimonials-grid, #catering-packages-grid { /* Combined selector for consistent behavior */
-                display: grid; /* Force grid layout */
-                grid-template-columns: repeat(1, 1fr); /* Force 1 column for very small screens */
+                display: grid !important; /* Force grid layout */
+                grid-template-columns: repeat(1, 1fr) !important; /* Force 1 column for very small screens */
                 gap: 0.4rem; /* Further reduced gap */
                 margin: 0 auto; /* Center the grid horizontally */
             }
@@ -771,12 +771,6 @@
             }
             .package-price span {
                 font-size: 0.9rem;
-            }
-            .package-description {
-                font-size: 0.8rem;
-            }
-            .package-features li {
-                font-size: 0.75rem;
             }
             .package-cta {
                 font-size: 0.8rem;
@@ -1147,7 +1141,7 @@
                     <p class="flex flex-col sm:flex-row items-start gap-3 text-left">
                         <i class="fas fa-clock text-[#F8A4B8] text-2xl mt-1 flex-shrink-0"></i>
                         <span class="text-gray-700">
-                            <span class="font-bold text-[#6F4E37]">Business Hours:</span><br>
+                            <span class="font-bold text-[#6F4E37]">Business Hours (Suggested):</span><br>
                             Mon-Fri: 11:00 AM - 7:00 PM<br>
                             Sat-Sun: 12:00 PM - 5:00 PM<br>
                             <span class="text-sm italic text-gray-600">*Hours for delivery may vary based on order volume and specific arrangements.*</span>
@@ -2547,7 +2541,7 @@
                             <input type="number" id="${quantityInputId}" value="${initialInputQuantity}" min="${minQuantity}"
                                    data-unit-price="${calculatedUnitPrice}"
                                    class="w-12 p-0.5 border border-gray-300 rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-[#F8A4B8] order-qty-input" data-item-title="${escapeHtmlAttribute(sweet.title)}">
-                            <button type="button" class="bg-[#F8A4B8] text-white px-1 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="1">+</button>
+                            <button type="button" class="bg-[#F8A4B8] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#E28FA0] transition-colors adjust-order-qty-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-delta="1">+</button>
                             <button type="button" class="bg-[#E0B400] text-white px-1.5 py-0.5 rounded-full text-xs font-semibold hover:bg-[#FFD700] transition-colors add-to-order-btn" data-item-title="${escapeHtmlAttribute(sweet.title)}" data-quantity-input-id="${quantityInputId}">Add</button>
                         </div>
                     </div>
