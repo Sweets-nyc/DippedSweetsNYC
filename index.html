@@ -1671,7 +1671,7 @@
             {
                 img: "IMG_8406.WEBP",
                 title: "Coconut Shrimp",
-                description: "Crispy, golden coconut-crusted shrimp served with a sweet chili dipping sauce. Serves 10-12.",
+                description: "Crispy, golden coconut-crusted shrimp served with a sweet chili dipping sauce. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$24.00", // Price per platter
                 partyPricePlatter: "$24.00",
                 baseUnit: "platter",
@@ -1686,7 +1686,7 @@
             {
                 img: "slider.jpg",
                 title: "Assorted Sliders",
-                description: "Miniature burgers, pulled pork, and chicken sliders with various toppings. Serves 10-12.",
+                description: "Miniature burgers, pulled pork, and chicken sliders with various toppings. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$25.00",
                 partyPricePlatter: "$25.00",
                 baseUnit: "platter",
@@ -1791,7 +1791,7 @@
             {
                 img: "skewers.jpg",
                 title: "Chicken and Beef Skewers",
-                description: "Tender chunks of marinated chicken and beef grilled on skewers. Serves 10-12.",
+                description: "Tender chunks of marinated chicken and beef grilled on skewers. Approx. 24 skewers per platter. Serves 10-12.",
                 simplePricePlatter: "$28.00",
                 partyPricePlatter: "$28.00",
                 baseUnit: "platter",
@@ -1851,7 +1851,7 @@
             {
                 img: "filet mignon.jpg",
                 title: "Filet Mignon Crostini Bites",
-                description: "Tender, bite-sized pieces of premium filet mignon. Serves 10-12.",
+                description: "Tender, bite-sized pieces of premium filet mignon on crostini. Approx. 30 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$35.00",
                 partyPricePlatter: "$35.00",
                 baseUnit: "platter",
@@ -1866,7 +1866,7 @@
             {
                 img: "pigsinblanket.jpg",
                 title: "Pigs in a Blanket",
-                description: "Classic mini hot dogs wrapped in flaky pastry, baked golden brown. Serves 10-12.",
+                description: "Classic mini hot dogs wrapped in flaky pastry, baked golden brown. Approx. 30 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$24.00",
                 partyPricePlatter: "$24.00",
                 baseUnit: "platter",
@@ -1881,7 +1881,7 @@
             {
                 img: "bege.jpg",
                 title: "Vegetable Empanadas",
-                description: "Crispy empanadas filled with a savory mix of seasoned vegetables. Serves 10-12.",
+                description: "Crispy empanadas filled with a savory mix of seasoned vegetables. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$26.00",
                 partyPricePlatter: "$26.00",
                 baseUnit: "platter",
@@ -1896,7 +1896,7 @@
             {
                 img: "beefempanads.jpg",
                 title: "Beef Empanadas",
-                description: "Golden empanadas generously filled with seasoned ground beef. Serves 10-12.",
+                description: "Golden empanadas generously filled with seasoned ground beef. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$26.00",
                 partyPricePlatter: "$26.00",
                 baseUnit: "platter",
@@ -1911,7 +1911,7 @@
             {
                 img: "spring rolls.jpg",
                 title: "Vegetable Spring Rolls",
-                description: "Crispy spring rolls filled with fresh vegetables, served with sweet chili sauce. Serves 10-12.",
+                description: "Crispy spring rolls filled with fresh vegetables, served with sweet chili sauce. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$30.00",
                 partyPricePlatter: "$30.00",
                 baseUnit: "platter",
@@ -1927,7 +1927,7 @@
             {
                 img: "quiches.png",
                 title: "Mini Quiches Assortment",
-                description: "Bite-sized quiches with various fillings like spinach & feta, Lorraine, and mushroom. Serves 10-12.",
+                description: "Bite-sized quiches with various fillings like spinach & feta, Lorraine, and mushroom. Approx. 24 pieces per platter. Serves 10-12.",
                 simplePricePlatter: "$30.00",
                 partyPricePlatter: "$30.00",
                 baseUnit: "platter",
@@ -1942,7 +1942,7 @@
             {
                 img: "caprese.avif",
                 title: "Caprese Skewers",
-                description: "Fresh mozzarella, cherry tomatoes, and basil, drizzled with balsamic glaze. Serves 10-12.",
+                description: "Fresh mozzarella, cherry tomatoes, and basil, drizzled with balsamic glaze. Approx. 20 skewers per platter. Serves 10-12.",
                 simplePricePlatter: "$30.00",
                 partyPricePlatter: "$30.00",
                 baseUnit: "platter",
@@ -1957,7 +1957,7 @@
             {
                 img: "chicketsatay.jpg",
                 title: "Chicken Satay Skewers",
-                description: "Grilled chicken skewers served with a rich peanut dipping sauce. Serves 10-12.",
+                description: "Grilled chicken skewers served with a rich peanut dipping sauce. Approx. 20 skewers per platter. Serves 10-12.",
                 simplePricePlatter: "$48.00",
                 partyPricePlatter: "$48.00",
                 baseUnit: "platter",
@@ -2796,7 +2796,7 @@
                         calculatedUnitPrice = parsePrice(sweet.dozenPrice) / 12; // Price per each from dozen price
                         unit = 'dozen'; // Unit for display in summary
                     } else {
-                        priceUsed = selectedOrderType === 'simple' ? sweet.simplePriceEach : sweet.partyPriceEach;
+                        priceUsed = selectedOrderType === 'simple' ? parsePrice(sweet.simplePriceEach) : parsePrice(sweet.partyPriceEach);
                         calculatedUnitPrice = parsePrice(priceUsed); // Price per each
                         unit = 'each'; // Unit for display in summary
                     }
