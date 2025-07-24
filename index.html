@@ -1039,6 +1039,20 @@
                     Remember, all packages are fully customizable! If there's something you don't need or want to swap, just let us know in your inquiry. We're here to create the perfect menu for your event.
                 </p>
 
+                <!-- NEW: Event Type Selector for Catering Packages -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12 p-4 bg-white rounded-xl shadow-md">
+                    <label for="eventTypeSelector" class="text-lg font-semibold text-gray-700">Select Event Type:</label>
+                    <select id="eventTypeSelector" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F8A4B8] text-lg text-gray-700">
+                        <option value="General Event">General Event</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Baby Shower">Baby Shower</option>
+                        <option value="Small Gathering">Small Gathering</option>
+                        <option value="Every Morning Breakfast Drop Off">Every Morning Breakfast Drop Off</option>
+                    </select>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="catering-packages-grid">
                     <!-- Catering packages will be dynamically inserted here by JavaScript -->
                 </div>
@@ -2236,7 +2250,7 @@
         const cateringPackages = [
             {
                 title: "Bronze Bites Package",
-                price: "$35",
+                basePrice: 35, // Numeric base price
                 per: "/person",
                 description: "Perfect for casual gatherings and small office events. A delightful selection of our popular savory and sweet mini bites.",
                 features: [
@@ -2250,11 +2264,21 @@
                     "Includes basic disposable plates & cutlery",
                     "On-site serving staff available upon request at an additional hourly rate"
                 ],
-                isFeatured: false
+                isFeatured: false,
+                // Define price adjustments for different event types (multipliers)
+                eventPriceMultipliers: {
+                    "General Event": 1.0,
+                    "Corporate Event": 1.15, // 15% increase
+                    "Wedding": 1.25,      // 25% increase
+                    "Birthday Party": 1.05, // 5% increase
+                    "Baby Shower": 1.05,
+                    "Small Gathering": 1.0, // No change
+                    "Every Morning Breakfast Drop Off": 0.9 // 10% discount for recurring
+                }
             },
             {
                 title: "Silver Spreads Package",
-                price: "$60",
+                basePrice: 60, // Numeric base price
                 per: "/person",
                 description: "Elevate your event with a more extensive menu, featuring a wider array of our handcrafted delights and catering staples.",
                 features: [
@@ -2269,11 +2293,20 @@
                     "Includes premium disposable plates, cutlery, and napkins",
                     "On-site serving staff available upon request at an additional hourly rate"
                 ],
-                isFeatured: true // Highlight this package
+                isFeatured: true, // Highlight this package
+                eventPriceMultipliers: {
+                    "General Event": 1.0,
+                    "Corporate Event": 1.15,
+                    "Wedding": 1.25,
+                    "Birthday Party": 1.05,
+                    "Baby Shower": 1.05,
+                    "Small Gathering": 1.0,
+                    "Every Morning Breakfast Drop Off": 0.9
+                }
             },
             {
                 title: "Golden Gala Package",
-                price: "$95",
+                basePrice: 95, // Numeric base price
                 per: "/person",
                 description: "Our premium offering for grand celebrations. A luxurious culinary experience with a diverse menu and enhanced service options.",
                 features: [
@@ -2288,7 +2321,16 @@
                     "Includes high-quality disposables or rental coordination (client choice)",
                     "Basic on-site setup & serving assistance (up to 2 hours) with uniformed staff"
                 ],
-                isFeatured: false
+                isFeatured: false,
+                eventPriceMultipliers: {
+                    "General Event": 1.0,
+                    "Corporate Event": 1.15,
+                    "Wedding": 1.25,
+                    "Birthday Party": 1.05,
+                    "Baby Shower": 1.05,
+                    "Small Gathering": 1.0,
+                    "Every Morning Breakfast Drop Off": 0.9
+                }
             }
         ];
 
@@ -3098,17 +3140,21 @@
         }
 
         // NEW: Function to populate Catering Packages
-        function populateCateringPackages() {
+        function populateCateringPackages(eventType = 'General Event') { // Default to 'General Event'
             const packagesGrid = document.getElementById('catering-packages-grid');
             if (!packagesGrid) return;
 
             let htmlContent = '';
             cateringPackages.forEach(pkg => {
+                // Calculate adjusted price based on event type
+                const multiplier = pkg.eventPriceMultipliers[eventType] || 1.0; // Default to 1.0 if not found
+                const adjustedPrice = (pkg.basePrice * multiplier).toFixed(2);
+
                 const featuresHtml = pkg.features.map(feature => `<li><i class="fas fa-check-circle"></i> ${escapeHtmlAttribute(feature)}</li>`).join('');
                 htmlContent += `
                     <div class="package-card p-6 flex flex-col items-center text-center ${pkg.isFeatured ? 'featured' : ''}">
                         <h3 class="package-title">${escapeHtmlAttribute(pkg.title)}</h3>
-                        <p class="package-price">${escapeHtmlAttribute(pkg.price)}<span>${escapeHtmlAttribute(pkg.per)}</span></p>
+                        <p class="package-price">$${adjustedPrice}<span>${escapeHtmlAttribute(pkg.per)}</span></p>
                         <p class="package-description">${escapeHtmlAttribute(pkg.description)}</p>
                         <div class="package-features">
                             <ul>
@@ -3130,7 +3176,7 @@
             showSection('home-menu-combined');
             populateSweetMenu('MainMenuDefault', 'sweet-menu-grid'); // Populate the default menu grid
             renderTestimonials(); // Render pre-populated testimonials on load
-            populateCateringPackages(); // Populate the new catering packages section on load
+            // populateCateringPackages(); // This will now be called by the event listener for the section
             // Do NOT populate order menu selection or update summary here, as we need to wait for order type choice
             // populateOrderMenuSelection();
             // updateOrderSummary();
@@ -3339,7 +3385,7 @@
             document.getElementById('view-catering-packages-btn-inline').addEventListener('click', function(e) {
                 e.preventDefault();
                 showSection('catering-packages-section');
-                populateCateringPackages();
+                populateCateringPackages(document.getElementById('eventTypeSelector').value); // Populate with default or current selection
             });
 
             // NEW: Event listener for "Back to Catering Menu" button on catering packages page
@@ -3623,6 +3669,21 @@
                     });
                 }
             }
+
+            // NEW: Event listener for Event Type Selector in Catering Packages
+            const eventTypeSelector = document.getElementById('eventTypeSelector');
+            if (eventTypeSelector) {
+                eventTypeSelector.addEventListener('change', function() {
+                    populateCateringPackages(this.value);
+                });
+            }
+
+            // Initial population of catering packages when the section is first displayed (e.g., via navigation)
+            // This ensures that when user navigates to #catering-packages-section, it's populated correctly.
+            // The default 'General Event' will be used initially.
+            // This is handled by the 'view-catering-packages-btn-inline' click listener now.
+            // If you navigate directly to #catering-packages-section via URL, you'd need to call it here:
+            // populateCateringPackages('General Event');
         });
     </script>
 </body>
