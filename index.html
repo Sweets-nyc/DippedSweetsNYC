@@ -2252,8 +2252,10 @@
                 title: "Bronze Bites Package",
                 basePrice: 35, // Numeric base price
                 per: "/person",
+                // Default description for general events
                 description: "Perfect for casual gatherings and small office events. A delightful selection of our popular savory and sweet mini bites.",
-                features: [
+                // Default features for general events
+                defaultFeatures: [
                     "Delivery included within specified NYC boroughs",
                     "Choice of 2 Savory Bites/Hors d'oeuvres",
                     "Choice of 1 Mini Sandwich/Wrap Platter",
@@ -2274,6 +2276,28 @@
                     "Baby Shower": 1.05,
                     "Small Gathering": 1.0, // No change
                     "Every Morning Breakfast Drop Off": 0.9 // 10% discount for recurring
+                },
+                // Content specific to certain event types (overrides default description/features)
+                eventSpecificContent: {
+                    "Every Morning Breakfast Drop Off": {
+                        descriptionOverride: "Ideal for daily office breakfasts or small morning meetings. A convenient selection of fresh and energizing breakfast essentials delivered right to your door.",
+                        featuresOverride: [
+                            "Daily delivery included within specified NYC boroughs",
+                            "Choice of 1 Breakfast Platter (e.g., Assorted Bagels, Mini Pancakes)",
+                            "Choice of 1 Fresh Fruit Cocktail Bowl or Yogurt Parfait selection",
+                            "Premium Coffee & Tea Station (includes creamers, sugars, stirrers)",
+                            "Minimum 10 guests (or daily drop-off for smaller teams)",
+                            "Includes eco-friendly disposable plates, cups, & cutlery",
+                            "Perfect for recurring daily/weekly orders",
+                            "Flexible delivery times to suit your morning schedule"
+                        ]
+                    },
+                    "Wedding": {
+                        descriptionOverride: "A charming selection for intimate wedding receptions or bridal brunches, focusing on elegance and delightful flavors."
+                    },
+                    "Corporate Event": {
+                        descriptionOverride: "Streamlined and professional, this package ensures your corporate gathering is fueled with delicious and convenient options."
+                    }
                 }
             },
             {
@@ -2281,7 +2305,7 @@
                 basePrice: 60, // Numeric base price
                 per: "/person",
                 description: "Elevate your event with a more extensive menu, featuring a wider array of our handcrafted delights and catering staples.",
-                features: [
+                defaultFeatures: [
                     "Delivery included within specified NYC boroughs",
                     "Choice of 3 Savory Bites/Hors d'oeuvres",
                     "Choice of 2 Mini Sandwich/Wrap Platters",
@@ -2302,6 +2326,22 @@
                     "Baby Shower": 1.05,
                     "Small Gathering": 1.0,
                     "Every Morning Breakfast Drop Off": 0.9
+                },
+                eventSpecificContent: {
+                    "Every Morning Breakfast Drop Off": {
+                        descriptionOverride: "A comprehensive breakfast solution for medium-sized teams or events. Enjoy a variety of breakfast items and beverages for a productive start.",
+                        featuresOverride: [
+                            "Daily delivery included within specified NYC boroughs",
+                            "Choice of 2 Breakfast Platters (e.g., Assorted Bagels, Scrambled Eggs & Sausage)",
+                            "Choice of 1 Fresh Fruit Cocktail Bowl or Yogurt Parfait selection",
+                            "Premium Coffee & Tea Station (includes creamers, sugars, stirrers)",
+                            "Assorted Juices (Orange, Apple)",
+                            "Minimum 20 guests",
+                            "Includes eco-friendly disposable plates, cups, & cutlery",
+                            "Perfect for recurring daily/weekly orders",
+                            "Flexible delivery times to suit your morning schedule"
+                        ]
+                    }
                 }
             },
             {
@@ -2309,7 +2349,7 @@
                 basePrice: 95, // Numeric base price
                 per: "/person",
                 description: "Our premium offering for grand celebrations. A luxurious culinary experience with a diverse menu and enhanced service options.",
-                features: [
+                defaultFeatures: [
                     "Delivery included within specified NYC boroughs",
                     "Choice of 4 Savory Bites/Hors d'oeuvres",
                     "Choice of 2 Mini Sandwich/Wrap Platters",
@@ -2330,6 +2370,24 @@
                     "Baby Shower": 1.05,
                     "Small Gathering": 1.0,
                     "Every Morning Breakfast Drop Off": 0.9
+                },
+                eventSpecificContent: {
+                    "Every Morning Breakfast Drop Off": {
+                        descriptionOverride: "The ultimate breakfast experience for large corporate events or daily full-scale office catering. A lavish spread to impress and energize.",
+                        featuresOverride: [
+                            "Daily delivery included within specified NYC boroughs",
+                            "Choice of 3 Breakfast Platters (e.g., Assorted Bagels, Scrambled Eggs & Sausage, Mini Pancakes)",
+                            "Choice of 2 Fresh Fruit Cocktail Bowls or Yogurt Parfait selections",
+                            "Premium Coffee & Tea Station (includes creamers, sugars, stirrers)",
+                            "Assorted Juices (Orange, Apple, Cranberry) & Bottled Water",
+                            "Signature Dipped Sweets Breakfast Pastry Platter (Mini Croissants, Muffins)",
+                            "Minimum 30 guests",
+                            "Includes eco-friendly disposable plates, cups, & cutlery",
+                            "Perfect for recurring daily/weekly orders",
+                            "Flexible delivery times to suit your morning schedule",
+                            "Dedicated account manager for seamless daily coordination"
+                        ]
+                    }
                 }
             }
         ];
@@ -3150,12 +3208,28 @@
                 const multiplier = pkg.eventPriceMultipliers[eventType] || 1.0; // Default to 1.0 if not found
                 const adjustedPrice = (pkg.basePrice * multiplier).toFixed(2);
 
-                const featuresHtml = pkg.features.map(feature => `<li><i class="fas fa-check-circle"></i> ${escapeHtmlAttribute(feature)}</li>`).join('');
+                // Determine which description and features to use
+                let packageDescription = pkg.description;
+                let packageFeatures = pkg.defaultFeatures;
+
+                if (pkg.eventSpecificContent && pkg.eventSpecificContent[eventType]) {
+                    const specificContent = pkg.eventSpecificContent[eventType];
+                    if (specificContent.descriptionOverride) {
+                        packageDescription = specificContent.descriptionOverride;
+                    }
+                    if (specificContent.featuresOverride) {
+                        packageFeatures = specificContent.featuresOverride;
+                    }
+                    // If there are featureAdditions, you'd combine them here with defaultFeatures
+                    // For now, we're using featuresOverride for full replacement for distinct types
+                }
+
+                const featuresHtml = packageFeatures.map(feature => `<li><i class="fas fa-check-circle"></i> ${escapeHtmlAttribute(feature)}</li>`).join('');
                 htmlContent += `
                     <div class="package-card p-6 flex flex-col items-center text-center ${pkg.isFeatured ? 'featured' : ''}">
                         <h3 class="package-title">${escapeHtmlAttribute(pkg.title)}</h3>
                         <p class="package-price">$${adjustedPrice}<span>${escapeHtmlAttribute(pkg.per)}</span></p>
-                        <p class="package-description">${escapeHtmlAttribute(pkg.description)}</p>
+                        <p class="package-description">${escapeHtmlAttribute(packageDescription)}</p>
                         <div class="package-features">
                             <ul>
                                 ${featuresHtml}
