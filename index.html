@@ -2250,7 +2250,6 @@
         const cateringPackages = [
             {
                 title: "Bronze Bites Package",
-                basePrice: 35, // Numeric base price
                 per: "/person",
                 // Default description for general events
                 description: "Perfect for casual gatherings and small office events. A delightful selection of our popular savory and sweet mini bites.",
@@ -2268,14 +2267,14 @@
                 ],
                 isFeatured: false,
                 // Define price adjustments for different event types (multipliers)
-                eventPriceMultipliers: {
-                    "General Event": 1.0,
-                    "Corporate Event": 1.15, // 15% increase
-                    "Wedding": 1.25,      // 25% increase
-                    "Birthday Party": 1.05, // 5% increase
-                    "Baby Shower": 1.05,
-                    "Small Gathering": 1.0, // No change
-                    "Every Morning Breakfast Drop Off": 0.9 // 10% discount for recurring
+                pricesPerEventType: { // <--- NEW: Directly set price for each event type
+                    "General Event": 35,
+                    "Corporate Event": 40,
+                    "Wedding": 40,
+                    "Birthday Party": 35,
+                    "Baby Shower": 35,
+                    "Small Gathering": 30,
+                    "Every Morning Breakfast Drop Off": 20
                 },
                 // Content specific to certain event types (overrides default description/features)
                 eventSpecificContent: {
@@ -2302,7 +2301,6 @@
             },
             {
                 title: "Silver Spreads Package",
-                basePrice: 60, // Numeric base price
                 per: "/person",
                 description: "Elevate your event with a more extensive menu, featuring a wider array of our handcrafted delights and catering staples.",
                 defaultFeatures: [
@@ -2318,14 +2316,14 @@
                     "On-site serving staff available upon request at an additional hourly rate"
                 ],
                 isFeatured: true, // Highlight this package
-                eventPriceMultipliers: {
-                    "General Event": 1.0,
-                    "Corporate Event": 1.15,
-                    "Wedding": 1.25,
-                    "Birthday Party": 1.05,
-                    "Baby Shower": 1.05,
-                    "Small Gathering": 1.0,
-                    "Every Morning Breakfast Drop Off": 0.9
+                pricesPerEventType: { // <--- NEW: Directly set price for each event type
+                    "General Event": 50,
+                    "Corporate Event": 56,
+                    "Wedding": 65,
+                    "Birthday Party": 60,
+                    "Baby Shower": 60,
+                    "Small Gathering": 58,
+                    "Every Morning Breakfast Drop Off": 40
                 },
                 eventSpecificContent: {
                     "Every Morning Breakfast Drop Off": {
@@ -2346,7 +2344,6 @@
             },
             {
                 title: "Golden Gala Package",
-                basePrice: 95, // Numeric base price
                 per: "/person",
                 description: "Our premium offering for grand celebrations. A luxurious culinary experience with a diverse menu and enhanced service options.",
                 defaultFeatures: [
@@ -2362,14 +2359,14 @@
                     "Basic on-site setup & serving assistance (up to 2 hours) with uniformed staff"
                 ],
                 isFeatured: false,
-                eventPriceMultipliers: {
-                    "General Event": 1.0,
-                    "Corporate Event": 1.15,
-                    "Wedding": 1.25,
-                    "Birthday Party": 1.05,
-                    "Baby Shower": 1.05,
-                    "Small Gathering": 1.0,
-                    "Every Morning Breakfast Drop Off": 0.9
+                pricesPerEventType: { // <--- NEW: Directly set price for each event type
+                    "General Event": 85,
+                    "Corporate Event": 90,
+                    "Wedding": 95,
+                    "Birthday Party": 85,
+                    "Baby Shower": 85,
+                    "Small Gathering": 80,
+                    "Every Morning Breakfast Drop Off": 75
                 },
                 eventSpecificContent: {
                     "Every Morning Breakfast Drop Off": {
@@ -3204,9 +3201,8 @@
 
             let htmlContent = '';
             cateringPackages.forEach(pkg => {
-                // Calculate adjusted price based on event type
-                const multiplier = pkg.eventPriceMultipliers[eventType] || 1.0; // Default to 1.0 if not found
-                const adjustedPrice = (pkg.basePrice * multiplier).toFixed(2);
+                // Get the directly set price for the selected event type
+                const adjustedPrice = pkg.pricesPerEventType[eventType];
 
                 // Determine which description and features to use
                 let packageDescription = pkg.description;
@@ -3220,15 +3216,13 @@
                     if (specificContent.featuresOverride) {
                         packageFeatures = specificContent.featuresOverride;
                     }
-                    // If there are featureAdditions, you'd combine them here with defaultFeatures
-                    // For now, we're using featuresOverride for full replacement for distinct types
                 }
 
                 const featuresHtml = packageFeatures.map(feature => `<li><i class="fas fa-check-circle"></i> ${escapeHtmlAttribute(feature)}</li>`).join('');
                 htmlContent += `
                     <div class="package-card p-6 flex flex-col items-center text-center ${pkg.isFeatured ? 'featured' : ''}">
                         <h3 class="package-title">${escapeHtmlAttribute(pkg.title)}</h3>
-                        <p class="package-price">$${adjustedPrice}<span>${escapeHtmlAttribute(pkg.per)}</span></p>
+                        <p class="package-price">$${adjustedPrice.toFixed(2)}<span>${escapeHtmlAttribute(pkg.per)}</span></p>
                         <p class="package-description">${escapeHtmlAttribute(packageDescription)}</p>
                         <div class="package-features">
                             <ul>
@@ -3475,7 +3469,7 @@
             });
 
 
-            // Event listener for "Inquire Now" buttons on catering package cards
+            // Event listeners for "Inquire Now" buttons on catering package cards
             document.addEventListener('click', function(e) {
                 if (e.target.classList.contains('inquire-package-btn')) {
                     e.preventDefault();
